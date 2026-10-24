@@ -93,21 +93,58 @@ Traditional intrusion detection systems rely on permanent IPv6 interface identif
   - Installed Node.js v22 LTS and Git.
   - Implemented `config/lab_config.yaml`, `config/detection_rules.yaml`, `config/app_config.py`.
   - Implemented SQLite database layer and Pydantic domain models.
-  - Verified 5/5 automated unit tests.
-- [ ] **Phase 1: IPv6 Lab Manager & Safe Network Topology** (Next)
-- [ ] **Phase 2: IoT Device Simulation, Traffic Generation & Address Rotation**
-- [ ] **Phase 3: Privacy Layer (Authentication, Pseudonyms & Correlation)**
+- [x] **Phase 1: Project Scaffolding & Environment Validation**
+  - Implemented FastAPI application entrypoint with `/api/health` endpoint.
+  - Implemented structured logging with sensitive token/key redaction.
+  - Built React + TypeScript + Vite dashboard with Tailwind CSS cyber theme.
+  - Verified backend health endpoint and proxy communication.
+  - Validated 7/7 automated backend tests and 0-error TypeScript build.
+- [ ] **Phase 2: Isolated IPv6 Lab with Five Emulated Devices** (Next)
+- [ ] **Phase 3: Normal Traffic, Address Rotation and Session-Scoped Pseudonyms**
 - [ ] **Phase 4: Packet Sniffing & IPv6 Security Detectors**
-- [ ] **Phase 5: FastAPI Backend, Tenant Isolation & Attack Simulators**
-- [ ] **Phase 6: React Dashboard & Visualization**
-- [ ] **Phase 7: End-to-End Evaluation, Automated Test Suite & Demo**
+- [ ] **Phase 5: Evaluation & Metrics Engine**
+- [ ] **Phase 6: Full Dashboard Integration & Visualization**
+- [ ] **Phase 7: End-to-End Evaluation & Reproducible Demonstration**
 
 ---
 
-## 5. Running the Automated Tests
+## 5. Local Setup & Execution Guide
 
-Activate the virtual environment and run the test suite:
+### Prerequisites
+- Linux (Ubuntu 22.04+ / 24.04+ / 26.04)
+- Python 3.10+ (tested with Python 3.14)
+- Node.js 18+ (tested with Node.js v22.14 LTS)
+- `iproute2`
+
+### Backend Setup & Execution
 ```bash
+# 1. Activate virtual environment
 source .venv/bin/activate
-pytest -v tests/
+
+# 2. Start FastAPI backend (Port 8000)
+./scripts/run_backend.sh
+# or directly: uvicorn backend.main:app --host 127.0.0.1 --port 8000 --reload
+```
+
+Test the health endpoint:
+```bash
+curl -sS http://127.0.0.1:8000/api/health
+```
+
+### Frontend Setup & Execution
+```bash
+# Start React + Vite development server (Port 5173)
+./scripts/run_frontend.sh
+# or directly: npm --prefix frontend run dev
+```
+Open browser at: [http://127.0.0.1:5173](http://127.0.0.1:5173)
+
+### Running Automated Tests
+```bash
+# Run all backend unit tests
+./.venv/bin/pytest -v tests/
+
+# Run frontend TypeScript type checking
+export PATH="$HOME/.local/bin:$PATH"
+npm --prefix frontend run lint
 ```
