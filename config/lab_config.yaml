@@ -1,0 +1,86 @@
+lab:
+  name: "priv6guard-lab"
+  bridge_name: "priv6-br0"
+  ipv6_prefix: "fd00:cafe:1::/64"
+  slaac_prefix_length: 64
+
+router:
+  name: "Authorized-Gateway"
+  namespace: "priv6-ns-router"
+  interface: "priv6-peer-rtr"
+  veth: "priv6-veth-rtr"
+  link_local: "fe80::1"
+  global_ip: "fd00:cafe:1::1"
+
+devices:
+  - id: "dev-01"
+    name: "Smart Thermostat"
+    type: "HVAC Controller"
+    namespace: "priv6-ns-dev1"
+    interface: "priv6-peer-d1"
+    veth: "priv6-veth-d1"
+    tenant_id: "tenant-alpha"
+    base_mac: "02:00:00:00:00:01"
+    initial_ip: "fd00:cafe:1::101"
+    traffic_profile: "telemetry_burst"
+    packet_interval_sec: 2.0
+
+  - id: "dev-02"
+    name: "Medical Heart Monitor"
+    type: "Vital Sensor"
+    namespace: "priv6-ns-dev2"
+    interface: "priv6-peer-d2"
+    veth: "priv6-veth-d2"
+    tenant_id: "tenant-alpha"
+    base_mac: "02:00:00:00:00:02"
+    initial_ip: "fd00:cafe:1::102"
+    traffic_profile: "continuous_stream"
+    packet_interval_sec: 1.0
+
+  - id: "dev-03"
+    name: "Industrial Flowmeter"
+    type: "Telemetry Sensor"
+    namespace: "priv6-ns-dev3"
+    interface: "priv6-peer-d3"
+    veth: "priv6-veth-d3"
+    tenant_id: "tenant-alpha"
+    base_mac: "02:00:00:00:00:03"
+    initial_ip: "fd00:cafe:1::103"
+    traffic_profile: "periodic_poll"
+    packet_interval_sec: 3.0
+
+  - id: "dev-04"
+    name: "CCTV Security Streamer"
+    type: "Video Camera"
+    namespace: "priv6-ns-dev4"
+    interface: "priv6-peer-d4"
+    veth: "priv6-veth-d4"
+    tenant_id: "tenant-beta"
+    base_mac: "02:00:00:00:00:04"
+    initial_ip: "fd00:cafe:1::104"
+    traffic_profile: "video_keepalive"
+    packet_interval_sec: 0.8
+
+  - id: "dev-05"
+    name: "Environmental Air Sensor"
+    type: "Air Quality Monitor"
+    namespace: "priv6-ns-dev5"
+    interface: "priv6-peer-d5"
+    veth: "priv6-veth-d5"
+    tenant_id: "tenant-beta"
+    base_mac: "02:00:00:00:00:05"
+    initial_ip: "fd00:cafe:1::105"
+    traffic_profile: "low_power_beacon"
+    packet_interval_sec: 4.0
+
+attacker:
+  namespace: "priv6-ns-attacker"
+  interface: "priv6-peer-atk"
+  veth: "priv6-veth-atk"
+  base_mac: "02:00:00:00:00:ee"
+  ip: "fd00:cafe:1::bad"
+
+rotation:
+  rotation_interval_sec: 60
+  rfc_compliance: "RFC 8981"
+  temp_address_scope: "global_ula"

@@ -1,0 +1,39 @@
+ra_policy:
+  description: "RFC 4861 & RFC 6105 Router Advertisement Trust Policy"
+  authorized_routers:
+    - name: "Primary-Lab-Gateway"
+      link_local: "fe80::1"
+      allowed_prefixes:
+        - "fd00:cafe:1::/64"
+      min_router_lifetime_sec: 60
+      max_router_lifetime_sec: 1800
+      expected_managed_flag: false
+      expected_other_flag: false
+  alerts:
+    rogue_router_address: true
+    unauthorized_prefix: true
+    abnormal_lifetime: true
+    flag_manipulation: true
+  severity: "CRITICAL"
+
+ndp_anomaly_policy:
+  description: "Rolling-window ICMPv6 Neighbor Discovery rate anomaly thresholds"
+  rolling_window_seconds: 5.0
+  thresholds:
+    max_neighbor_solicitations_per_sec: 15.0
+    max_neighbor_advertisements_per_sec: 15.0
+    max_router_solicitations_per_sec: 5.0
+    max_total_ndp_per_sec: 25.0
+  cooldown_seconds: 10.0
+  anomaly_severity: "HIGH"
+  indicator_classification: "anomaly_indicator_not_definitive_proof"
+
+privacy_policy:
+  description: "RFC 8981-compliant privacy & short-lived pseudonym management"
+  session_token_ttl_seconds: 300
+  pseudonym_epoch_seconds: 120
+  purge_interval_seconds: 30
+  hmac_algorithm: "SHA256"
+  allow_correlation_with_valid_session: true
+  allow_unauthorized_fingerprinting: false
+  reconstruction_prevention: true
