@@ -70,8 +70,15 @@ class DetectionMetrics(BaseModel):
     false_negatives: int = 0
     true_negatives: int = 0
     detection_rate_pct: float = 100.0
+    precision_pct: float = 100.0
     false_alarm_rate_pct: float = 0.0
+    false_positive_rate_pct: float = 0.0
+    false_negative_rate_pct: float = 0.0
     avg_detection_latency_ms: float = 0.0
+    completed_experiments_count: int = 0
+    evaluation_unit: str = "experiment"
+    has_data: bool = True
+    message: Optional[str] = None
 
 class PrivacyMetrics(BaseModel):
     active_pseudonyms: int = 0
@@ -102,3 +109,63 @@ class LabStatusResponse(BaseModel):
     monitor_active: bool
     traffic_generator_active: bool
     mode: str = "simulation"
+
+# ==========================================
+# Phase 4 & 5: Normalized Events & Alerts
+# ==========================================
+
+class NormalizedEvent(BaseModel):
+    event_id: str
+    timestamp: str
+    interface: str = "p6g-br0"
+    protocol: str = "ICMPv6"
+    icmp6_type: int
+    icmp6_name: str
+    source_ip: str
+    target_ip: Optional[str] = None
+    tenant_id: Optional[str] = None
+    session_pseudonym: Optional[str] = None
+    scenario_id: Optional[str] = None
+    evidence: Dict[str, Any] = Field(default_factory=dict)
+
+class NormalizedAlert(BaseModel):
+    alert_id: str
+    timestamp: str
+    alert_type: str = Field(description="ROGUE_RA_POLICY_VIOLATION or NDP_RATE_ANOMALY")
+    severity: str = Field(description="CRITICAL, HIGH, WARNING, INFO")
+    rule_id: str
+    reason: str
+    interface: str = "p6g-br0"
+    evidence: Dict[str, Any] = Field(default_factory=dict)
+    experiment_id: Optional[str] = None
+    status: str = "ACTIVE"
+    tenant_scope: Optional[str] = "tenant-alpha"
+
+class ExperimentRecord(BaseModel):
+    experiment_id: str
+    scenario_type: str
+    target_namespaces: List[str] = Field(default_factory=list)
+    parameters: Dict[str, Any] = Field(default_factory=dict)
+    status: str = "RUNNING" # RUNNING, COMPLETED, CANCELLED, FAILED
+    start_time: str
+    completion_time: Optional[str] = None
+    packets_sent: int = 0
+    alerts_triggered: int = 0
+
+class ExperimentResponse(BaseModel):
+    status: str
+    experiment_id: str
+    scenario_type: str
+    message: str
+    details: Dict[str, Any] = Field(default_factory=dict)
+
+class SessionInfoResponse(BaseModel):
+    session_id_masked: str
+    device_id: str
+    tenant_id: str
+    current_pseudonym: str
+    created_at: str
+    expires_at: str
+    ttl_remaining_seconds: int
+    is_valid: bool
+
