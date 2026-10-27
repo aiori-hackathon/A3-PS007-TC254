@@ -4,6 +4,7 @@
 > **AIORI Hackathon 3**  
 > **Problem Statement**: PS-007  
 > **Team Code**: A3-PS007-TC254  
+> **Solution Video**: [Watch our YouTube Video Team Intro & Demo](https://youtu.be/BkqlxewUyNs)  
 
 ---
 
