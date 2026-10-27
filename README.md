@@ -186,6 +186,7 @@ python3 scripts/run_demo.py
 *Walks through the entire 9-step demonstration from health checks to empirical metrics.*
 
 ### 6.4 Documentation Links
-- [Laboratory Runbook](file:///home/devfardeen/Desktop/AIORI/docs/LAB_RUNBOOK.md)
-- [Comprehensive Empirical Evaluation Report](file:///home/devfardeen/Desktop/AIORI/docs/EVALUATION_REPORT.md)
+- [Laboratory Runbook](docs/LAB_RUNBOOK.md)
+- [Comprehensive Empirical Evaluation Report](docs/EVALUATION_REPORT.md)
+
 
