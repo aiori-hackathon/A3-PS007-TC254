@@ -33,13 +33,14 @@
     radial-gradient(circle at 90% 12%, rgba(99, 102, 241, 0.05) 0%, transparent 45%);
 }
 
-/* Modern Glossy Widget Surfaces */
+/* Modern Glossy Squircle Widget Surfaces */
 .glossy-widget {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%), #0c1322;
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border: 1px solid rgba(255, 255, 255, 0.07);
   box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4), inset 0 1px 1px 0 rgba(255, 255, 255, 0.09);
+  border-radius: 26px;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -49,6 +50,27 @@
   -webkit-backdrop-filter: blur(18px);
   border: 1px solid rgba(226, 232, 240, 0.9);
   box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06), inset 0 1px 1px 0 rgba(255, 255, 255, 0.95);
+  border-radius: 26px;
+}
+
+/* Squircle Curvature Utilities */
+.squircle-3xl {
+  border-radius: 32px;
+}
+.squircle-2xl {
+  border-radius: 26px;
+}
+.squircle-xl {
+  border-radius: 20px;
+}
+.squircle-lg {
+  border-radius: 16px;
+}
+.squircle-md {
+  border-radius: 12px;
+}
+.squircle-sm {
+  border-radius: 8px;
 }
 
 /* Glossy Gradient Hover Effect */
@@ -61,11 +83,6 @@
 .light .glossy-hover:hover {
   border-color: rgba(6, 182, 212, 0.5);
   box-shadow: 0 12px 28px -4px rgba(14, 165, 233, 0.16), inset 0 1px 1px 0 rgba(255, 255, 255, 1);
-}
-
-/* Glowing Accent Border Utility */
-.border-gradient-cyan {
-  border-image: linear-gradient(to right, #06b6d4, #6366f1) 1;
 }
 
 /* Smooth Scrollbars */

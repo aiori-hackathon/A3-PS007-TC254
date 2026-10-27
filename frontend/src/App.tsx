@@ -255,13 +255,13 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#f8fafc] dark:bg-[#070b14] bg-ambient-mesh text-slate-800 dark:text-slate-100 flex flex-col font-['Plus_Jakarta_Sans',sans-serif] transition-colors duration-200">
-      {/* HEADER & BRANDING — WIDE FLUID CONTAINER */}
+      {/* HEADER & BRANDING — WIDE FLUID SQUIRCLE BAR */}
       <header className="border-b border-slate-200/80 dark:border-white/10 bg-white/80 dark:bg-[#0a0f1d]/85 backdrop-blur-xl sticky top-0 z-40 px-4 sm:px-8 lg:px-12 py-3.5 shadow-sm dark:shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
         <div className="w-full max-w-[1780px] mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
           
           {/* Logo & Title */}
           <div className="flex items-center gap-4">
-            <div className="p-3 rounded-2xl bg-gradient-to-br from-cyan-500 via-sky-500 to-indigo-600 text-white shadow-lg shadow-cyan-500/25 ring-1 ring-white/20 flex items-center justify-center">
+            <div className="p-3 rounded-[20px] bg-gradient-to-br from-cyan-500 via-sky-500 to-indigo-600 text-white shadow-lg shadow-cyan-500/25 ring-1 ring-white/20 flex items-center justify-center">
               <Shield className="w-6 h-6 drop-shadow" />
             </div>
             <div>
@@ -269,10 +269,10 @@ export default function App() {
                 <h1 className="text-2xl font-black tracking-tight font-['Outfit'] bg-gradient-to-r from-slate-900 via-slate-800 to-cyan-600 dark:from-white dark:via-slate-200 dark:to-cyan-400 bg-clip-text text-transparent">
                   PRIV6GUARD
                 </h1>
-                <span className="text-[11px] font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 font-['Outfit']">
+                <span className="text-[11px] font-bold tracking-wider px-3 py-1 rounded-[14px] bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 font-['Outfit']">
                   LAB SIMULATION
                 </span>
-                <span className="text-[11px] font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-700 dark:text-cyan-300 font-['Outfit']">
+                <span className="text-[11px] font-bold tracking-wider px-3 py-1 rounded-[14px] bg-cyan-500/10 border border-cyan-500/30 text-cyan-700 dark:text-cyan-300 font-['Outfit']">
                   AIORI HACKATHON 3 — PS-007
                 </span>
               </div>
@@ -285,10 +285,10 @@ export default function App() {
 
           {/* CONTROLS: THEME TOGGLE, TENANT SELECTOR, LIVE STATUS */}
           <div className="flex flex-wrap items-center gap-3 self-end lg:self-center">
-            {/* Theme Toggle Button */}
+            {/* Theme Toggle Button in Squircle */}
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.06] dark:hover:bg-white/[0.12] text-slate-700 dark:text-slate-300 border border-slate-200/80 dark:border-white/10 transition-all duration-200 shadow-sm"
+              className="p-2.5 rounded-[14px] bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.06] dark:hover:bg-white/[0.12] text-slate-700 dark:text-slate-300 border border-slate-200/80 dark:border-white/10 transition-all duration-200 shadow-sm"
               title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} mode`}
               aria-label="Toggle Theme"
             >
@@ -299,12 +299,12 @@ export default function App() {
               )}
             </button>
 
-            {/* Segmented Multi-Tenant Switcher */}
-            <div className="flex items-center bg-slate-100 dark:bg-white/[0.05] border border-slate-200/80 dark:border-white/10 rounded-xl p-1 text-xs font-medium shadow-sm">
+            {/* Segmented Multi-Tenant Switcher in Squircle */}
+            <div className="flex items-center bg-slate-100 dark:bg-white/[0.05] border border-slate-200/80 dark:border-white/10 rounded-[16px] p-1 text-xs font-medium shadow-sm">
               <span className="text-slate-400 dark:text-slate-500 px-2.5 text-[11px] font-semibold tracking-wider font-['Outfit']">TENANT:</span>
               <button
                 onClick={() => setTenantId('tenant-alpha')}
-                className={`px-3.5 py-1.5 rounded-lg transition-all duration-200 font-['Outfit'] ${
+                className={`px-3.5 py-1.5 rounded-[12px] transition-all duration-200 font-['Outfit'] ${
                   tenantId === 'tenant-alpha'
                     ? 'bg-white dark:bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border border-slate-200 dark:border-cyan-500/40 shadow-sm font-bold'
                     : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -314,7 +314,7 @@ export default function App() {
               </button>
               <button
                 onClick={() => setTenantId('tenant-beta')}
-                className={`px-3.5 py-1.5 rounded-lg transition-all duration-200 font-['Outfit'] ${
+                className={`px-3.5 py-1.5 rounded-[12px] transition-all duration-200 font-['Outfit'] ${
                   tenantId === 'tenant-beta'
                     ? 'bg-white dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-slate-200 dark:border-purple-500/40 shadow-sm font-bold'
                     : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -324,8 +324,8 @@ export default function App() {
               </button>
             </div>
 
-            {/* Backend Health Status Badge */}
-            <div className="flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-white/[0.05] border border-slate-200/80 dark:border-white/10 text-xs shadow-sm">
+            {/* Backend Health Status Badge in Squircle */}
+            <div className="flex items-center gap-2.5 px-3.5 py-2 rounded-[14px] bg-slate-100 dark:bg-white/[0.05] border border-slate-200/80 dark:border-white/10 text-xs shadow-sm">
               <div
                 className={`w-2.5 h-2.5 rounded-full ${
                   health?.status === 'healthy'
@@ -340,7 +340,7 @@ export default function App() {
           </div>
         </div>
 
-        {/* 8-PAGE NAVIGATION BAR */}
+        {/* 8-PAGE NAVIGATION BAR in SQUIRCLES */}
         <nav className="w-full max-w-[1780px] mx-auto flex gap-2 mt-3.5 border-t border-slate-200/80 dark:border-white/10 pt-2.5 overflow-x-auto text-xs font-semibold no-scrollbar">
           {[
             { id: 'overview', label: 'Overview', icon: Activity },
@@ -358,7 +358,7 @@ export default function App() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as TabType)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl whitespace-nowrap transition-all duration-200 font-['Outfit'] text-xs ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-[14px] whitespace-nowrap transition-all duration-200 font-['Outfit'] text-xs ${
                   active
                     ? 'bg-gradient-to-r from-cyan-500/15 to-indigo-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/40 shadow-sm font-bold scale-[1.02]'
                     : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/[0.05]'
@@ -395,14 +395,14 @@ export default function App() {
           </div>
           <button
             onClick={() => setStatusMessage(null)}
-            className="text-slate-400 hover:text-slate-700 dark:hover:text-white px-2 py-1 rounded"
+            className="text-slate-400 hover:text-slate-700 dark:hover:text-white px-2 py-1 rounded-[10px]"
           >
             ✕
           </button>
         </div>
       )}
 
-      {/* MAIN CONTENT AREA — EXPANDED WIDE CONTAINER */}
+      {/* MAIN CONTENT AREA — SQUIRCLE WIDGETS */}
       <main className="w-full max-w-[1780px] mx-auto p-4 sm:p-8 lg:p-10 flex-1 flex flex-col gap-8">
         {loading ? (
           <div className="flex-1 flex flex-col items-center justify-center py-32 text-slate-500 gap-4">
@@ -416,17 +416,17 @@ export default function App() {
             {/* 1. OVERVIEW VIEW */}
             {activeTab === 'overview' && (
               <div className="flex flex-col gap-8">
-                {/* 4 Sleek Glossy Metric Cards */}
+                {/* 4 Sleek Glossy Squircle Metric Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                   
                   {/* Card 1: Bridge */}
-                  <div className="glossy-widget glossy-hover rounded-2xl p-6 relative overflow-hidden group">
+                  <div className="glossy-widget glossy-hover rounded-[26px] p-6 relative overflow-hidden group">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl group-hover:bg-cyan-500/20 transition-all pointer-events-none" />
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-bold text-slate-500 dark:text-slate-400 font-['Outfit'] tracking-wider uppercase">
                         Lab Bridge Status
                       </span>
-                      <div className="p-2.5 rounded-xl bg-cyan-500/10 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30">
+                      <div className="p-2.5 rounded-[16px] bg-cyan-500/10 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30">
                         <Radio className="w-4 h-4" />
                       </div>
                     </div>
@@ -435,7 +435,7 @@ export default function App() {
                         {labStatus?.bridge_name || 'p6g-br0'}
                       </span>
                       <span
-                        className={`text-xs px-2.5 py-0.5 rounded-full font-bold uppercase font-['Outfit'] ${
+                        className={`text-xs px-2.5 py-0.5 rounded-[12px] font-bold uppercase font-['Outfit'] ${
                           labStatus?.bridge_status === 'UP'
                             ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/40 shadow-sm'
                             : 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
@@ -450,13 +450,13 @@ export default function App() {
                   </div>
 
                   {/* Card 2: Devices */}
-                  <div className="glossy-widget glossy-hover rounded-2xl p-6 relative overflow-hidden group">
+                  <div className="glossy-widget glossy-hover rounded-[26px] p-6 relative overflow-hidden group">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all pointer-events-none" />
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-bold text-slate-500 dark:text-slate-400 font-['Outfit'] tracking-wider uppercase">
                         Active IoT Devices
                       </span>
-                      <div className="p-2.5 rounded-xl bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
+                      <div className="p-2.5 rounded-[16px] bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
                         <Cpu className="w-4 h-4" />
                       </div>
                     </div>
@@ -474,13 +474,13 @@ export default function App() {
                   </div>
 
                   {/* Card 3: Alerts */}
-                  <div className="glossy-widget glossy-hover rounded-2xl p-6 relative overflow-hidden group">
+                  <div className="glossy-widget glossy-hover rounded-[26px] p-6 relative overflow-hidden group">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/10 rounded-full blur-2xl group-hover:bg-rose-500/20 transition-all pointer-events-none" />
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-bold text-slate-500 dark:text-slate-400 font-['Outfit'] tracking-wider uppercase">
                         Security Alerts
                       </span>
-                      <div className="p-2.5 rounded-xl bg-rose-500/10 dark:bg-rose-500/20 text-rose-600 dark:text-rose-400 border border-rose-500/30">
+                      <div className="p-2.5 rounded-[16px] bg-rose-500/10 dark:bg-rose-500/20 text-rose-600 dark:text-rose-400 border border-rose-500/30">
                         <AlertTriangle className="w-4 h-4" />
                       </div>
                     </div>
@@ -489,7 +489,7 @@ export default function App() {
                         {alerts.length}
                       </span>
                       {alerts.some((a) => a.severity === 'CRITICAL') && (
-                        <span className="text-xs px-2.5 py-0.5 rounded-full bg-rose-500/15 border border-rose-500/40 text-rose-600 dark:text-rose-400 font-bold uppercase font-['Outfit'] animate-pulse">
+                        <span className="text-xs px-2.5 py-0.5 rounded-[12px] bg-rose-500/15 border border-rose-500/40 text-rose-600 dark:text-rose-400 font-bold uppercase font-['Outfit'] animate-pulse">
                           CRITICAL
                         </span>
                       )}
@@ -500,13 +500,13 @@ export default function App() {
                   </div>
 
                   {/* Card 4: Privacy */}
-                  <div className="glossy-widget glossy-hover rounded-2xl p-6 relative overflow-hidden group">
+                  <div className="glossy-widget glossy-hover rounded-[26px] p-6 relative overflow-hidden group">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/20 transition-all pointer-events-none" />
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-bold text-slate-500 dark:text-slate-400 font-['Outfit'] tracking-wider uppercase">
                         Privacy Protection
                       </span>
-                      <div className="p-2.5 rounded-xl bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 border border-indigo-500/30">
+                      <div className="p-2.5 rounded-[16px] bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 border border-indigo-500/30">
                         <Lock className="w-4 h-4" />
                       </div>
                     </div>
@@ -516,7 +516,7 @@ export default function App() {
                           ? `${(metrics.privacy_metrics.tracking_resistance_score * 100).toFixed(0)}%`
                           : '100%'}
                       </span>
-                      <span className="text-xs px-2.5 py-0.5 rounded-full bg-indigo-500/15 border border-indigo-500/40 text-indigo-600 dark:text-indigo-400 font-bold uppercase font-['Outfit']">
+                      <span className="text-xs px-2.5 py-0.5 rounded-[12px] bg-indigo-500/15 border border-indigo-500/40 text-indigo-600 dark:text-indigo-400 font-bold uppercase font-['Outfit']">
                         ZERO FP
                       </span>
                     </div>
@@ -526,11 +526,11 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* VISUAL NETWORK TOPOLOGY WIDGET */}
-                <div className="glossy-widget rounded-2xl p-6 sm:p-8 relative overflow-hidden shadow-md">
+                {/* SQUIRCLE NETWORK TOPOLOGY WIDGET */}
+                <div className="glossy-widget rounded-[28px] p-6 sm:p-8 relative overflow-hidden shadow-md">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
                     <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30">
+                      <div className="p-2.5 rounded-[16px] bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30">
                         <Network className="w-5 h-5" />
                       </div>
                       <div>
@@ -542,17 +542,17 @@ export default function App() {
                         </p>
                       </div>
                     </div>
-                    <span className="text-xs font-['Outfit'] font-semibold px-3 py-1 rounded-full bg-slate-100 dark:bg-white/[0.06] text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/10 self-start sm:self-auto">
+                    <span className="text-xs font-['Outfit'] font-semibold px-3.5 py-1 rounded-[14px] bg-slate-100 dark:bg-white/[0.06] text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/10 self-start sm:self-auto">
                       Zero Host Interface Leakage
                     </span>
                   </div>
 
                   {/* Topology Inner Card */}
-                  <div className="p-6 rounded-2xl bg-slate-100/60 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 relative">
+                  <div className="p-6 rounded-[24px] bg-slate-100/60 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 relative">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
                       
-                      {/* Gateway Node */}
-                      <div className="p-5 rounded-2xl bg-white/90 dark:bg-[#10192e] border border-cyan-500/30 shadow-sm hover:shadow-cyan-500/10 transition-all flex flex-col justify-between gap-3">
+                      {/* Gateway Node in Squircle */}
+                      <div className="p-5 rounded-[22px] bg-white/90 dark:bg-[#10192e] border border-cyan-500/30 shadow-sm hover:shadow-cyan-500/10 transition-all flex flex-col justify-between gap-3">
                         <div>
                           <div className="flex items-center justify-between mb-2">
                             <span className="text-xs font-bold text-cyan-700 dark:text-cyan-300 font-['Outfit'] tracking-wider uppercase">
@@ -566,27 +566,27 @@ export default function App() {
                             <div><strong className="text-slate-500 dark:text-slate-400">Prefix:</strong> <code className="font-mono text-slate-600 dark:text-slate-300">2001:db8:6::/64</code></div>
                           </div>
                         </div>
-                        <span className="text-[11px] font-['Outfit'] font-bold bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 px-3 py-1 rounded-lg text-center">
+                        <span className="text-[11px] font-['Outfit'] font-bold bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 px-3 py-1 rounded-[12px] text-center">
                           RFC 4861/6105 Trusted
                         </span>
                       </div>
 
-                      {/* Bridge Hub */}
-                      <div className="p-5 rounded-2xl bg-white/90 dark:bg-[#10192e] border border-indigo-500/30 shadow-sm hover:shadow-indigo-500/10 transition-all flex flex-col items-center justify-center text-center gap-2">
-                        <div className="p-3 rounded-2xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
+                      {/* Bridge Hub in Squircle */}
+                      <div className="p-5 rounded-[22px] bg-white/90 dark:bg-[#10192e] border border-indigo-500/30 shadow-sm hover:shadow-indigo-500/10 transition-all flex flex-col items-center justify-center text-center gap-2">
+                        <div className="p-3 rounded-[18px] bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
                           <Radio className="w-7 h-7 animate-pulse" />
                         </div>
                         <div className="font-['Outfit'] font-bold text-base text-slate-900 dark:text-white">
                           VIRTUAL BRIDGE: p6g-br0
                         </div>
                         <div className="text-xs text-slate-500 font-medium">Isolated Subnet Hub</div>
-                        <div className="text-[11px] px-3 py-1 rounded-lg bg-slate-100 dark:bg-white/[0.06] text-slate-600 dark:text-slate-300 font-['Outfit'] font-semibold mt-1">
+                        <div className="text-[11px] px-3.5 py-1 rounded-[12px] bg-slate-100 dark:bg-white/[0.06] text-slate-600 dark:text-slate-300 font-['Outfit'] font-semibold mt-1">
                           5 IoT Nodes + Gateway + Attacker
                         </div>
                       </div>
 
-                      {/* Attacker Node */}
-                      <div className="p-5 rounded-2xl bg-white/90 dark:bg-[#10192e] border border-rose-500/30 shadow-sm hover:shadow-rose-500/10 transition-all flex flex-col justify-between gap-3">
+                      {/* Attacker Node in Squircle */}
+                      <div className="p-5 rounded-[22px] bg-white/90 dark:bg-[#10192e] border border-rose-500/30 shadow-sm hover:shadow-rose-500/10 transition-all flex flex-col justify-between gap-3">
                         <div>
                           <div className="flex items-center justify-between mb-2">
                             <span className="text-xs font-bold text-rose-600 dark:text-rose-400 font-['Outfit'] tracking-wider uppercase">
@@ -600,7 +600,7 @@ export default function App() {
                             <div><strong className="text-slate-500 dark:text-slate-400">Status:</strong> Confined to Bridge</div>
                           </div>
                         </div>
-                        <span className="text-[11px] font-['Outfit'] font-bold bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/30 px-3 py-1 rounded-lg text-center">
+                        <span className="text-[11px] font-['Outfit'] font-bold bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/30 px-3 py-1 rounded-[12px] text-center">
                           Rogue RA & Storm Generator
                         </span>
                       </div>
@@ -619,20 +619,20 @@ export default function App() {
                         {devices.map((dev) => (
                           <div
                             key={dev.id}
-                            className="p-4 rounded-xl bg-white dark:bg-[#121c33] border border-slate-200/80 dark:border-white/10 shadow-sm hover:border-cyan-500/50 hover:-translate-y-1 transition-all duration-200 group"
+                            className="p-4 rounded-[20px] bg-white dark:bg-[#121c33] border border-slate-200/80 dark:border-white/10 shadow-sm hover:border-cyan-500/50 hover:-translate-y-1 transition-all duration-200 group"
                           >
                             <div className="flex items-center justify-between mb-2">
                               <span className="font-['Outfit'] font-bold text-sm text-slate-900 dark:text-white group-hover:text-cyan-500 transition-colors">
                                 {dev.id}
                               </span>
-                              <span className="text-[10px] px-2 py-0.5 rounded-full font-['Outfit'] font-bold bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30">
+                              <span className="text-[10px] px-2.5 py-0.5 rounded-[10px] font-['Outfit'] font-bold bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30">
                                 ROT:{dev.rotation_count}
                               </span>
                             </div>
                             <div className="text-xs text-slate-600 dark:text-slate-400 font-medium truncate mb-2">
                               {dev.name}
                             </div>
-                            <div className="bg-slate-50 dark:bg-black/30 p-2 rounded-lg border border-slate-100 dark:border-white/5 flex flex-col gap-1">
+                            <div className="bg-slate-50 dark:bg-black/30 p-2.5 rounded-[14px] border border-slate-100 dark:border-white/5 flex flex-col gap-1">
                               <div className="font-mono text-[10px] text-slate-500 dark:text-slate-400 truncate">
                                 IP: {dev.current_ipv6}
                               </div>
@@ -651,7 +651,7 @@ export default function App() {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                   
                   {/* Recent Security Alerts Widget (7 cols) */}
-                  <div className="lg:col-span-7 glossy-widget rounded-2xl p-6 sm:p-7 shadow-sm flex flex-col justify-between">
+                  <div className="lg:col-span-7 glossy-widget rounded-[26px] p-6 sm:p-7 shadow-sm flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between mb-5">
                         <div className="flex items-center gap-2.5">
@@ -677,11 +677,11 @@ export default function App() {
                           {alerts.slice(0, 4).map((alt) => (
                             <div
                               key={alt.alert_id}
-                              className="p-3.5 rounded-xl bg-slate-50/80 dark:bg-black/25 border border-slate-200/70 dark:border-white/5 flex items-start justify-between gap-3 hover:border-slate-300 dark:hover:border-white/10 transition-colors"
+                              className="p-3.5 rounded-[16px] bg-slate-50/80 dark:bg-black/25 border border-slate-200/70 dark:border-white/5 flex items-start justify-between gap-3 hover:border-slate-300 dark:hover:border-white/10 transition-colors"
                             >
                               <div className="flex items-start gap-3">
                                 <span
-                                  className={`text-[10px] font-bold px-2.5 py-1 rounded-md font-['Outfit'] uppercase shrink-0 mt-0.5 ${
+                                  className={`text-[10px] font-bold px-2.5 py-1 rounded-[10px] font-['Outfit'] uppercase shrink-0 mt-0.5 ${
                                     alt.severity === 'CRITICAL'
                                       ? 'bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-500/30'
                                       : 'bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30'
@@ -709,7 +709,7 @@ export default function App() {
                   </div>
 
                   {/* Quick Lab Actions Widget (5 cols) */}
-                  <div className="lg:col-span-5 glossy-widget rounded-2xl p-6 sm:p-7 shadow-sm flex flex-col justify-between">
+                  <div className="lg:col-span-5 glossy-widget rounded-[26px] p-6 sm:p-7 shadow-sm flex flex-col justify-between">
                     <div>
                       <div className="flex items-center gap-2.5 mb-2">
                         <Zap className="w-5 h-5 text-cyan-500" />
@@ -725,7 +725,7 @@ export default function App() {
                         <button
                           onClick={handleNormalTraffic}
                           disabled={actionLoading}
-                          className="p-3.5 rounded-xl border border-slate-200/80 dark:border-white/10 bg-slate-50 dark:bg-black/30 hover:bg-slate-100 dark:hover:bg-white/[0.08] hover:border-emerald-500/40 text-left transition-all duration-200 group"
+                          className="p-4 rounded-[18px] border border-slate-200/80 dark:border-white/10 bg-slate-50 dark:bg-black/30 hover:bg-slate-100 dark:hover:bg-white/[0.08] hover:border-emerald-500/40 text-left transition-all duration-200 group"
                         >
                           <div className="flex items-center gap-2 text-xs font-bold font-['Outfit'] text-slate-900 dark:text-white group-hover:text-emerald-500 transition-colors">
                             <Activity className="w-4 h-4 text-emerald-500" /> Benign Traffic
@@ -736,7 +736,7 @@ export default function App() {
                         <button
                           onClick={() => promptExperiment('ROGUE_RA')}
                           disabled={actionLoading}
-                          className="p-3.5 rounded-xl border border-rose-200/80 dark:border-rose-900/40 bg-rose-50/40 dark:bg-rose-950/20 hover:bg-rose-100/60 dark:hover:bg-rose-950/40 hover:border-rose-500/50 text-left transition-all duration-200 group"
+                          className="p-4 rounded-[18px] border border-rose-200/80 dark:border-rose-900/40 bg-rose-50/40 dark:bg-rose-950/20 hover:bg-rose-100/60 dark:hover:bg-rose-950/40 hover:border-rose-500/50 text-left transition-all duration-200 group"
                         >
                           <div className="flex items-center gap-2 text-xs font-bold font-['Outfit'] text-rose-700 dark:text-rose-400 group-hover:text-rose-500 transition-colors">
                             <AlertTriangle className="w-4 h-4 text-rose-500" /> Rogue RA Attack
@@ -747,7 +747,7 @@ export default function App() {
                         <button
                           onClick={() => promptExperiment('NDP_BURST')}
                           disabled={actionLoading}
-                          className="p-3.5 rounded-xl border border-amber-200/80 dark:border-amber-900/40 bg-amber-50/40 dark:bg-amber-950/20 hover:bg-amber-100/60 dark:hover:bg-amber-950/40 hover:border-amber-500/50 text-left transition-all duration-200 group"
+                          className="p-4 rounded-[18px] border border-amber-200/80 dark:border-amber-900/40 bg-amber-50/40 dark:bg-amber-950/20 hover:bg-amber-100/60 dark:hover:bg-amber-950/40 hover:border-amber-500/50 text-left transition-all duration-200 group"
                         >
                           <div className="flex items-center gap-2 text-xs font-bold font-['Outfit'] text-amber-700 dark:text-amber-400 group-hover:text-amber-500 transition-colors">
                             <Zap className="w-4 h-4 text-amber-500" /> NDP Storm
@@ -760,7 +760,7 @@ export default function App() {
                             if (devices.length > 0) handleRotate(devices[0].id);
                           }}
                           disabled={actionLoading || devices.length === 0}
-                          className="p-3.5 rounded-xl border border-cyan-200/80 dark:border-cyan-900/40 bg-cyan-50/40 dark:bg-cyan-950/20 hover:bg-cyan-100/60 dark:hover:bg-cyan-950/40 hover:border-cyan-500/50 text-left transition-all duration-200 group"
+                          className="p-4 rounded-[18px] border border-cyan-200/80 dark:border-cyan-900/40 bg-cyan-50/40 dark:bg-cyan-950/20 hover:bg-cyan-100/60 dark:hover:bg-cyan-950/40 hover:border-cyan-500/50 text-left transition-all duration-200 group"
                         >
                           <div className="flex items-center gap-2 text-xs font-bold font-['Outfit'] text-cyan-700 dark:text-cyan-400 group-hover:text-cyan-500 transition-colors">
                             <RotateCcw className="w-4 h-4 text-cyan-500" /> Rotate Device 1
@@ -793,7 +793,7 @@ export default function App() {
                   </div>
                   <button
                     onClick={refreshData}
-                    className="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/10 text-xs font-['Outfit'] font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-white/[0.1] flex items-center gap-2 shadow-sm"
+                    className="px-4 py-2.5 rounded-[14px] bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/10 text-xs font-['Outfit'] font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-white/[0.1] flex items-center gap-2 shadow-sm"
                   >
                     <RefreshCw className="w-3.5 h-3.5" /> Refresh
                   </button>
@@ -803,12 +803,12 @@ export default function App() {
                   {devices.map((dev) => (
                     <div
                       key={dev.id}
-                      className="glossy-widget glossy-hover rounded-2xl p-6 shadow-sm flex flex-col justify-between"
+                      className="glossy-widget glossy-hover rounded-[26px] p-6 shadow-sm flex flex-col justify-between"
                     >
                       <div>
                         <div className="flex items-start justify-between">
                           <div className="flex items-center gap-3">
-                            <div className="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30">
+                            <div className="p-3 rounded-[16px] bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30">
                               <Cpu className="w-5 h-5" />
                             </div>
                             <div>
@@ -818,14 +818,14 @@ export default function App() {
                               <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">{dev.name}</div>
                             </div>
                           </div>
-                          <span className="text-xs px-2.5 py-1 rounded-full font-['Outfit'] font-bold bg-slate-100 text-slate-700 dark:bg-white/[0.08] dark:text-slate-300 border border-slate-200 dark:border-white/10">
+                          <span className="text-xs px-3 py-1 rounded-[12px] font-['Outfit'] font-bold bg-slate-100 text-slate-700 dark:bg-white/[0.08] dark:text-slate-300 border border-slate-200 dark:border-white/10">
                             {dev.tenant_id}
                           </span>
                         </div>
 
                         <div className="mt-5 flex flex-col gap-2.5 text-xs">
                           {/* IPv6 Address */}
-                          <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 flex items-center justify-between">
+                          <div className="p-3 rounded-[16px] bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 flex items-center justify-between">
                             <div className="truncate mr-2">
                               <span className="text-[10px] text-slate-400 font-semibold uppercase font-['Outfit'] block">Current Temporary IPv6</span>
                               <span className="font-mono text-slate-800 dark:text-slate-200 font-bold truncate block">
@@ -834,7 +834,7 @@ export default function App() {
                             </div>
                             <button
                               onClick={() => copyToClipboard(dev.current_ipv6, `ip-${dev.id}`)}
-                              className="text-slate-400 hover:text-cyan-500 p-1.5 rounded-lg hover:bg-slate-200/50 dark:hover:bg-white/5"
+                              className="text-slate-400 hover:text-cyan-500 p-2 rounded-[10px] hover:bg-slate-200/50 dark:hover:bg-white/5"
                               title="Copy IPv6 Address"
                             >
                               {copiedId === `ip-${dev.id}` ? (
@@ -846,7 +846,7 @@ export default function App() {
                           </div>
 
                           {/* Blind Pseudonym */}
-                          <div className="p-3 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 flex items-center justify-between">
+                          <div className="p-3 rounded-[16px] bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 flex items-center justify-between">
                             <div className="truncate mr-2">
                               <span className="text-[10px] text-slate-400 font-semibold uppercase font-['Outfit'] block">Active Blind Pseudonym</span>
                               <span className="font-mono text-cyan-600 dark:text-cyan-400 font-bold truncate block">
@@ -855,7 +855,7 @@ export default function App() {
                             </div>
                             <button
                               onClick={() => copyToClipboard(dev.current_pseudonym, `ps-${dev.id}`)}
-                              className="text-slate-400 hover:text-cyan-500 p-1.5 rounded-lg hover:bg-slate-200/50 dark:hover:bg-white/5"
+                              className="text-slate-400 hover:text-cyan-500 p-2 rounded-[10px] hover:bg-slate-200/50 dark:hover:bg-white/5"
                               title="Copy Pseudonym"
                             >
                               {copiedId === `ps-${dev.id}` ? (
@@ -888,7 +888,7 @@ export default function App() {
                       <button
                         onClick={() => handleRotate(dev.id)}
                         disabled={actionLoading}
-                        className="mt-5 w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-cyan-600 to-sky-600 hover:from-cyan-500 hover:to-sky-500 text-white text-xs font-['Outfit'] font-bold flex items-center justify-center gap-2 transition-all shadow-md shadow-cyan-500/20"
+                        className="mt-5 w-full py-3 px-4 rounded-[16px] bg-gradient-to-r from-cyan-600 to-sky-600 hover:from-cyan-500 hover:to-sky-500 text-white text-xs font-['Outfit'] font-bold flex items-center justify-center gap-2 transition-all shadow-md shadow-cyan-500/20"
                       >
                         <RotateCcw className={`w-4 h-4 ${actionLoading ? 'animate-spin' : ''}`} />
                         Rotate Address (RFC 8981)
@@ -913,7 +913,7 @@ export default function App() {
 
                 {/* Privacy Safeguards Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
-                  <div className="glossy-widget rounded-2xl p-5 shadow-sm">
+                  <div className="glossy-widget rounded-[22px] p-5 shadow-sm">
                     <span className="text-xs font-bold font-['Outfit'] text-cyan-600 dark:text-cyan-400 block mb-1.5 uppercase tracking-wide">
                       1. Zero Fingerprinting
                     </span>
@@ -922,7 +922,7 @@ export default function App() {
                     </p>
                   </div>
 
-                  <div className="glossy-widget rounded-2xl p-5 shadow-sm">
+                  <div className="glossy-widget rounded-[22px] p-5 shadow-sm">
                     <span className="text-xs font-bold font-['Outfit'] text-cyan-600 dark:text-cyan-400 block mb-1.5 uppercase tracking-wide">
                       2. Short-Lived Sessions
                     </span>
@@ -931,7 +931,7 @@ export default function App() {
                     </p>
                   </div>
 
-                  <div className="glossy-widget rounded-2xl p-5 shadow-sm">
+                  <div className="glossy-widget rounded-[22px] p-5 shadow-sm">
                     <span className="text-xs font-bold font-['Outfit'] text-cyan-600 dark:text-cyan-400 block mb-1.5 uppercase tracking-wide">
                       3. Blind Pseudonyms
                     </span>
@@ -940,7 +940,7 @@ export default function App() {
                     </p>
                   </div>
 
-                  <div className="glossy-widget rounded-2xl p-5 shadow-sm">
+                  <div className="glossy-widget rounded-[22px] p-5 shadow-sm">
                     <span className="text-xs font-bold font-['Outfit'] text-cyan-600 dark:text-cyan-400 block mb-1.5 uppercase tracking-wide">
                       4. Immediate Purge
                     </span>
@@ -951,7 +951,7 @@ export default function App() {
                 </div>
 
                 {/* Active Sessions Table */}
-                <div className="glossy-widget rounded-2xl overflow-hidden shadow-sm">
+                <div className="glossy-widget rounded-[26px] overflow-hidden shadow-sm">
                   <div className="p-5 border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between">
                     <h3 className="text-sm font-bold font-['Outfit'] uppercase text-slate-900 dark:text-white">
                       Active Sessions ({sessions.length}) — {tenantId}
@@ -990,7 +990,7 @@ export default function App() {
                                 {s.current_pseudonym}
                               </td>
                               <td className="p-3.5">
-                                <span className="px-2.5 py-1 rounded-full text-[10px] font-['Outfit'] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
+                                <span className="px-3 py-1 rounded-[12px] text-[10px] font-['Outfit'] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
                                   {s.is_valid ? 'ACTIVE' : 'EXPIRED'}
                                 </span>
                               </td>
@@ -1018,10 +1018,10 @@ export default function App() {
                   </div>
 
                   {/* Filter Buttons */}
-                  <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-white/[0.05] p-1.5 rounded-xl border border-slate-200/80 dark:border-white/10 text-xs">
+                  <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-white/[0.05] p-1.5 rounded-[16px] border border-slate-200/80 dark:border-white/10 text-xs">
                     <button
                       onClick={() => setAlertFilter('ALL')}
-                      className={`px-3.5 py-1.5 rounded-lg font-['Outfit'] font-bold transition-all ${
+                      className={`px-3.5 py-1.5 rounded-[12px] font-['Outfit'] font-bold transition-all ${
                         alertFilter === 'ALL'
                           ? 'bg-white dark:bg-white/[0.12] text-slate-900 dark:text-white shadow-sm'
                           : 'text-slate-600 dark:text-slate-400'
@@ -1031,7 +1031,7 @@ export default function App() {
                     </button>
                     <button
                       onClick={() => setAlertFilter('RA')}
-                      className={`px-3.5 py-1.5 rounded-lg font-['Outfit'] font-bold transition-all ${
+                      className={`px-3.5 py-1.5 rounded-[12px] font-['Outfit'] font-bold transition-all ${
                         alertFilter === 'RA'
                           ? 'bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-500/40 shadow-sm'
                           : 'text-slate-600 dark:text-slate-400'
@@ -1041,7 +1041,7 @@ export default function App() {
                     </button>
                     <button
                       onClick={() => setAlertFilter('NDP')}
-                      className={`px-3.5 py-1.5 rounded-lg font-['Outfit'] font-bold transition-all ${
+                      className={`px-3.5 py-1.5 rounded-[12px] font-['Outfit'] font-bold transition-all ${
                         alertFilter === 'NDP'
                           ? 'bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-500/40 shadow-sm'
                           : 'text-slate-600 dark:text-slate-400'
@@ -1053,7 +1053,7 @@ export default function App() {
                 </div>
 
                 {filteredAlerts.length === 0 ? (
-                  <div className="p-16 text-center glossy-widget rounded-2xl shadow-sm">
+                  <div className="p-16 text-center glossy-widget rounded-[26px] shadow-sm">
                     <Shield className="w-12 h-12 text-emerald-500 mx-auto mb-3" />
                     <div className="text-base font-bold text-slate-900 dark:text-white font-['Outfit']">
                       No Alerts Triggered
@@ -1067,12 +1067,12 @@ export default function App() {
                     {filteredAlerts.map((alt) => (
                       <div
                         key={alt.alert_id}
-                        className="glossy-widget rounded-2xl p-6 shadow-sm flex flex-col gap-3.5"
+                        className="glossy-widget rounded-[26px] p-6 shadow-sm flex flex-col gap-3.5"
                       >
                         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 dark:border-white/5 pb-3.5">
                           <div className="flex items-center gap-2.5">
                             <span
-                              className={`text-[11px] font-bold px-3 py-1 rounded-md font-['Outfit'] uppercase ${
+                              className={`text-[11px] font-bold px-3 py-1 rounded-[10px] font-['Outfit'] uppercase ${
                                 alt.severity === 'CRITICAL'
                                   ? 'bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-500/30'
                                   : 'bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30'
@@ -1098,7 +1098,7 @@ export default function App() {
                         </div>
 
                         {/* Structured Evidence Block */}
-                        <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 text-xs font-mono text-slate-600 dark:text-slate-400">
+                        <div className="p-4 rounded-[18px] bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 text-xs font-mono text-slate-600 dark:text-slate-400">
                           <div className="text-[10px] uppercase font-bold text-slate-400 mb-1.5 font-['Outfit'] tracking-wider">
                             Detection Evidence & Confinement Metadata
                           </div>
@@ -1134,25 +1134,25 @@ export default function App() {
 
                 {/* Traffic Rate Stats */}
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
-                  <div className="glossy-widget rounded-2xl p-5 shadow-sm">
+                  <div className="glossy-widget rounded-[26px] p-5 shadow-sm">
                     <span className="text-[11px] text-slate-500 font-['Outfit'] font-bold uppercase tracking-wider">Current Packet Rate</span>
                     <div className="text-2xl font-bold font-['Outfit'] text-slate-900 dark:text-white mt-1">
                       {metrics?.traffic_rates?.current_pps?.toFixed(1) || '0.0'} PPS
                     </div>
                   </div>
-                  <div className="glossy-widget rounded-2xl p-5 shadow-sm">
+                  <div className="glossy-widget rounded-[26px] p-5 shadow-sm">
                     <span className="text-[11px] text-slate-500 font-['Outfit'] font-bold uppercase tracking-wider">NDP NS Rate</span>
                     <div className="text-2xl font-bold font-['Outfit'] text-cyan-600 dark:text-cyan-400 mt-1">
                       {metrics?.traffic_rates?.icmpv6_ns_rate?.toFixed(1) || '0.0'} PPS
                     </div>
                   </div>
-                  <div className="glossy-widget rounded-2xl p-5 shadow-sm">
+                  <div className="glossy-widget rounded-[26px] p-5 shadow-sm">
                     <span className="text-[11px] text-slate-500 font-['Outfit'] font-bold uppercase tracking-wider">NDP NA Rate</span>
                     <div className="text-2xl font-bold font-['Outfit'] text-indigo-600 dark:text-indigo-400 mt-1">
                       {metrics?.traffic_rates?.icmpv6_na_rate?.toFixed(1) || '0.0'} PPS
                     </div>
                   </div>
-                  <div className="glossy-widget rounded-2xl p-5 shadow-sm">
+                  <div className="glossy-widget rounded-[26px] p-5 shadow-sm">
                     <span className="text-[11px] text-slate-500 font-['Outfit'] font-bold uppercase tracking-wider">Rate Threshold</span>
                     <div className="text-2xl font-bold font-['Outfit'] text-amber-600 dark:text-amber-400 mt-1">
                       {metrics?.traffic_rates?.ndp_threshold || '15.0'} PPS
@@ -1161,7 +1161,7 @@ export default function App() {
                 </div>
 
                 {/* Normalized Events Feed */}
-                <div className="glossy-widget rounded-2xl overflow-hidden shadow-sm">
+                <div className="glossy-widget rounded-[26px] overflow-hidden shadow-sm">
                   <div className="p-5 border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between">
                     <h3 className="text-sm font-bold font-['Outfit'] uppercase text-slate-900 dark:text-white">
                       Normalized Security Events ({events.length})
@@ -1192,7 +1192,7 @@ export default function App() {
                               <td className="p-3.5 text-slate-500">{new Date(ev.timestamp).toLocaleTimeString()}</td>
                               <td className="p-3.5">
                                 <span
-                                  className={`px-2.5 py-1 rounded-md text-[10px] font-['Outfit'] font-bold ${
+                                  className={`px-2.5 py-1 rounded-[10px] text-[10px] font-['Outfit'] font-bold ${
                                     ev.event_type.includes('ROGUE') || ev.event_type.includes('ANOMALY')
                                       ? 'bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-500/30'
                                       : 'bg-slate-100 text-slate-700 dark:bg-white/[0.08] dark:text-slate-300'
@@ -1231,13 +1231,13 @@ export default function App() {
                 {/* Experiment Triggers */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Scenario 1: Rogue RA */}
-                  <div className="glossy-widget rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+                  <div className="glossy-widget rounded-[26px] p-6 shadow-sm flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between mb-2.5">
                         <span className="text-xs font-bold font-['Outfit'] text-rose-600 dark:text-rose-400 uppercase tracking-wide">
                           Scenario 1: Rogue Router Advertisement
                         </span>
-                        <span className="text-[10px] px-2.5 py-0.5 rounded-full font-['Outfit'] font-bold bg-rose-500/15 border border-rose-500/30 text-rose-600 dark:text-rose-400">
+                        <span className="text-[10px] px-2.5 py-1 rounded-[12px] font-['Outfit'] font-bold bg-rose-500/15 border border-rose-500/30 text-rose-600 dark:text-rose-400">
                           RFC 6105 Violation
                         </span>
                       </div>
@@ -1250,7 +1250,7 @@ export default function App() {
                         <code className="text-rose-600 dark:text-rose-400 font-mono">2001:db8:baad::/64</code>.
                       </p>
 
-                      <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 text-xs font-mono text-slate-500 mb-5 flex flex-col gap-1">
+                      <div className="p-4 rounded-[16px] bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 text-xs font-mono text-slate-500 mb-5 flex flex-col gap-1">
                         <div>Source: <span className="text-rose-500">fe80::dead:beef (Untrusted)</span></div>
                         <div>Prefix: <span className="text-rose-500">2001:db8:baad::/64 (Rogue)</span></div>
                         <div>Confinement: Isolated Bridge (p6g-br0)</div>
@@ -1260,7 +1260,7 @@ export default function App() {
                     <button
                       onClick={() => promptExperiment('ROGUE_RA')}
                       disabled={actionLoading}
-                      className="w-full py-3 px-4 rounded-xl bg-rose-600 hover:bg-rose-500 dark:bg-rose-500/20 dark:hover:bg-rose-500/30 text-white dark:text-rose-300 border border-rose-600 dark:border-rose-500/40 text-xs font-['Outfit'] font-bold flex items-center justify-center gap-2 transition-all shadow-md shadow-rose-600/20"
+                      className="w-full py-3 px-4 rounded-[16px] bg-rose-600 hover:bg-rose-500 dark:bg-rose-500/20 dark:hover:bg-rose-500/30 text-white dark:text-rose-300 border border-rose-600 dark:border-rose-500/40 text-xs font-['Outfit'] font-bold flex items-center justify-center gap-2 transition-all shadow-md shadow-rose-600/20"
                     >
                       <Play className="w-4 h-4" />
                       Launch Rogue RA Scenario
@@ -1268,13 +1268,13 @@ export default function App() {
                   </div>
 
                   {/* Scenario 2: NDP Burst Storm */}
-                  <div className="glossy-widget rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+                  <div className="glossy-widget rounded-[26px] p-6 shadow-sm flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between mb-2.5">
                         <span className="text-xs font-bold font-['Outfit'] text-amber-600 dark:text-amber-400 uppercase tracking-wide">
                           Scenario 2: Abnormal NDP Rate Burst
                         </span>
-                        <span className="text-[10px] px-2.5 py-0.5 rounded-full font-['Outfit'] font-bold bg-amber-500/15 border border-amber-500/30 text-amber-600 dark:text-amber-400">
+                        <span className="text-[10px] px-2.5 py-1 rounded-[12px] font-['Outfit'] font-bold bg-amber-500/15 border border-amber-500/30 text-amber-600 dark:text-amber-400">
                           Rate Anomaly
                         </span>
                       </div>
@@ -1285,7 +1285,7 @@ export default function App() {
                         Transmits a controlled storm of 90 Neighbor Solicitations in a 5.0s window to trigger rolling-window rate detectors with non-punitive classification.
                       </p>
 
-                      <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 text-xs font-mono text-slate-500 mb-5 flex flex-col gap-1">
+                      <div className="p-4 rounded-[16px] bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 text-xs font-mono text-slate-500 mb-5 flex flex-col gap-1">
                         <div>Burst Size: 90 NS packets</div>
                         <div>Target IP: 2001:db8:6::11</div>
                         <div>Threshold: 15.0 PPS on 5.0s window</div>
@@ -1295,7 +1295,7 @@ export default function App() {
                     <button
                       onClick={() => promptExperiment('NDP_BURST')}
                       disabled={actionLoading}
-                      className="w-full py-3 px-4 rounded-xl bg-amber-600 hover:bg-amber-500 dark:bg-amber-500/20 dark:hover:bg-amber-500/30 text-white dark:text-amber-300 border border-amber-600 dark:border-amber-500/40 text-xs font-['Outfit'] font-bold flex items-center justify-center gap-2 transition-all shadow-md shadow-amber-600/20"
+                      className="w-full py-3 px-4 rounded-[16px] bg-amber-600 hover:bg-amber-500 dark:bg-amber-500/20 dark:hover:bg-amber-500/30 text-white dark:text-amber-300 border border-amber-600 dark:border-amber-500/40 text-xs font-['Outfit'] font-bold flex items-center justify-center gap-2 transition-all shadow-md shadow-amber-600/20"
                     >
                       <Zap className="w-4 h-4" />
                       Launch NDP Storm Scenario
@@ -1304,7 +1304,7 @@ export default function App() {
                 </div>
 
                 {/* Experiment Run History Table */}
-                <div className="glossy-widget rounded-2xl overflow-hidden shadow-sm">
+                <div className="glossy-widget rounded-[26px] overflow-hidden shadow-sm">
                   <div className="p-5 border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between">
                     <h3 className="text-sm font-bold font-['Outfit'] uppercase text-slate-900 dark:text-white">
                       Recorded Experiments History ({experiments.length})
@@ -1312,7 +1312,7 @@ export default function App() {
                     <button
                       onClick={handleStopExperiment}
                       disabled={actionLoading}
-                      className="px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-white/[0.08] text-xs text-rose-600 dark:text-rose-400 hover:bg-slate-200 dark:hover:bg-white/[0.12] font-['Outfit'] font-bold flex items-center gap-1.5"
+                      className="px-4 py-2 rounded-[14px] bg-slate-100 dark:bg-white/[0.08] text-xs text-rose-600 dark:text-rose-400 hover:bg-slate-200 dark:hover:bg-white/[0.12] font-['Outfit'] font-bold flex items-center gap-1.5"
                     >
                       <StopCircle className="w-3.5 h-3.5" /> Stop Running
                     </button>
@@ -1346,7 +1346,7 @@ export default function App() {
                                 {exp.alerts_triggered}
                               </td>
                               <td className="p-3.5">
-                                <span className="px-2.5 py-1 rounded-md text-[10px] font-['Outfit'] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
+                                <span className="px-2.5 py-1 rounded-[10px] text-[10px] font-['Outfit'] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
                                   {exp.status}
                                 </span>
                               </td>
@@ -1373,7 +1373,7 @@ export default function App() {
                 </div>
 
                 {!metrics?.detection_metrics?.has_data ? (
-                  <div className="p-16 text-center glossy-widget rounded-2xl shadow-sm">
+                  <div className="p-16 text-center glossy-widget rounded-[26px] shadow-sm">
                     <Layers className="w-12 h-12 text-slate-400 mx-auto mb-3" />
                     <div className="text-base font-bold text-slate-900 dark:text-white font-['Outfit']">
                       Insufficient evaluation data
@@ -1386,7 +1386,7 @@ export default function App() {
                   <>
                     {/* Primary Benchmark KPI Cards */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                      <div className="glossy-widget rounded-2xl p-6 shadow-sm">
+                      <div className="glossy-widget rounded-[26px] p-6 shadow-sm">
                         <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 font-['Outfit'] uppercase tracking-wider">
                           TRUE POSITIVE RATE
                         </span>
@@ -1401,7 +1401,7 @@ export default function App() {
                         </div>
                       </div>
 
-                      <div className="glossy-widget rounded-2xl p-6 shadow-sm">
+                      <div className="glossy-widget rounded-[26px] p-6 shadow-sm">
                         <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 font-['Outfit'] uppercase tracking-wider">
                           FALSE ALARM RATE
                         </span>
@@ -1416,7 +1416,7 @@ export default function App() {
                         </div>
                       </div>
 
-                      <div className="glossy-widget rounded-2xl p-6 shadow-sm">
+                      <div className="glossy-widget rounded-[26px] p-6 shadow-sm">
                         <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 font-['Outfit'] uppercase tracking-wider">
                           AVG DETECTION LATENCY
                         </span>
@@ -1428,7 +1428,7 @@ export default function App() {
                         <div className="text-xs text-slate-400 font-medium mt-1">Sub-millisecond core</div>
                       </div>
 
-                      <div className="glossy-widget rounded-2xl p-6 shadow-sm">
+                      <div className="glossy-widget rounded-[26px] p-6 shadow-sm">
                         <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 font-['Outfit'] uppercase tracking-wider">
                           TRACKING RESISTANCE
                         </span>
@@ -1443,7 +1443,7 @@ export default function App() {
 
                     {/* Visual Charts */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                      <div className="glossy-widget rounded-2xl p-6 shadow-sm">
+                      <div className="glossy-widget rounded-[26px] p-6 shadow-sm">
                         <h3 className="text-sm font-bold font-['Outfit'] uppercase text-slate-700 dark:text-slate-300 mb-5">
                           Detection Accuracy Distribution
                         </h3>
@@ -1464,22 +1464,22 @@ export default function App() {
                                 contentStyle={{
                                   backgroundColor: theme === 'dark' ? '#0f172a' : '#ffffff',
                                   borderColor: theme === 'dark' ? '#334155' : '#cbd5e1',
-                                  borderRadius: 12,
+                                  borderRadius: 16,
                                   fontSize: 12,
                                   boxShadow: '0 8px 30px rgba(0,0,0,0.2)',
                                 }}
                               />
-                              <Bar dataKey="value" radius={[6, 6, 0, 0]} />
+                              <Bar dataKey="value" radius={[8, 8, 0, 0]} />
                             </BarChart>
                           </ResponsiveContainer>
                         </div>
                       </div>
 
-                      <div className="glossy-widget rounded-2xl p-6 shadow-sm">
+                      <div className="glossy-widget rounded-[26px] p-6 shadow-sm">
                         <h3 className="text-sm font-bold font-['Outfit'] uppercase text-slate-700 dark:text-slate-300 mb-5">
                           Security vs Privacy Tradeoff Matrix
                         </h3>
-                        <div className="p-5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 flex flex-col gap-3.5 text-xs font-medium">
+                        <div className="p-5 rounded-[18px] bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 flex flex-col gap-3.5 text-xs font-medium">
                           <div className="flex items-center justify-between">
                             <span className="text-slate-500">Evaluation Unit:</span>
                             <span className="font-bold text-slate-800 dark:text-slate-200 font-['Outfit']">Per Experiment Trial</span>
@@ -1524,11 +1524,11 @@ export default function App() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="glossy-widget rounded-2xl p-6 shadow-sm">
+                  <div className="glossy-widget rounded-[26px] p-6 shadow-sm">
                     <h3 className="text-xs font-bold font-['Outfit'] uppercase text-cyan-600 dark:text-cyan-400 mb-3 tracking-wider">
                       Router Advertisement (RFC 6105) Policy
                     </h3>
-                    <div className="p-4 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 text-xs flex flex-col gap-2 font-medium">
+                    <div className="p-4 rounded-[16px] bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 text-xs flex flex-col gap-2 font-medium">
                       <div>Authorized Gateway: <code className="font-mono text-cyan-500">fe80::1</code></div>
                       <div>Authorized Prefix: <code className="font-mono text-cyan-500">2001:db8:6::/64</code></div>
                       <div>Policy Rule: Default-Deny on unrecognized L2/L3 sources</div>
@@ -1536,11 +1536,11 @@ export default function App() {
                     </div>
                   </div>
 
-                  <div className="glossy-widget rounded-2xl p-6 shadow-sm">
+                  <div className="glossy-widget rounded-[26px] p-6 shadow-sm">
                     <h3 className="text-xs font-bold font-['Outfit'] uppercase text-cyan-600 dark:text-cyan-400 mb-3 tracking-wider">
                       NDP Rolling-Window Rate Detector
                     </h3>
-                    <div className="p-4 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 text-xs flex flex-col gap-2 font-medium">
+                    <div className="p-4 rounded-[16px] bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 text-xs flex flex-col gap-2 font-medium">
                       <div>Window Duration: 5.0 seconds</div>
                       <div>Threshold: 15.0 PPS per source address</div>
                       <div>Cooldown: 10.0 seconds suppression window</div>
@@ -1550,11 +1550,11 @@ export default function App() {
                 </div>
 
                 {/* Quickstart Reference Box */}
-                <div className="glossy-widget rounded-2xl p-6 shadow-sm">
+                <div className="glossy-widget rounded-[26px] p-6 shadow-sm">
                   <h3 className="text-sm font-bold font-['Outfit'] uppercase text-slate-800 dark:text-slate-200 mb-3 tracking-wider">
                     CLI Reproducibility Commands
                   </h3>
-                  <div className="bg-slate-900 text-slate-200 p-4 rounded-xl font-mono text-xs flex flex-col gap-2 overflow-x-auto shadow-inner">
+                  <div className="bg-slate-900 text-slate-200 p-5 rounded-[20px] font-mono text-xs flex flex-col gap-2 overflow-x-auto shadow-inner">
                     <div className="text-slate-500"># Run full automated test suite</div>
                     <div className="text-cyan-400">./.venv/bin/pytest -v tests/</div>
                     <div className="mt-1 text-slate-500"># Run 14-step reproducible demonstration sequence</div>
@@ -1569,12 +1569,12 @@ export default function App() {
         )}
       </main>
 
-      {/* CONFIRMATION MODAL */}
+      {/* CONFIRMATION MODAL in SQUIRCLE */}
       {confirmModal.isOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="glossy-widget rounded-3xl max-w-md w-full p-7 shadow-2xl animate-in fade-in zoom-in-95 duration-150">
-            <div className="flex items-center gap-3 mb-3.5">
-              <div className="p-3 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-600 dark:text-amber-400">
+          <div className="glossy-widget rounded-[32px] max-w-md w-full p-8 shadow-2xl animate-in fade-in zoom-in-95 duration-150">
+            <div className="flex items-center gap-3.5 mb-4">
+              <div className="p-3 rounded-[18px] bg-amber-500/15 border border-amber-500/30 text-amber-600 dark:text-amber-400">
                 <AlertTriangle className="w-5 h-5" />
               </div>
               <h3 className="text-base font-bold font-['Outfit'] text-slate-900 dark:text-white">
@@ -1589,13 +1589,13 @@ export default function App() {
             <div className="flex items-center justify-end gap-3">
               <button
                 onClick={() => setConfirmModal({ isOpen: false, scenario: null, title: '', description: '' })}
-                className="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.08] dark:hover:bg-white/[0.14] text-slate-700 dark:text-slate-300 text-xs font-['Outfit'] font-bold transition-colors"
+                className="px-4 py-2.5 rounded-[14px] bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.08] dark:hover:bg-white/[0.14] text-slate-700 dark:text-slate-300 text-xs font-['Outfit'] font-bold transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={executeConfirmedExperiment}
-                className="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-['Outfit'] font-bold transition-all shadow-md shadow-rose-600/30"
+                className="px-5 py-2.5 rounded-[14px] bg-rose-600 hover:bg-rose-500 text-white text-xs font-['Outfit'] font-bold transition-all shadow-md shadow-rose-600/30"
               >
                 Confirm & Launch
               </button>
