@@ -4,30 +4,71 @@
 
 @layer base {
   :root {
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    --font-heading: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+    --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-code: 'JetBrains Mono', 'Fira Code', monospace;
   }
 
   body {
-    font-family: var(--font-sans);
+    font-family: var(--font-body);
     overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
   }
 }
 
-/* Modern Glassmorphic & Elevated UI Utilities */
-.glass-panel {
-  @apply bg-white/80 dark:bg-[#0c1322]/80 backdrop-blur-md border border-slate-200/80 dark:border-slate-800/80 shadow-sm dark:shadow-[0_4px_20px_rgba(0,0,0,0.3)];
+/* Ambient Radial Mesh Background */
+.bg-ambient-mesh {
+  background-image: 
+    radial-gradient(circle at 10% 8%, rgba(6, 182, 212, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 90% 12%, rgba(99, 102, 241, 0.10) 0%, transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
 }
 
-.glass-card {
-  @apply bg-white dark:bg-[#0e1628] border border-slate-200 dark:border-slate-800/90 rounded-2xl shadow-sm dark:shadow-md transition-all duration-200;
+.light .bg-ambient-mesh {
+  background-image: 
+    radial-gradient(circle at 10% 8%, rgba(6, 182, 212, 0.06) 0%, transparent 45%),
+    radial-gradient(circle at 90% 12%, rgba(99, 102, 241, 0.05) 0%, transparent 45%);
 }
 
-.glass-card-hover {
-  @apply hover:border-cyan-500/50 dark:hover:border-cyan-500/40 hover:shadow-md dark:hover:shadow-[0_0_20px_rgba(6,182,212,0.15)] hover:-translate-y-0.5 transition-all duration-200;
+/* Modern Glossy Widget Surfaces */
+.glossy-widget {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%), #0c1322;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4), inset 0 1px 1px 0 rgba(255, 255, 255, 0.09);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Custom Scrollbars for Light and Dark themes */
+.light .glossy-widget {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06), inset 0 1px 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+/* Glossy Gradient Hover Effect */
+.glossy-hover:hover {
+  transform: translateY(-2px);
+  border-color: rgba(6, 182, 212, 0.45);
+  box-shadow: 0 12px 30px -4px rgba(6, 182, 212, 0.2), 0 0 15px 0 rgba(6, 182, 212, 0.1), inset 0 1px 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.light .glossy-hover:hover {
+  border-color: rgba(6, 182, 212, 0.5);
+  box-shadow: 0 12px 28px -4px rgba(14, 165, 233, 0.16), inset 0 1px 1px 0 rgba(255, 255, 255, 1);
+}
+
+/* Glowing Accent Border Utility */
+.border-gradient-cyan {
+  border-image: linear-gradient(to right, #06b6d4, #6366f1) 1;
+}
+
+/* Smooth Scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -53,18 +94,11 @@
   background: #0891b2;
 }
 
-/* Subtle glow animations */
-@keyframes pulseGlow {
-  0%, 100% {
-    opacity: 0.4;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scale(1.04);
-  }
+/* Hide scrollbar for tabs */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
-
-.animate-pulse-glow {
-  animation: pulseGlow 3s ease-in-out infinite;
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
