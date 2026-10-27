@@ -40,7 +40,9 @@
   -webkit-backdrop-filter: blur(18px);
   border: 1px solid rgba(255, 255, 255, 0.07);
   box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4), inset 0 1px 1px 0 rgba(255, 255, 255, 0.09);
-  border-radius: 26px;
+  border-radius: 28px;
+  -webkit-corner-smoothing: continuous;
+  corner-smoothing: 100%;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -50,27 +52,68 @@
   -webkit-backdrop-filter: blur(18px);
   border: 1px solid rgba(226, 232, 240, 0.9);
   box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06), inset 0 1px 1px 0 rgba(255, 255, 255, 0.95);
-  border-radius: 26px;
+  border-radius: 28px;
+  -webkit-corner-smoothing: continuous;
+  corner-smoothing: 100%;
 }
 
-/* Squircle Curvature Utilities */
+/* Squircle Continuous Curvature Utilities */
+.squircle-super {
+  border-radius: 34px;
+  -webkit-corner-smoothing: continuous;
+  corner-smoothing: 100%;
+}
+.squircle-modal {
+  border-radius: 32px;
+  -webkit-corner-smoothing: continuous;
+  corner-smoothing: 100%;
+}
+.squircle-widget {
+  border-radius: 28px;
+  -webkit-corner-smoothing: continuous;
+  corner-smoothing: 100%;
+}
 .squircle-3xl {
   border-radius: 32px;
+  -webkit-corner-smoothing: continuous;
+  corner-smoothing: 100%;
 }
 .squircle-2xl {
   border-radius: 26px;
+  -webkit-corner-smoothing: continuous;
+  corner-smoothing: 100%;
+}
+.squircle-card {
+  border-radius: 22px;
+  -webkit-corner-smoothing: continuous;
+  corner-smoothing: 100%;
+}
+.squircle-subcard {
+  border-radius: 18px;
+  -webkit-corner-smoothing: continuous;
+  corner-smoothing: 100%;
 }
 .squircle-xl {
   border-radius: 20px;
+  -webkit-corner-smoothing: continuous;
+  corner-smoothing: 100%;
 }
-.squircle-lg {
+.squircle-lg,
+.squircle-btn {
   border-radius: 16px;
+  -webkit-corner-smoothing: continuous;
+  corner-smoothing: 100%;
 }
-.squircle-md {
-  border-radius: 12px;
+.squircle-md,
+.squircle-pill {
+  border-radius: 14px;
+  -webkit-corner-smoothing: continuous;
+  corner-smoothing: 100%;
 }
 .squircle-sm {
-  border-radius: 8px;
+  border-radius: 10px;
+  -webkit-corner-smoothing: continuous;
+  corner-smoothing: 100%;
 }
 
 /* Glossy Gradient Hover Effect */
