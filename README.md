@@ -1,24 +1,73 @@
 # PRIV6GUARD
 **Privacy-Aware IPv6 IoT Security Monitoring Across Address Rotation**
 
-> **AIORI Hackathon 3**  
-> **Problem Statement**: PS-007  
-> **Team Code**: A3-PS007-TC254  
-> **Solution Video**: [Watch our YouTube Video Team Intro & Demo](https://youtu.be/BkqlxewUyNs)  
+> **AIORI Hackathon 3 | Problem Statement: PS-007 | Team Code: A3-PS007-TC254**  
+> **Official Demo & Presentation**: [Watch YouTube Video](https://youtu.be/BkqlxewUyNs) | [Solution Slide Deck (PDF)](./A3-PS007-TC254-PPT.pdf) | [Architecture Guide](./docs/ARCHITECTURE.md) | [Evaluation Report](./docs/EVALUATION_REPORT.md) | [Lab Runbook](./docs/LAB_RUNBOOK.md)
 
 ---
 
-## 1. Project Overview
-
-PRIV6GUARD is an IPv6 IoT security monitoring prototype engineered to demonstrate that local network anomaly detection and intrusion monitoring can remain highly effective while IoT devices rotate temporary IPv6 addresses (RFC 8981).
-
-Traditional intrusion detection systems rely on permanent IPv6 interface identifiers (EUI-64) or static device tracking, which introduces significant user surveillance and tracking risks. PRIV6GUARD addresses this tradeoff by introducing **cryptographic, short-lived pseudonyms**, **time-bounded authorized sessions**, and **zero-fingerprint security correlation**, paired with high-fidelity detection of:
-- **Unauthorized ICMPv6 Router Advertisements (Rogue RAs)**
-- **Abnormal Neighbor Discovery Protocol (NDP) Message Rates**
+## Table of Contents
+1. [Project Title](#1-project-title)
+2. [Problem Statement](#2-problem-statement)
+3. [Problem Understanding](#3-problem-understanding)
+4. [Proposed Solution](#4-proposed-solution)
+5. [Architecture Diagram](#5-architecture-diagram)
+6. [Feature List](#6-feature-list)
+7. [Technology Stack](#7-technology-stack)
+8. [Prerequisites](#8-prerequisites)
+9. [Installation Instructions](#9-installation-instructions)
+10. [Backend Startup](#10-backend-startup)
+11. [Frontend Startup](#11-frontend-startup)
+12. [Lab Setup](#12-lab-setup)
+13. [Lab Teardown](#13-lab-teardown)
+14. [How to Run Each Experiment](#14-how-to-run-each-experiment)
+15. [How to Run Tests](#15-how-to-run-tests)
+16. [How to Export Evaluation Results](#16-how-to-export-evaluation-results)
+17. [Security Considerations](#17-security-considerations)
+18. [Privacy Design](#18-privacy-design)
+19. [Limitations](#19-limitations)
+20. [Team Roles](#20-team-roles)
+21. [Screenshots & UI Showcase](#21-screenshots--ui-showcase)
+22. [Reproducible Demo Sequence](#22-reproducible-demo-sequence)
 
 ---
 
-## 2. Architecture & Design Principles
+## 1. Project Title
+**PRIV6GUARD: Privacy-Aware IPv6 IoT Security Monitoring Across Address Rotation**  
+*A privacy-preserving network intrusion detection system for dynamic IPv6 environments conforming to RFC 8981, RFC 4861, and RFC 6105.*
+
+---
+
+## 2. Problem Statement
+**Hackathon Problem Statement**: PS-007 (IPv6 IoT Security and Privacy Monitoring).  
+The proliferation of Internet of Things (IoT) devices operating on IPv6 networks creates a critical friction between network security monitoring and user privacy:
+- In standard IPv6 deployments, devices adopting SLAAC (Stateless Address Autoconfiguration) with EUI-64 identifiers expose their permanent MAC addresses, allowing trivial long-term tracking and device profiling across subnets.
+- To counter tracking, modern privacy standards (RFC 8981) rotate temporary interface identifiers at regular intervals.
+- However, traditional Network Intrusion Detection Systems (NIDS) and Security Information and Event Management (SIEM) solutions rely on static IP addresses or persistent hardware identifiers to maintain state, correlate security events, and detect multi-stage attacks.
+- Consequently, when IoT devices rotate their IPv6 addresses, legacy security monitors either fail completely (losing attack context) or bypass privacy safeguards by using invasive behavioral fingerprinting (TCP timestamps, TLS ciphers, clock skews) that recreates persistent tracking.
+
+---
+
+## 3. Problem Understanding
+1. **The Privacy-Security Dilemma**: Security operators must know *if* a device is behaving maliciously or under attack, but have no legitimate need to link distinct historical sessions together into a permanent profile of user habits.
+2. **Fragility of Legacy IDS**: In an RFC 8981 environment, a rogue gateway injecting malicious Router Advertisements (RAs) or a compromised device generating high-rate Neighbor Discovery Protocol (NDP) floods can evade attribution or cause false alerts against newly assigned legitimate addresses.
+3. **Flaws in Behavioral Fingerprinting**: Invasive fingerprinting techniques (measuring inter-arrival packet jitters, TCP options, or device quirks) violate user consent and break privacy promises made by operating systems implementing RFC 8981.
+4. **Tenant Isolation Needs**: Multi-tenant deployments (e.g., smart buildings, managed healthcare facilities) require strict cryptographic and database separation so that security events, device pseudonyms, and telemetry cannot leak across tenants.
+
+---
+
+## 4. Proposed Solution
+**PRIV6GUARD** introduces a zero-fingerprint security architecture that decouples physical identity from security correlation:
+- **Zero Behavioral Fingerprinting**: The monitoring stack never records or correlates packets using persistent hardware profiles, device quirks, or link-layer fingerprints.
+- **Short-Lived Authorized Sessions & Blind Pseudonyms**: Devices authenticate once per session with pre-shared credentials to obtain a short-lived token ($TTL=300\text{s}$). During address rotation, a cryptographic HMAC pseudonym is issued and bound strictly to that session epoch.
+- **Immediate Expiry Purge**: When a session expires, the mapping table purges all correlation keys. Outdated pseudonyms return `None`/401, rendering past and future activity unlinkable.
+- **RFC 4861/6105 Trust-Policy RA Detector**: Validates gateway authenticity based on link-local identity and authorized prefix ownership, independent of transmission frequency.
+- **Rolling-Window NDP Anomaly Detector**: Employs ring-buffered timestamp queues to detect message storms (Solicitations/Advertisements) with cooldown suppression, classifying anomalies as non-punitive indicators.
+- **Strict Multi-Tenant Isolation**: Enforced at the FastAPI dependency layer (`X-Tenant-ID`) and SQLite parameterization level.
+
+---
+
+## 5. Architecture Diagram
 
 ```
   +-------------------------------------------------------------------------+
@@ -67,126 +116,257 @@ Traditional intrusion detection systems rely on permanent IPv6 interface identif
      +-----------------------+                +-------------------------+
 ```
 
-### Core Security & Privacy Invariants:
-1. **Isolated Lab Topology**: Virtual bridge `p6g-br0` and network namespaces prevent any packet leakage to host physical interfaces.
-2. **Zero Behavioral Fingerprinting**: No persistent hardware profiling, TCP/TLS fingerprinting, or MAC address retention past L2 frame processing.
-3. **Session-Bounded Correlation**: Devices maintain monitoring continuity across address rotation *only* via explicit, authenticated, short-lived session tokens ($TTL = 300\text{s}$).
-4. **Purged Expired Mappings**: Outdated pseudonym mappings are purged and rejected by the API layer.
-5. **Backend-Enforced Multi-Tenancy**: Data queries strictly filter by `tenant_id` at the database level.
-6. **Cryptographic Manifest Verification**: Teardown only removes resources explicitly recorded in `data/lab_manifest.json` and verified with a SHA-256 integrity checksum.
-7. **Explicit Router Trust Policy**: Rogue classification evaluates gateway link-local identity and prefix ownership; routers are never classified as rogue purely because of advertisement frequency.
-8. **Anomaly Indicator Classification**: High NDP message rates are flagged as anomaly indicators rather than definitive proof of malice.
+*For complete Mermaid diagrams covering topology, data flow, lifecycles, and detection logic, see [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md).*
 
 ---
 
-## 3. Emulated IoT Devices
-
-| Device ID | Device Name | Device Type | Namespace | Tenant | Base Link-Local | Assigned Global IPv6 |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `p6g-iot1` | Smart Thermostat | HVAC Controller | `p6g-iot1` | `tenant-alpha` | `fe80::11` | `2001:db8:6::11` |
-| `p6g-iot2` | Medical Heart Monitor | Vital Sensor | `p6g-iot2` | `tenant-alpha` | `fe80::12` | `2001:db8:6::12` |
-| `p6g-iot3` | Industrial Flowmeter | Telemetry Sensor | `p6g-iot3` | `tenant-alpha` | `fe80::13` | `2001:db8:6::13` |
-| `p6g-iot4` | CCTV Security Streamer | Video Camera | `p6g-iot4` | `tenant-beta` | `fe80::14` | `2001:db8:6::14` |
-| `p6g-iot5` | Environmental Air Sensor | Air Quality Monitor | `p6g-iot5` | `tenant-beta` | `fe80::15` | `2001:db8:6::15` |
-
----
-
-## 4. Phase Status & Progress
-
-- [x] **Phase 0: Environment Bootstrapping & Configuration Foundations**
-  - Bootstrapped Python 3.14 virtual environment with `fastapi`, `scapy`, `pydantic-settings`, `cryptography`, `aiosqlite`, `pytest`.
-  - Installed Node.js v22 LTS and Git.
-  - Implemented `config/lab_config.yaml`, `config/detection_rules.yaml`, `config/app_config.py`.
-  - Implemented SQLite database layer and Pydantic domain models.
-- [x] **Phase 1: Project Scaffolding & Environment Validation**
-  - Implemented FastAPI application entrypoint with `/api/health` endpoint.
-  - Implemented structured logging with sensitive token/key redaction.
-  - Built React + TypeScript + Vite dashboard with Tailwind CSS cyber theme.
-  - Validated 7/7 backend unit tests and 0-error TypeScript build.
-- [x] **Phase 2: Isolated IPv6 Lab with Five Emulated Devices**
-  - Implemented typed lab configuration with `2001:db8:6::/64` documentation prefix.
-  - Implemented `network/lab_setup.py` with conflict detection, rollback, and interface provisioning.
-  - Implemented `network/lab_teardown.py` with cryptographic manifest verification (`data/lab_manifest.json`).
-  - Implemented `network/device_inventory.py` and `network/lab_status.py` with attack pre-flight checks.
-  - Implemented `network/unprivileged_runner.py` for rootless user namespace execution.
-  - Documented full operational runbook in `docs/LAB_RUNBOOK.md`.
-- [x] **Phase 3: Normal Traffic, Address Rotation and Session-Scoped Pseudonyms**
-  - Implemented `network/traffic_simulator.py` (benign telemetry generator with start/stop/status).
-  - Implemented `network/address_rotator.py` (RFC 8981 address rotation with safe transition policy).
-  - Implemented `security/auth_manager.py` (authenticated sessions, rate limiting, controllable clock).
-  - Implemented `security/pseudonym_manager.py` (cryptographic random pseudonyms, expiry purge).
-  - Implemented `security/correlation_engine.py` (authorized session correlation, zero fingerprinting).
-  - Implemented `security/audit_logger.py` (data minimization, credential redaction).
-- [x] **Phase 4: Packet Sniffing & IPv6 Security Detectors**
-  - Implemented `security/ra_detector.py` enforcing RFC 4861/6105 trust policies with frequency invariance.
-  - Implemented `security/ndp_detector.py` rolling-window anomaly rate counter with cooldown suppression.
-  - Implemented `security/event_manager.py` for structured alert dispatch and pseudonym correlation.
-  - Implemented `network/packet_capture.py` Scapy bridge packet listener with data minimization.
-- [x] **Phase 5: Evaluation & Metrics Engine + REST API Integration**
-  - Implemented REST API routers: `/api/lab`, `/api/devices`, `/api/events`, `/api/metrics`, `/api/attacks`.
-  - Implemented strict backend multi-tenant isolation via `X-Tenant-ID` dependency injection.
-  - Implemented controlled attack simulation endpoints with pre-flight check enforcement.
-  - Validated 48/48 automated tests across all phases.
-- [x] **Phase 6: Full Dashboard Integration & Visualization**
-  - Integrated React 18 + TypeScript + Vite + Tailwind CSS frontend dashboard.
-  - Implemented multi-tenant switcher (`tenant-alpha` vs `tenant-beta`) with instant state isolation.
-  - Built interactive network topology diagram showing bridge, gateway, 5 IoT devices, and attacker node.
-  - Built real-time device rotation control cards with live RFC 8981 address rotation button.
-  - Built attack simulation control panel for one-click Rogue RA and NDP storm triggers.
-  - Added empirical evaluation charts with Recharts (AreaChart latency, BarChart TPR/FPR).
-- [x] **Phase 7: End-to-End Evaluation & Reproducible Demonstration**
-  - Implemented `scripts/run_demo.py` for reproducible 9-step CLI evaluation.
-  - Created `tests/test_end_to_end_acceptance.py` formally verifying all 13 Section 7 criteria.
-  - Generated comprehensive empirical evaluation report in `docs/EVALUATION_REPORT.md`.
-  - Validated 61/61 automated tests with 100% pass rate.
+## 6. Feature List
+- **Deterministic Virtual Lab**: 5 emulated IPv6 IoT nodes across multiple tenants (`tenant-alpha`, `tenant-beta`) in isolated Linux network namespaces.
+- **RFC 8981 Address Rotation Engine**: Generates cryptographically secure, randomized interface identifiers with zero downtime.
+- **Session-Bounded Cryptographic Pseudonymity**: Maps ephemeral IPv6 addresses to epoch pseudonyms valid only during an active session ($TTL=300\text{s}$).
+- **Automatic Memory & Database Purge**: Periodically eliminates expired pseudonym mappings, preventing post-session correlation.
+- **Rogue RA Trust Detector (RFC 4861/6105)**: Identifies unauthorized gateway link-locals and rogue prefix injections with sub-millisecond detection latency.
+- **NDP Anomaly Detector**: Identifies high-rate NS/NA/RS floods via a 5.0-second rolling window with cooldown suppression.
+- **Data Minimization Engine**: Drops raw L2 frame payloads immediately upon ingestion (`store=False`), storing only essential normalized header fields.
+- **Multi-Tenant REST API**: Full tenant partitioning via `X-Tenant-ID` header injection.
+- **Cyber Dashboard UI**: Real-time topology visualization, live event stream, interactive rotation controls, and Recharts metric graphs.
+- **Dual Execution Modes**: Supports both rootless live lab mode and fixture-based demonstration mode with visible terminal labeling.
 
 ---
 
-## 5. API Reference
-
-| Endpoint | Method | Description | Tenant Isolated |
-| :--- | :--- | :--- | :--- |
-| `/api/health` | GET | Operational health and version | Public |
-| `/api/lab/status` | GET | Status of virtual bridge & namespaces | Public |
-| `/api/lab/start` | POST | Start virtual bridge monitoring & sniffer | Protected |
-| `/api/lab/stop` | POST | Stop packet sniffer gracefully | Protected |
-| `/api/devices` | GET | List 5 emulated devices with active pseudonyms | **Yes** (`X-Tenant-ID`) |
-| `/api/devices/{id}/authenticate` | POST | Authenticate device and issue session token | **Yes** (`X-Tenant-ID`) |
-| `/api/devices/{id}/rotate` | POST | Rotate IPv6 address and issue fresh pseudonym | **Yes** (`X-Tenant-ID`) |
-| `/api/sessions` | GET | List active sessions and remaining TTLs | **Yes** (`X-Tenant-ID`) |
-| `/api/events` | GET | Chronological security events (`ROGUE_RA`, `NDP_RATE_ANOMALY`) | **Yes** (`X-Tenant-ID`) |
-| `/api/alerts` | GET | Normalized alert structures with filters | **Yes** (`X-Tenant-ID`) |
-| `/api/metrics` | GET | Live evaluation metrics (detection rates, privacy index) | Global |
-| `/api/experiments/normal` | POST | Run benign baseline telemetry scenario | Guarded |
-| `/api/experiments/rogue-ra` | POST | Controlled Rogue RA injection experiment | Guarded |
-| `/api/experiments/ndp-burst` | POST | Controlled NDP message storm experiment | Guarded |
-| `/api/experiments/stop` | POST | Stop running experiment | Public |
-| `/api/experiments` | GET | List recorded experiment trial records | Global |
+## 7. Technology Stack
+| Layer | Technologies |
+| :--- | :--- |
+| **Backend Core** | Python 3.12+, FastAPI, Uvicorn, Pydantic v2, `pydantic-settings` |
+| **Networking & Sniffing** | Scapy, Linux `iproute2`, Network Namespaces (`ip netns`), Linux Virtual Bridge (`p6g-br0`) |
+| **Cryptography & Storage** | Python `secrets`, `cryptography` (HMAC-SHA256), `aiosqlite` (SQLite WAL mode) |
+| **Frontend Dashboard** | React 18, TypeScript, Vite, Tailwind CSS, Lucide React, Recharts |
+| **Test & Evaluation** | Pytest, `pytest-asyncio`, Vitest, HTTPX |
 
 ---
 
-## 6. Verification & Reproducibility Guide
+## 8. Prerequisites
+- **Operating System**: Linux (Ubuntu 22.04 LTS or Debian 12 recommended) with kernel support for `ip netns` and bridge interfaces.
+- **Python**: Version 3.10 or higher (Python 3.12+ recommended).
+- **Node.js**: Version 18 or higher (Node.js v22 LTS tested).
+- **Package Managers**: `pip` and `npm`.
+- **System Utilities**: `iproute2`, `iptables`, `sudo` (required only for live network namespace creation).
 
-### 6.1 Run All 69 Automated Tests
+---
+
+## 9. Installation Instructions
+
+### Step 1: Clone Repository
+```bash
+git clone https://github.com/aiori-hackathon/A3-PS007-TC254.git
+cd A3-PS007-TC254
+```
+
+### Step 2: Set Up Python Virtual Environment
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+### Step 3: Install Frontend Dependencies
+```bash
+cd frontend
+npm install
+cd ..
+```
+
+### Step 4: Configure Environment Variables
+```bash
+cp .env.example .env
+```
+
+---
+
+## 10. Backend Startup
+
+To start the FastAPI backend service:
+```bash
+source .venv/bin/activate
+uvicorn backend.app:app --host 127.0.0.1 --port 8000 --reload
+```
+- API Base URL: `http://127.0.0.1:8000`
+- Interactive OpenAPI Docs: `http://127.0.0.1:8000/docs`
+- Health Endpoint: `http://127.0.0.1:8000/api/health`
+
+---
+
+## 11. Frontend Startup
+
+In a separate terminal:
+```bash
+cd frontend
+npm run dev
+```
+- Dashboard URL: `http://localhost:5173`
+- Default Tenant: `tenant-alpha` (switchable in header to `tenant-beta`)
+
+---
+
+## 12. Lab Setup
+
+To provision the isolated virtual bridge, network namespaces, and 5 emulated IoT nodes:
+```bash
+sudo ./.venv/bin/python3 network/lab_setup.py
+```
+*Note: If unprivileged user namespaces are supported, rootless execution is available via `network/unprivileged_runner.py`.*
+
+To verify the lab status:
+```bash
+./.venv/bin/python3 -c "from network.lab_status import check_lab_status; print(check_lab_status())"
+```
+
+---
+
+## 13. Lab Teardown
+
+To safely tear down all virtual interfaces, bridge, and namespaces using cryptographic manifest verification (`data/lab_manifest.json`):
+```bash
+sudo ./.venv/bin/python3 network/lab_teardown.py
+```
+*Guarantees zero residual interface leaks and never modifies host physical interfaces.*
+
+---
+
+## 14. How to Run Each Experiment
+
+Priv6Guard includes an automated, empirical evaluation runner: `scripts/evaluate_prototype.py`.
+
+To run all 7 structured empirical experiments:
+```bash
+./.venv/bin/python3 scripts/evaluate_prototype.py
+```
+
+### Individual Experiment Details:
+1. **Experiment 1: Benign Baseline**
+   - Transmits normal ICMPv6 telemetry across all 5 nodes.
+   - Measures baseline NDP rate and verifies zero false alarms.
+2. **Experiment 2: Rogue RA Policy Detection**
+   - Injects legitimate gateway RAs (`fe80::1`) and rogue RAs (`fe80::dead:beef`, unauthorized prefix `2001:db8:baad::/64`).
+   - Verifies 100% true-positive classification without frequency bias.
+3. **Experiment 3: NDP Rate Anomaly Storms**
+   - Injects high-rate Neighbor Solicitations (50 PPS) and tests borderline threshold rates (12 PPS).
+   - Validates rolling-window detection and cooldown suppression.
+4. **Experiment 4: Authorized RFC 8981 Address Rotation**
+   - Authenticates session and rotates IPv6 address.
+   - Verifies session continuity while ensuring no behavioral fingerprinting is performed.
+5. **Experiment 5: Pseudonym Expiry & Purge**
+   - Advances test clock past epoch TTL ($35\text{s} > 30\text{s}$) and runs memory purge.
+   - Confirms subsequent lookup returns `None` (rejection).
+6. **Experiment 6: Multi-Tenant Boundary Isolation**
+   - Evaluates cross-tenant data requests between `tenant-alpha` and `tenant-beta`.
+   - Confirms zero cross-tenant event, session, or device leakage.
+7. **Experiment 7: Restart & State Recovery**
+   - Simulates backend storage restart.
+   - Confirms expired mappings remain permanently expired and cannot be resurrected.
+
+---
+
+## 15. How to Run Tests
+
+### Run Full Pytest Suite (100 Tests)
 ```bash
 ./.venv/bin/pytest -v tests/
 ```
-*Executes all 69 unit, integration, and security tests in ~4.0 seconds.*
+*Executes all 100 backend unit, security, integration, and failure handling tests in ~3.5 seconds.*
 
-### 6.2 Run 13-Criteria Acceptance Test
+### Run Frontend Vitest Suite (9 Tests)
 ```bash
-./.venv/bin/pytest -v tests/test_end_to_end_acceptance.py
+cd frontend && npm test -- --run && cd ..
 ```
-*Formally validates all 13 criteria from Section 7 of the problem statement.*
+*Executes all component and API client test suites.*
 
-### 6.3 Run Live Demonstration Script
+---
+
+## 16. How to Export Evaluation Results
+
+When running `scripts/evaluate_prototype.py`, structured machine-readable results are automatically exported to:
+- **JSON**: `data/evaluation_results.json`
+- **CSV**: `data/evaluation_results.csv`
+
+To inspect the summary metrics directly from the CLI:
 ```bash
-python3 scripts/run_demo.py
+./.venv/bin/python3 -c "import json; data=json.load(open('data/evaluation_results.json')); print(json.dumps(data['summary_metrics'], indent=2))"
 ```
-*Walks through the entire 9-step demonstration from health checks to empirical metrics.*
 
-### 6.4 Documentation Links
-- [Laboratory Runbook](docs/LAB_RUNBOOK.md)
-- [Comprehensive Empirical Evaluation Report](docs/EVALUATION_REPORT.md)
+---
 
+## 17. Security Considerations
+- **Target Confinement**: Attack and experiment endpoints strictly enforce that target IPs and rogue sources belong to `2001:db8:6::/64` or `fe80::/10`, rejecting public or arbitrary addresses with HTTP 400.
+- **Data Minimization**: Packet sniffer runs with `store=False`, capturing only essential ICMPv6 header metadata into `NormalizedEvent` and discarding raw link payloads immediately.
+- **SQL Injection Prevention**: All database operations use parameterized queries (`aiosqlite`).
+- **Secret Redaction**: Structured audit logger automatically redacts session tokens, bearer headers, and device secrets before writing to disk.
+- **Fail-Safe Design**: Missing lab interfaces or temporary database locks cause endpoints to fail safely with informative HTTP errors rather than crashing worker threads.
 
+---
+
+## 18. Privacy Design
+1. **Zero Link-Layer Correlation**: Device MAC addresses are discarded after L2 ingestion and are never stored in database tables.
+2. **Ephemeral Identity**: Pseudonyms are derived via HMAC-SHA256 with an ephemeral key and are valid only for a short time epoch ($120\text{s}$).
+3. **Session-Bounded Scope**: Continuous correlation across address rotation is permitted **only** when accompanied by an authorized session token ($TTL=300\text{s}$).
+4. **Permanent Expiry**: When a session expires, its cryptographic mapping is purged from memory and database, guaranteeing past activity cannot be linked to future sessions.
+5. **Strict Tenant Boundaries**: Enforced at the controller and SQL level via `tenant_id`.
+
+---
+
+## 19. Limitations
+1. **Traffic Analysis Correlation**: Passive eavesdroppers observing packet volume and transmission intervals (e.g., fixed sensor heartbeats every 60 seconds) could statistically infer device continuity.
+2. **Application-Layer Fingerprinting**: Upper-layer protocol payloads (HTTP headers, TLS ClientHellos) are deliberately uninspected to adhere to data minimization.
+3. **Local Subnet Scope**: Privacy guarantees apply to the local L2/L3 IPv6 segment. Upstream ISP routing prefixes remain visible across wide-area networks.
+4. **Evaluation Scale**: Empirical trials were executed in a controlled 5-node environment (18 benchmark trials). Enterprise multi-thousand device deployments require hardware-accelerated sniffing (e.g., DPDK/AF_XDP).
+
+---
+
+## 20. Team Roles
+**AIORI Hackathon 3 | Team Code: A3-PS007-TC254**
+
+| Member / Role | Focus Area & Responsibilities |
+| :--- | :--- |
+| **Lead Security Architect** | IPv6 Network Stack, Linux Virtual Bridge (`p6g-br0`), Network Namespaces, Scapy Packet Sniffer & Data Minimization. |
+| **Cryptography & Privacy Specialist** | RFC 8981 Address Rotation, HMAC-SHA256 Blind Pseudonyms, Session Token Lifecycle, and TTL Purge Engine. |
+| **Detection & Systems Engineer** | RFC 4861/6105 Rogue RA Trust Detector, Rolling-Window NDP Anomaly Counter, and SQLite WAL Persistence. |
+| **Full-Stack & Integration Engineer** | FastAPI REST Services, Multi-Tenant Dependency Injection, React + TypeScript Dashboard, and Automated Test Harnesses. |
+
+---
+
+## 21. Screenshots & UI Showcase
+
+The Priv6Guard web interface provides real-time situational awareness:
+1. **Network Topology Map**: Interactive visual diagram showing the virtual bridge, gateway, 5 IoT devices, and the attacker node.
+2. **Live Event Stream**: Real-time tabular feed showing incoming ICMPv6 telemetry and alert flags.
+3. **Address Rotation Control**: Interactive trigger allowing judges to rotate any device's RFC 8981 address and inspect the updated pseudonym.
+4. **Attack Simulation Panel**: Controlled execution buttons for injecting Rogue RAs and NDP storms.
+5. **Evaluation Metrics**: Recharts visualizations for True Positive Rate, False Alarm Rate, and Average Latency.
+6. **Multi-Tenant Switcher**: Immediate toggling between `tenant-alpha` and `tenant-beta` demonstrating zero cross-tenant leakage.
+
+---
+
+## 22. Reproducible Demo Sequence
+
+Run the complete 14-step automated demonstration sequence required by Phase 9 Section E:
+```bash
+./.venv/bin/python3 scripts/run_demo.py --mode fixture
+```
+*(Use `--mode live` when the live backend is running on `http://127.0.0.1:8000`)*
+
+### 14-Step Demo Breakdown:
+1. **Step 1**: Start application and verify health.
+2. **Step 2**: Inspect lab status and bridge topology.
+3. **Step 3**: Display all 5 emulated IPv6 devices.
+4. **Step 4**: Generate benign baseline telemetry.
+5. **Step 5**: Perform authorized RFC 8981 address rotation.
+6. **Step 6**: Validate permitted legitimate Router Advertisement.
+7. **Step 7**: Inject controlled Rogue RA scenario.
+8. **Step 8**: Retrieve resulting Rogue RA security alert.
+9. **Step 9**: Inject controlled NDP anomaly burst scenario.
+10. **Step 10**: Retrieve resulting NDP rate anomaly indicator alert.
+11. **Step 11**: Run pseudonym epoch expiry and immediate purge verification.
+12. **Step 12**: Demonstrate multi-tenant boundary isolation.
+13. **Step 13**: Calculate live empirical evaluation metrics.
+14. **Step 14**: Gracefully stop lab and sniffer workers.

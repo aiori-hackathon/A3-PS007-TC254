@@ -111,8 +111,8 @@ async def rotate_device_address(
         if len(parts) == 2 and parts[0].lower() == "bearer":
             token = parts[1]
 
-    # If no token provided in request, check if device has active pre-shared session for demo convenience
-    if not token:
+    # If no token provided in request and none was attempted, check if device has pre-shared session for demo convenience
+    if not token and req.session_token is None and authorization is None:
         cred = DEVICE_CREDENTIALS_STORE.get(device_id)
         if cred and cred["tenant_id"] == tenant_id:
             _, token, _ = sm.authenticate_device(device_id, tenant_id, cred["secret"])

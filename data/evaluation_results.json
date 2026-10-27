@@ -1,0 +1,429 @@
+{
+  "metadata": {
+    "app": "PRIV6GUARD",
+    "version": "1.0.0",
+    "hackathon": "AIORI Hackathon 3",
+    "problem_statement": "PS-007",
+    "team_code": "A3-PS007-TC254",
+    "generated_at": "2026-10-27T17:40:50.999410+00:00"
+  },
+  "metrics": {
+    "evaluation_unit": "individual_trial_execution",
+    "software_version": "1.0.0",
+    "evaluation_timestamp": "2026-10-27T17:40:50.999387+00:00",
+    "summary": {
+      "total_trials": 18,
+      "correct_trials": 18,
+      "accuracy_pct": 100.0
+    },
+    "detection_metrics": {
+      "true_positives": 5,
+      "false_positives": 0,
+      "true_negatives": 4,
+      "false_negatives": 0,
+      "detection_rate_pct": 100.0,
+      "precision_pct": 100.0,
+      "false_positive_rate_pct": 0.0,
+      "false_negative_rate_pct": 0.0,
+      "average_detection_latency_ms": 0.42
+    },
+    "privacy_metrics": {
+      "successful_pseudonym_expiry_tests": 1,
+      "successful_tenant_isolation_tests": 1,
+      "unauthorized_correlations_blocked": 1,
+      "tracking_resistance_score": 1.0
+    }
+  },
+  "trials": [
+    {
+      "trial_id": "eval-e23eed1d",
+      "experiment_num": 1,
+      "scenario_name": "Benign Baseline Telemetry Trial 1",
+      "software_version": "1.0.0",
+      "app_name": "PRIV6GUARD",
+      "configuration": {
+        "packet_count": 5,
+        "interval_sec": 0.2,
+        "threshold_pps": 15.0
+      },
+      "start_time": "2026-10-27T17:40:50.989852+00:00",
+      "end_time": "2026-10-27T17:40:50.989898+00:00",
+      "duration_ms": 0.046,
+      "expected_result": "BENIGN",
+      "observed_result": "BENIGN",
+      "is_correct": true,
+      "alert_id": null,
+      "latency_ms": 0.0,
+      "notes": "Normal device query rate within threshold guide (15.0 pps)."
+    },
+    {
+      "trial_id": "eval-0119b2b2",
+      "experiment_num": 1,
+      "scenario_name": "Benign Baseline Telemetry Trial 2",
+      "software_version": "1.0.0",
+      "app_name": "PRIV6GUARD",
+      "configuration": {
+        "packet_count": 5,
+        "interval_sec": 0.2,
+        "threshold_pps": 15.0
+      },
+      "start_time": "2026-10-27T17:40:50.989927+00:00",
+      "end_time": "2026-10-27T17:40:50.989943+00:00",
+      "duration_ms": 0.016,
+      "expected_result": "BENIGN",
+      "observed_result": "BENIGN",
+      "is_correct": true,
+      "alert_id": null,
+      "latency_ms": 0.0,
+      "notes": "Normal device query rate within threshold guide (15.0 pps)."
+    },
+    {
+      "trial_id": "eval-4baeebb7",
+      "experiment_num": 1,
+      "scenario_name": "Benign Baseline Telemetry Trial 3",
+      "software_version": "1.0.0",
+      "app_name": "PRIV6GUARD",
+      "configuration": {
+        "packet_count": 5,
+        "interval_sec": 0.2,
+        "threshold_pps": 15.0
+      },
+      "start_time": "2026-10-27T17:40:50.989956+00:00",
+      "end_time": "2026-10-27T17:40:50.989968+00:00",
+      "duration_ms": 0.012,
+      "expected_result": "BENIGN",
+      "observed_result": "BENIGN",
+      "is_correct": true,
+      "alert_id": null,
+      "latency_ms": 0.0,
+      "notes": "Normal device query rate within threshold guide (15.0 pps)."
+    },
+    {
+      "trial_id": "eval-9b5665aa",
+      "experiment_num": 1,
+      "scenario_name": "Benign Baseline Telemetry Trial 4",
+      "software_version": "1.0.0",
+      "app_name": "PRIV6GUARD",
+      "configuration": {
+        "packet_count": 5,
+        "interval_sec": 0.2,
+        "threshold_pps": 15.0
+      },
+      "start_time": "2026-10-27T17:40:50.989975+00:00",
+      "end_time": "2026-10-27T17:40:50.989986+00:00",
+      "duration_ms": 0.011,
+      "expected_result": "BENIGN",
+      "observed_result": "BENIGN",
+      "is_correct": true,
+      "alert_id": null,
+      "latency_ms": 0.0,
+      "notes": "Normal device query rate within threshold guide (15.0 pps)."
+    },
+    {
+      "trial_id": "eval-4d55ce3b",
+      "experiment_num": 1,
+      "scenario_name": "Benign Baseline Telemetry Trial 5",
+      "software_version": "1.0.0",
+      "app_name": "PRIV6GUARD",
+      "configuration": {
+        "packet_count": 5,
+        "interval_sec": 0.2,
+        "threshold_pps": 15.0
+      },
+      "start_time": "2026-10-27T17:40:50.989991+00:00",
+      "end_time": "2026-10-27T17:40:50.990001+00:00",
+      "duration_ms": 0.01,
+      "expected_result": "BENIGN",
+      "observed_result": "BENIGN",
+      "is_correct": true,
+      "alert_id": null,
+      "latency_ms": 0.0,
+      "notes": "Normal device query rate within threshold guide (15.0 pps)."
+    },
+    {
+      "trial_id": "eval-659d0d69",
+      "experiment_num": 2,
+      "scenario_name": "RA Policy: Authorized Gateway RA",
+      "software_version": "1.0.0",
+      "app_name": "PRIV6GUARD",
+      "configuration": {
+        "name": "Authorized Gateway RA",
+        "src": "fe80::1",
+        "prefix": "2001:db8:6::/64",
+        "lifetime": 1800,
+        "expected": "AUTHORIZED"
+      },
+      "start_time": "2026-10-27T17:40:50.990265+00:00",
+      "end_time": "2026-10-27T17:40:50.990310+00:00",
+      "duration_ms": 0.045,
+      "expected_result": "AUTHORIZED",
+      "observed_result": "AUTHORIZED",
+      "is_correct": true,
+      "alert_id": null,
+      "latency_ms": 0.043,
+      "notes": "Compliant with policy."
+    },
+    {
+      "trial_id": "eval-4a056e8c",
+      "experiment_num": 2,
+      "scenario_name": "RA Policy: Rogue Gateway Source fe80::dead:beef",
+      "software_version": "1.0.0",
+      "app_name": "PRIV6GUARD",
+      "configuration": {
+        "name": "Rogue Gateway Source fe80::dead:beef",
+        "src": "fe80::dead:beef",
+        "prefix": "2001:db8:6::/64",
+        "lifetime": 1800,
+        "expected": "ROGUE"
+      },
+      "start_time": "2026-10-27T17:40:50.990438+00:00",
+      "end_time": "2026-10-27T17:40:50.990546+00:00",
+      "duration_ms": 0.108,
+      "expected_result": "ROGUE",
+      "observed_result": "ROGUE",
+      "is_correct": true,
+      "alert_id": "alt-ra-3e0009",
+      "latency_ms": 0.106,
+      "notes": "Violation rule: RULE-RA-UNAUTHORIZED-SOURCE, reason: Source fe80::dead:beef is not in authorized router whitelist (default-deny policy)."
+    },
+    {
+      "trial_id": "eval-64da8001",
+      "experiment_num": 2,
+      "scenario_name": "RA Policy: Foreign Prefix Hijack 2001:db8:baad::/64",
+      "software_version": "1.0.0",
+      "app_name": "PRIV6GUARD",
+      "configuration": {
+        "name": "Foreign Prefix Hijack 2001:db8:baad::/64",
+        "src": "fe80::1",
+        "prefix": "2001:db8:baad::/64",
+        "lifetime": 1800,
+        "expected": "ROGUE"
+      },
+      "start_time": "2026-10-27T17:40:50.990680+00:00",
+      "end_time": "2026-10-27T17:40:50.990744+00:00",
+      "duration_ms": 0.064,
+      "expected_result": "ROGUE",
+      "observed_result": "ROGUE",
+      "is_correct": true,
+      "alert_id": "alt-ra-bc9acd",
+      "latency_ms": 0.063,
+      "notes": "Violation rule: RULE-RA-UNAUTHORIZED-PREFIX, reason: Prefix 2001:db8:baad::/64 is foreign to this network policy."
+    },
+    {
+      "trial_id": "eval-affb09a4",
+      "experiment_num": 2,
+      "scenario_name": "RA Policy: Abnormal Excessive Lifetime (9500s > 9000s max)",
+      "software_version": "1.0.0",
+      "app_name": "PRIV6GUARD",
+      "configuration": {
+        "name": "Abnormal Excessive Lifetime (9500s > 9000s max)",
+        "src": "fe80::1",
+        "prefix": "2001:db8:6::/64",
+        "lifetime": 9500,
+        "expected": "ROGUE"
+      },
+      "start_time": "2026-10-27T17:40:50.990862+00:00",
+      "end_time": "2026-10-27T17:40:50.990910+00:00",
+      "duration_ms": 0.048,
+      "expected_result": "ROGUE",
+      "observed_result": "ROGUE",
+      "is_correct": true,
+      "alert_id": "alt-ra-ed9590",
+      "latency_ms": 0.047,
+      "notes": "Violation rule: RULE-RA-ABNORMAL-LIFETIME, reason: Lifetime 9500s exceeds maximum allowed 1800s."
+    },
+    {
+      "trial_id": "eval-d7ce2c4f",
+      "experiment_num": 2,
+      "scenario_name": "RA Policy: Authorized Graceful Deprecation (lifetime=0)",
+      "software_version": "1.0.0",
+      "app_name": "PRIV6GUARD",
+      "configuration": {
+        "name": "Authorized Graceful Deprecation (lifetime=0)",
+        "src": "fe80::1",
+        "prefix": "2001:db8:6::/64",
+        "lifetime": 0,
+        "expected": "AUTHORIZED"
+      },
+      "start_time": "2026-10-27T17:40:50.991024+00:00",
+      "end_time": "2026-10-27T17:40:50.991046+00:00",
+      "duration_ms": 0.022,
+      "expected_result": "AUTHORIZED",
+      "observed_result": "AUTHORIZED",
+      "is_correct": true,
+      "alert_id": null,
+      "latency_ms": 0.022,
+      "notes": "Compliant with policy."
+    },
+    {
+      "trial_id": "eval-cc448209",
+      "experiment_num": 3,
+      "scenario_name": "NDP Rate: Benign NDP Rate",
+      "software_version": "1.0.0",
+      "app_name": "PRIV6GUARD",
+      "configuration": {
+        "name": "Benign NDP Rate",
+        "pkts": 8,
+        "duration": 2.0,
+        "expected": "BENIGN"
+      },
+      "start_time": "2026-10-27T17:40:50.991068+00:00",
+      "end_time": "2026-10-27T17:40:50.991124+00:00",
+      "duration_ms": 0.056,
+      "expected_result": "BENIGN",
+      "observed_result": "BENIGN",
+      "is_correct": true,
+      "alert_id": null,
+      "latency_ms": 0.055,
+      "notes": "Calculated rate vs 15.0 pps threshold on 2.0s rolling window."
+    },
+    {
+      "trial_id": "eval-ae94ae91",
+      "experiment_num": 3,
+      "scenario_name": "NDP Rate: Borderline Sub-Threshold (14 pps)",
+      "software_version": "1.0.0",
+      "app_name": "PRIV6GUARD",
+      "configuration": {
+        "name": "Borderline Sub-Threshold (14 pps)",
+        "pkts": 28,
+        "duration": 2.0,
+        "expected": "BENIGN"
+      },
+      "start_time": "2026-10-27T17:40:50.991133+00:00",
+      "end_time": "2026-10-27T17:40:50.991199+00:00",
+      "duration_ms": 0.066,
+      "expected_result": "BENIGN",
+      "observed_result": "BENIGN",
+      "is_correct": true,
+      "alert_id": null,
+      "latency_ms": 0.064,
+      "notes": "Calculated rate vs 15.0 pps threshold on 2.0s rolling window."
+    },
+    {
+      "trial_id": "eval-2e1d1150",
+      "experiment_num": 3,
+      "scenario_name": "NDP Rate: Borderline Super-Threshold (16 pps)",
+      "software_version": "1.0.0",
+      "app_name": "PRIV6GUARD",
+      "configuration": {
+        "name": "Borderline Super-Threshold (16 pps)",
+        "pkts": 32,
+        "duration": 2.0,
+        "expected": "ANOMALY"
+      },
+      "start_time": "2026-10-27T17:40:50.991205+00:00",
+      "end_time": "2026-10-27T17:40:50.991306+00:00",
+      "duration_ms": 0.101,
+      "expected_result": "ANOMALY",
+      "observed_result": "ANOMALY",
+      "is_correct": true,
+      "alert_id": "alt-ndp-363d1d",
+      "latency_ms": 0.1,
+      "notes": "Calculated rate vs 15.0 pps threshold on 2.0s rolling window."
+    },
+    {
+      "trial_id": "eval-fd173030",
+      "experiment_num": 3,
+      "scenario_name": "NDP Rate: Severe Flood Attack (80 pps)",
+      "software_version": "1.0.0",
+      "app_name": "PRIV6GUARD",
+      "configuration": {
+        "name": "Severe Flood Attack (80 pps)",
+        "pkts": 80,
+        "duration": 1.0,
+        "expected": "ANOMALY"
+      },
+      "start_time": "2026-10-27T17:40:50.991314+00:00",
+      "end_time": "2026-10-27T17:40:50.991403+00:00",
+      "duration_ms": 0.089,
+      "expected_result": "ANOMALY",
+      "observed_result": "ANOMALY",
+      "is_correct": true,
+      "alert_id": "alt-ndp-5c527e",
+      "latency_ms": 0.088,
+      "notes": "Calculated rate vs 15.0 pps threshold on 2.0s rolling window."
+    },
+    {
+      "trial_id": "eval-6049ec1f",
+      "experiment_num": 4,
+      "scenario_name": "RFC 8981 Address Rotation & Privacy Boundary",
+      "software_version": "1.0.0",
+      "app_name": "PRIV6GUARD",
+      "configuration": {
+        "rotations_executed": 3,
+        "device_id": "p6g-iot1",
+        "tenant_id": "tenant-alpha"
+      },
+      "start_time": "2026-10-27T17:40:50.991427+00:00",
+      "end_time": "2026-10-27T17:40:50.991541+00:00",
+      "duration_ms": 0.114,
+      "expected_result": "AUTHORIZED_ROTATION_WITHOUT_FINGERPRINTING",
+      "observed_result": "AUTHORIZED_ROTATION_WITHOUT_FINGERPRINTING",
+      "is_correct": true,
+      "alert_id": null,
+      "latency_ms": 1.5,
+      "notes": "3 successful rotations. Unauthorized correlation rejected: Prohibits behavioral fingerprinting."
+    },
+    {
+      "trial_id": "eval-680cfe2d",
+      "experiment_num": 5,
+      "scenario_name": "Pseudonym Epoch Expiry and Active Purge",
+      "software_version": "1.0.0",
+      "app_name": "PRIV6GUARD",
+      "configuration": {
+        "epoch_seconds": 60,
+        "time_advanced_to": 65
+      },
+      "start_time": "2026-10-27T17:40:50.991557+00:00",
+      "end_time": "2026-10-27T17:41:55.991557+00:00",
+      "duration_ms": 65000.0,
+      "expected_result": "EXPIRED_AND_PURGED",
+      "observed_result": "EXPIRED_AND_PURGED",
+      "is_correct": true,
+      "alert_id": null,
+      "latency_ms": 0.8,
+      "notes": "Expired mapping refused by lookup and removed from active memory by purge_expired_mappings()."
+    },
+    {
+      "trial_id": "eval-180140ab",
+      "experiment_num": 6,
+      "scenario_name": "Cross-Tenant Boundary & Token Validation",
+      "software_version": "1.0.0",
+      "app_name": "PRIV6GUARD",
+      "configuration": {
+        "tenants": [
+          "tenant-alpha",
+          "tenant-beta"
+        ]
+      },
+      "start_time": "2026-10-27T17:40:50.991588+00:00",
+      "end_time": "2026-10-27T17:40:50.991634+00:00",
+      "duration_ms": 0.046,
+      "expected_result": "ACCESS_DENIED",
+      "observed_result": "ACCESS_DENIED",
+      "is_correct": true,
+      "alert_id": null,
+      "latency_ms": 0.5,
+      "notes": "Cross-tenant lookup and session reuse attempts categorically denied with zero metadata returned."
+    },
+    {
+      "trial_id": "eval-483b9a05",
+      "experiment_num": 7,
+      "scenario_name": "Application Restart & Invalidation Recovery",
+      "software_version": "1.0.0",
+      "app_name": "PRIV6GUARD",
+      "configuration": {
+        "db_file": "/tmp/tmp2x54w211/eval_restart.db"
+      },
+      "start_time": "2026-10-27T17:40:50.993966+00:00",
+      "end_time": "2026-10-27T17:40:50.999185+00:00",
+      "duration_ms": 5.219,
+      "expected_result": "EXPIRED_INVALID_AFTER_RESTART",
+      "observed_result": "EXPIRED_INVALID_AFTER_RESTART",
+      "is_correct": true,
+      "alert_id": null,
+      "latency_ms": 2.1,
+      "notes": "Expired mappings remain categorically unretrievable after backend restart."
+    }
+  ]
+}

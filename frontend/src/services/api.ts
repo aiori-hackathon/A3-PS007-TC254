@@ -151,14 +151,31 @@ export const api = {
     return res.json();
   },
 
-  async rotateDevice(deviceId: string, tenantId: string = 'tenant-alpha'): Promise<any> {
-    const res = await fetch(`/api/devices/${deviceId}/rotate`, {
+  async authenticateDevice(deviceId: string, secret: string, tenantId: string = 'tenant-alpha'): Promise<{ session_token: string; expires_in_seconds: number; message: string }> {
+    const res = await fetch(`/api/devices/${deviceId}/authenticate`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'X-Tenant-ID': tenantId,
       },
-      body: JSON.stringify({}),
+      body: JSON.stringify({ secret }),
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ detail: res.statusText }));
+      throw new Error(err.detail || 'Authentication failed');
+    }
+    return res.json();
+  },
+
+  async rotateDevice(deviceId: string, tenantId: string = 'tenant-alpha', sessionToken?: string): Promise<any> {
+    const res = await fetch(`/api/devices/${deviceId}/rotate`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Tenant-ID': tenantId,
+        ...(sessionToken ? { 'Authorization': `Bearer ${sessionToken}` } : {}),
+      },
+      body: JSON.stringify(sessionToken ? { session_token: sessionToken } : {}),
     });
     if (!res.ok) {
       const err = await res.json().catch(() => ({ detail: res.statusText }));

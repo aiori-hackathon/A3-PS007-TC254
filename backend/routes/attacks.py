@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Optional, Dict, Any
 
 from backend.dependencies import (
@@ -19,12 +19,12 @@ router = APIRouter(prefix="/api/attacks", tags=["Controlled Attack Simulator"])
 class RogueRARequest(BaseModel):
     rogue_source: str = "fe80::dead:beef"
     unauthorized_prefix: str = "2001:db8:baad::/64"
-    router_lifetime: int = 1800
+    router_lifetime: int = Field(default=1800, ge=0, le=9000)
 
 class NDPFloodRequest(BaseModel):
     target_ip: str = "2001:db8:6::11"
-    packet_count: int = 90
-    packet_rate_pps: int = 50
+    packet_count: int = Field(default=90, ge=10, le=500)
+    packet_rate_pps: int = Field(default=50, ge=5, le=200)
 
 @router.post("/rogue-ra")
 async def trigger_rogue_ra(
@@ -36,8 +36,15 @@ async def trigger_rogue_ra(
 ) -> Dict[str, Any]:
     """
     Trigger a controlled Rogue Router Advertisement injection.
-    Guarded by preflight lab validation.
+    Guarded by strict address space confinement and preflight lab validation.
     """
+    # Strict target address confinement: Reject arbitrary external targets
+    if not (req.rogue_source.lower().startswith("fe80:") or req.rogue_source.lower().startswith("2001:db8:6:")):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Refused: Rogue source address '{req.rogue_source}' does not belong to configured lab address space (fe80::/10 or 2001:db8:6::/64). Arbitrary external targets are strictly forbidden."
+        )
+
     # 1. Execute attack simulation
     attack_res = attack_sim.inject_rogue_ra(
         rogue_source=req.rogue_source,
@@ -70,7 +77,14 @@ async def trigger_ndp_flood(
 ) -> Dict[str, Any]:
     """
     Trigger a controlled NDP flood burst to test rolling-window rate anomaly detection.
+    Guarded by strict target address confinement.
     """
+    if not (req.target_ip.lower().startswith("2001:db8:6:") or req.target_ip.lower().startswith("fe80:")):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Refused: Target IP '{req.target_ip}' does not belong to configured lab network (2001:db8:6::/64). Arbitrary external targets are strictly forbidden."
+        )
+
     attack_res = attack_sim.inject_ndp_flood(
         target_ip=req.target_ip,
         packet_count=req.packet_count,
