@@ -1,23 +1,55 @@
+@import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+@import url('https://fonts.cdnfonts.com/css/sf-mono');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --font-heading: 'Outfit', 'Plus Jakarta Sans', sans-serif;
-    --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-code: 'JetBrains Mono', 'Fira Code', monospace;
+    --font-sf-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro", system-ui, sans-serif;
+    --font-sf-text: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", system-ui, sans-serif;
+    --font-sf-mono: "SF Mono", SFMono-Regular, ui-monospace, Menlo, Monaco, Consolas, monospace;
+    --font-heading: var(--font-sf-display);
+    --font-body: var(--font-sf-text);
+    --font-code: var(--font-sf-mono);
   }
 
   body {
     font-family: var(--font-body);
+    letter-spacing: -0.011em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
+    letter-spacing: -0.025em;
+  }
+
+  code, pre, kbd, samp {
+    font-family: var(--font-code);
   }
 }
+
+/* Apple San Francisco Typography Hierarchy Utilities */
+.font-sf-display {
+  font-family: var(--font-sf-display);
+  letter-spacing: -0.022em;
+}
+
+.font-sf-text {
+  font-family: var(--font-sf-text);
+  letter-spacing: -0.011em;
+}
+
+.font-sf-mono {
+  font-family: var(--font-sf-mono);
+  letter-spacing: -0.01em;
+}
+
 
 /* Ambient Radial Mesh Background */
 .bg-ambient-mesh {

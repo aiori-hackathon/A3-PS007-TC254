@@ -7,6 +7,43 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        sans: [
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"SF Pro Text"',
+          '"SF Pro Display"',
+          '"SF Pro"',
+          'system-ui',
+          'sans-serif',
+        ],
+        display: [
+          '"SF Pro Display"',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"SF Pro"',
+          'system-ui',
+          'sans-serif',
+        ],
+        body: [
+          '"SF Pro Text"',
+          '"SF Pro"',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'system-ui',
+          'sans-serif',
+        ],
+        mono: [
+          '"SF Mono"',
+          'SFMono-Regular',
+          'ui-monospace',
+          'Menlo',
+          'Monaco',
+          'Consolas',
+          '"JetBrains Mono"',
+          'monospace',
+        ],
+      },
       colors: {
         cyber: {
           900: '#070b14',

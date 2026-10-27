@@ -254,7 +254,7 @@ export default function App() {
   });
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] dark:bg-[#070b14] bg-ambient-mesh text-slate-800 dark:text-slate-100 flex flex-col font-['Plus_Jakarta_Sans',sans-serif] transition-colors duration-200">
+    <div className="min-h-screen bg-[#f8fafc] dark:bg-[#070b14] bg-ambient-mesh text-slate-800 dark:text-slate-100 flex flex-col font-sans transition-colors duration-200">
       {/* FLOATING HEADER & BRANDING — CONTINUOUS SQUIRCLE DOCK */}
       <header className="sticky top-0 z-40 px-4 sm:px-8 lg:px-12 pt-3.5 pb-1 backdrop-blur-md">
         <div className="w-full max-w-[1780px] mx-auto glossy-widget squircle-card p-4 sm:px-6 sm:py-3.5 shadow-lg flex flex-col gap-3.5">
@@ -267,13 +267,13 @@ export default function App() {
               </div>
               <div>
                 <div className="flex flex-wrap items-center gap-2.5">
-                  <h1 className="text-2xl font-black tracking-tight font-['Outfit'] bg-gradient-to-r from-slate-900 via-slate-800 to-cyan-600 dark:from-white dark:via-slate-200 dark:to-cyan-400 bg-clip-text text-transparent">
+                  <h1 className="text-2xl font-black tracking-tight font-sf-display bg-gradient-to-r from-slate-900 via-slate-800 to-cyan-600 dark:from-white dark:via-slate-200 dark:to-cyan-400 bg-clip-text text-transparent">
                     PRIV6GUARD
                   </h1>
-                  <span className="text-[11px] font-bold tracking-wider px-3 py-1 squircle-pill bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 font-['Outfit']">
+                  <span className="text-[11px] font-bold tracking-wider px-3 py-1 squircle-pill bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 font-sf-display">
                     LAB SIMULATION
                   </span>
-                  <span className="text-[11px] font-bold tracking-wider px-3 py-1 squircle-pill bg-cyan-500/10 border border-cyan-500/30 text-cyan-700 dark:text-cyan-300 font-['Outfit']">
+                  <span className="text-[11px] font-bold tracking-wider px-3 py-1 squircle-pill bg-cyan-500/10 border border-cyan-500/30 text-cyan-700 dark:text-cyan-300 font-sf-display">
                     AIORI HACKATHON 3 — PS-007
                   </span>
                 </div>
@@ -302,10 +302,10 @@ export default function App() {
 
               {/* Segmented Multi-Tenant Switcher in Squircle */}
               <div className="flex items-center bg-slate-100 dark:bg-white/[0.05] border border-slate-200/80 dark:border-white/10 squircle-card p-1 text-xs font-medium shadow-sm">
-                <span className="text-slate-400 dark:text-slate-500 px-2.5 text-[11px] font-semibold tracking-wider font-['Outfit']">TENANT:</span>
+                <span className="text-slate-400 dark:text-slate-500 px-2.5 text-[11px] font-semibold tracking-wider font-sf-display">TENANT:</span>
                 <button
                   onClick={() => setTenantId('tenant-alpha')}
-                  className={`px-3.5 py-1.5 squircle-pill transition-all duration-200 font-['Outfit'] ${
+                  className={`px-3.5 py-1.5 squircle-pill transition-all duration-200 font-sf-display ${
                     tenantId === 'tenant-alpha'
                       ? 'bg-white dark:bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border border-slate-200 dark:border-cyan-500/40 shadow-sm font-bold'
                       : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -315,7 +315,7 @@ export default function App() {
                 </button>
                 <button
                   onClick={() => setTenantId('tenant-beta')}
-                  className={`px-3.5 py-1.5 squircle-pill transition-all duration-200 font-['Outfit'] ${
+                  className={`px-3.5 py-1.5 squircle-pill transition-all duration-200 font-sf-display ${
                     tenantId === 'tenant-beta'
                       ? 'bg-white dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-slate-200 dark:border-purple-500/40 shadow-sm font-bold'
                       : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
@@ -334,7 +334,7 @@ export default function App() {
                       : 'bg-rose-500 shadow-[0_0_10px_#f43f5e]'
                   }`}
                 />
-                <span className="text-slate-700 dark:text-slate-200 font-bold font-['Outfit'] tracking-wide text-xs">
+                <span className="text-slate-700 dark:text-slate-200 font-bold font-sf-display tracking-wide text-xs">
                   API: {health?.status === 'healthy' ? 'CONNECTED' : 'DISCONNECTED'}
                 </span>
               </div>
@@ -359,7 +359,7 @@ export default function App() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as TabType)}
-                  className={`flex items-center gap-2 px-4 py-2 squircle-pill whitespace-nowrap transition-all duration-200 font-['Outfit'] text-xs ${
+                  className={`flex items-center gap-2 px-4 py-2 squircle-pill whitespace-nowrap transition-all duration-200 font-sf-display text-xs ${
                     active
                       ? 'bg-gradient-to-r from-cyan-500/15 to-indigo-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/40 shadow-sm font-bold scale-[1.02]'
                       : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/[0.05]'
@@ -411,7 +411,7 @@ export default function App() {
         {loading ? (
           <div className="flex-1 flex flex-col items-center justify-center py-32 text-slate-500 gap-4">
             <Activity className="w-10 h-10 animate-spin text-cyan-500" />
-            <span className="text-sm font-['Outfit'] font-semibold tracking-wide text-slate-600 dark:text-slate-400">
+            <span className="text-sm font-sf-display font-semibold tracking-wide text-slate-600 dark:text-slate-400">
               Initializing Priv6Guard Dynamic Monitoring Subsystems...
             </span>
           </div>
@@ -427,7 +427,7 @@ export default function App() {
                   <div className="glossy-widget glossy-hover squircle-widget p-6 relative overflow-hidden group">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl group-hover:bg-cyan-500/20 transition-all pointer-events-none" />
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-slate-500 dark:text-slate-400 font-['Outfit'] tracking-wider uppercase">
+                      <span className="text-xs font-bold text-slate-500 dark:text-slate-400 font-sf-display tracking-wider uppercase">
                         Lab Bridge Status
                       </span>
                       <div className="p-2.5 squircle-subcard bg-cyan-500/10 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30">
@@ -435,11 +435,11 @@ export default function App() {
                       </div>
                     </div>
                     <div className="flex items-baseline gap-3 mt-4">
-                      <span className="text-3xl font-extrabold text-slate-900 dark:text-white font-['Outfit']">
+                      <span className="text-3xl font-extrabold text-slate-900 dark:text-white font-sf-display">
                         {labStatus?.bridge_name || 'p6g-br0'}
                       </span>
                       <span
-                        className={`text-xs px-2.5 py-0.5 squircle-pill font-bold uppercase font-['Outfit'] ${
+                        className={`text-xs px-2.5 py-0.5 squircle-pill font-bold uppercase font-sf-display ${
                           labStatus?.bridge_status === 'UP'
                             ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/40 shadow-sm'
                             : 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400'
@@ -457,7 +457,7 @@ export default function App() {
                   <div className="glossy-widget glossy-hover squircle-widget p-6 relative overflow-hidden group">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all pointer-events-none" />
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-slate-500 dark:text-slate-400 font-['Outfit'] tracking-wider uppercase">
+                      <span className="text-xs font-bold text-slate-500 dark:text-slate-400 font-sf-display tracking-wider uppercase">
                         Active IoT Devices
                       </span>
                       <div className="p-2.5 squircle-subcard bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
@@ -465,10 +465,10 @@ export default function App() {
                       </div>
                     </div>
                     <div className="flex items-baseline gap-3 mt-4">
-                      <span className="text-3xl font-extrabold text-slate-900 dark:text-white font-['Outfit']">
+                      <span className="text-3xl font-extrabold text-slate-900 dark:text-white font-sf-display">
                         {devices.length}
                       </span>
-                      <span className="text-xs text-emerald-600 dark:text-emerald-400 font-['Outfit'] font-bold">
+                      <span className="text-xs text-emerald-600 dark:text-emerald-400 font-sf-display font-bold">
                         {tenantId === 'tenant-alpha' ? 'Alpha Group' : 'Beta Group'}
                       </span>
                     </div>
@@ -481,7 +481,7 @@ export default function App() {
                   <div className="glossy-widget glossy-hover squircle-widget p-6 relative overflow-hidden group">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/10 rounded-full blur-2xl group-hover:bg-rose-500/20 transition-all pointer-events-none" />
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-slate-500 dark:text-slate-400 font-['Outfit'] tracking-wider uppercase">
+                      <span className="text-xs font-bold text-slate-500 dark:text-slate-400 font-sf-display tracking-wider uppercase">
                         Security Alerts
                       </span>
                       <div className="p-2.5 squircle-subcard bg-rose-500/10 dark:bg-rose-500/20 text-rose-600 dark:text-rose-400 border border-rose-500/30">
@@ -489,11 +489,11 @@ export default function App() {
                       </div>
                     </div>
                     <div className="flex items-baseline gap-3 mt-4">
-                      <span className="text-3xl font-extrabold text-slate-900 dark:text-white font-['Outfit']">
+                      <span className="text-3xl font-extrabold text-slate-900 dark:text-white font-sf-display">
                         {alerts.length}
                       </span>
                       {alerts.some((a) => a.severity === 'CRITICAL') && (
-                        <span className="text-xs px-2.5 py-0.5 squircle-pill bg-rose-500/15 border border-rose-500/40 text-rose-600 dark:text-rose-400 font-bold uppercase font-['Outfit'] animate-pulse">
+                        <span className="text-xs px-2.5 py-0.5 squircle-pill bg-rose-500/15 border border-rose-500/40 text-rose-600 dark:text-rose-400 font-bold uppercase font-sf-display animate-pulse">
                           CRITICAL
                         </span>
                       )}
@@ -507,7 +507,7 @@ export default function App() {
                   <div className="glossy-widget glossy-hover squircle-widget p-6 relative overflow-hidden group">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/20 transition-all pointer-events-none" />
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-slate-500 dark:text-slate-400 font-['Outfit'] tracking-wider uppercase">
+                      <span className="text-xs font-bold text-slate-500 dark:text-slate-400 font-sf-display tracking-wider uppercase">
                         Privacy Protection
                       </span>
                       <div className="p-2.5 squircle-subcard bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 border border-indigo-500/30">
@@ -515,12 +515,12 @@ export default function App() {
                       </div>
                     </div>
                     <div className="flex items-baseline gap-3 mt-4">
-                      <span className="text-3xl font-extrabold text-slate-900 dark:text-white font-['Outfit']">
+                      <span className="text-3xl font-extrabold text-slate-900 dark:text-white font-sf-display">
                         {metrics?.privacy_metrics?.tracking_resistance_score !== undefined
                           ? `${(metrics.privacy_metrics.tracking_resistance_score * 100).toFixed(0)}%`
                           : '100%'}
                       </span>
-                      <span className="text-xs px-2.5 py-0.5 squircle-pill bg-indigo-500/15 border border-indigo-500/40 text-indigo-600 dark:text-indigo-400 font-bold uppercase font-['Outfit']">
+                      <span className="text-xs px-2.5 py-0.5 squircle-pill bg-indigo-500/15 border border-indigo-500/40 text-indigo-600 dark:text-indigo-400 font-bold uppercase font-sf-display">
                         ZERO FP
                       </span>
                     </div>
@@ -538,7 +538,7 @@ export default function App() {
                         <Network className="w-5 h-5" />
                       </div>
                       <div>
-                        <h2 className="text-base font-extrabold text-slate-900 dark:text-white font-['Outfit'] tracking-wide">
+                        <h2 className="text-base font-extrabold text-slate-900 dark:text-white font-sf-display tracking-wide">
                           ISOLATED NETWORK TOPOLOGY MAP (2001:DB8:6::/64)
                         </h2>
                         <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
@@ -546,7 +546,7 @@ export default function App() {
                         </p>
                       </div>
                     </div>
-                    <span className="text-xs font-['Outfit'] font-semibold px-3.5 py-1 squircle-pill bg-slate-100 dark:bg-white/[0.06] text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/10 self-start sm:self-auto">
+                    <span className="text-xs font-sf-display font-semibold px-3.5 py-1 squircle-pill bg-slate-100 dark:bg-white/[0.06] text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/10 self-start sm:self-auto">
                       Zero Host Interface Leakage
                     </span>
                   </div>
@@ -559,7 +559,7 @@ export default function App() {
                       <div className="p-5 squircle-card bg-white/90 dark:bg-[#10192e] border border-cyan-500/30 shadow-sm hover:shadow-cyan-500/10 transition-all flex flex-col justify-between gap-3">
                         <div>
                           <div className="flex items-center justify-between mb-2">
-                            <span className="text-xs font-bold text-cyan-700 dark:text-cyan-300 font-['Outfit'] tracking-wider uppercase">
+                            <span className="text-xs font-bold text-cyan-700 dark:text-cyan-300 font-sf-display tracking-wider uppercase">
                               Authorized Gateway
                             </span>
                             <span className="w-2.5 h-2.5 rounded-full bg-cyan-500 animate-ping" />
@@ -570,7 +570,7 @@ export default function App() {
                             <div><strong className="text-slate-500 dark:text-slate-400">Prefix:</strong> <code className="font-mono text-slate-600 dark:text-slate-300">2001:db8:6::/64</code></div>
                           </div>
                         </div>
-                        <span className="text-[11px] font-['Outfit'] font-bold bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 px-3 py-1 squircle-pill text-center">
+                        <span className="text-[11px] font-sf-display font-bold bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 px-3 py-1 squircle-pill text-center">
                           RFC 4861/6105 Trusted
                         </span>
                       </div>
@@ -580,11 +580,11 @@ export default function App() {
                         <div className="p-3 squircle-subcard bg-indigo-500/10 text-indigo-600 dark:text-indigo-400">
                           <Radio className="w-7 h-7 animate-pulse" />
                         </div>
-                        <div className="font-['Outfit'] font-bold text-base text-slate-900 dark:text-white">
+                        <div className="font-sf-display font-bold text-base text-slate-900 dark:text-white">
                           VIRTUAL BRIDGE: p6g-br0
                         </div>
                         <div className="text-xs text-slate-500 font-medium">Isolated Subnet Hub</div>
-                        <div className="text-[11px] px-3.5 py-1 squircle-pill bg-slate-100 dark:bg-white/[0.06] text-slate-600 dark:text-slate-300 font-['Outfit'] font-semibold mt-1">
+                        <div className="text-[11px] px-3.5 py-1 squircle-pill bg-slate-100 dark:bg-white/[0.06] text-slate-600 dark:text-slate-300 font-sf-display font-semibold mt-1">
                           5 IoT Nodes + Gateway + Attacker
                         </div>
                       </div>
@@ -593,7 +593,7 @@ export default function App() {
                       <div className="p-5 squircle-card bg-white/90 dark:bg-[#10192e] border border-rose-500/30 shadow-sm hover:shadow-rose-500/10 transition-all flex flex-col justify-between gap-3">
                         <div>
                           <div className="flex items-center justify-between mb-2">
-                            <span className="text-xs font-bold text-rose-600 dark:text-rose-400 font-['Outfit'] tracking-wider uppercase">
+                            <span className="text-xs font-bold text-rose-600 dark:text-rose-400 font-sf-display tracking-wider uppercase">
                               Attacker Node (Controlled)
                             </span>
                             <span className="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-[0_0_8px_#f43f5e]" />
@@ -604,7 +604,7 @@ export default function App() {
                             <div><strong className="text-slate-500 dark:text-slate-400">Status:</strong> Confined to Bridge</div>
                           </div>
                         </div>
-                        <span className="text-[11px] font-['Outfit'] font-bold bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/30 px-3 py-1 squircle-pill text-center">
+                        <span className="text-[11px] font-sf-display font-bold bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/30 px-3 py-1 squircle-pill text-center">
                           Rogue RA & Storm Generator
                         </span>
                       </div>
@@ -613,7 +613,7 @@ export default function App() {
                     {/* Emulated IoT Devices Row */}
                     <div className="mt-8 pt-6 border-t border-slate-200/80 dark:border-white/10">
                       <div className="flex items-center justify-between mb-4">
-                        <span className="text-xs font-bold font-['Outfit'] text-slate-600 dark:text-slate-400 uppercase tracking-wider">
+                        <span className="text-xs font-bold font-sf-display text-slate-600 dark:text-slate-400 uppercase tracking-wider">
                           Emulated IoT Devices (RFC 8981 Rotating Interfaces)
                         </span>
                         <span className="text-xs text-slate-400 font-medium">Automatic Periodic Pseudonymization</span>
@@ -626,10 +626,10 @@ export default function App() {
                             className="p-4 squircle-subcard bg-white dark:bg-[#121c33] border border-slate-200/80 dark:border-white/10 shadow-sm hover:border-cyan-500/50 hover:-translate-y-1 transition-all duration-200 group"
                           >
                             <div className="flex items-center justify-between mb-2">
-                              <span className="font-['Outfit'] font-bold text-sm text-slate-900 dark:text-white group-hover:text-cyan-500 transition-colors">
+                              <span className="font-sf-display font-bold text-sm text-slate-900 dark:text-white group-hover:text-cyan-500 transition-colors">
                                 {dev.id}
                               </span>
-                              <span className="text-[10px] px-2.5 py-0.5 squircle-sm font-['Outfit'] font-bold bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30">
+                              <span className="text-[10px] px-2.5 py-0.5 squircle-sm font-sf-display font-bold bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 border border-cyan-500/30">
                                 ROT:{dev.rotation_count}
                               </span>
                             </div>
@@ -660,13 +660,13 @@ export default function App() {
                       <div className="flex items-center justify-between mb-5">
                         <div className="flex items-center gap-2.5">
                           <AlertTriangle className="w-5 h-5 text-amber-500" />
-                          <h3 className="text-base font-bold font-['Outfit'] text-slate-900 dark:text-white">
+                          <h3 className="text-base font-bold font-sf-display text-slate-900 dark:text-white">
                             Recent Security Alerts
                           </h3>
                         </div>
                         <button
                           onClick={() => setActiveTab('alerts')}
-                          className="text-xs font-['Outfit'] font-bold text-cyan-600 dark:text-cyan-400 hover:underline flex items-center gap-1.5"
+                          className="text-xs font-sf-display font-bold text-cyan-600 dark:text-cyan-400 hover:underline flex items-center gap-1.5"
                         >
                           View All ({alerts.length}) <ArrowRight className="w-3.5 h-3.5" />
                         </button>
@@ -685,7 +685,7 @@ export default function App() {
                             >
                               <div className="flex items-start gap-3">
                                 <span
-                                  className={`text-[10px] font-bold px-2.5 py-1 squircle-sm font-['Outfit'] uppercase shrink-0 mt-0.5 ${
+                                  className={`text-[10px] font-bold px-2.5 py-1 squircle-sm font-sf-display uppercase shrink-0 mt-0.5 ${
                                     alt.severity === 'CRITICAL'
                                       ? 'bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-500/30'
                                       : 'bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30'
@@ -694,7 +694,7 @@ export default function App() {
                                   {alt.severity}
                                 </span>
                                 <div>
-                                  <div className="font-['Outfit'] font-bold text-xs text-slate-900 dark:text-white">
+                                  <div className="font-sf-display font-bold text-xs text-slate-900 dark:text-white">
                                     {alt.rule_id}
                                   </div>
                                   <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5 line-clamp-1 font-medium">
@@ -717,7 +717,7 @@ export default function App() {
                     <div>
                       <div className="flex items-center gap-2.5 mb-2">
                         <Zap className="w-5 h-5 text-cyan-500" />
-                        <h3 className="text-base font-bold font-['Outfit'] text-slate-900 dark:text-white">
+                        <h3 className="text-base font-bold font-sf-display text-slate-900 dark:text-white">
                           Quick Lab Actions
                         </h3>
                       </div>
@@ -731,7 +731,7 @@ export default function App() {
                           disabled={actionLoading}
                           className="p-4 squircle-subcard border border-slate-200/80 dark:border-white/10 bg-slate-50 dark:bg-black/30 hover:bg-slate-100 dark:hover:bg-white/[0.08] hover:border-emerald-500/40 text-left transition-all duration-200 group"
                         >
-                          <div className="flex items-center gap-2 text-xs font-bold font-['Outfit'] text-slate-900 dark:text-white group-hover:text-emerald-500 transition-colors">
+                          <div className="flex items-center gap-2 text-xs font-bold font-sf-display text-slate-900 dark:text-white group-hover:text-emerald-500 transition-colors">
                             <Activity className="w-4 h-4 text-emerald-500" /> Benign Traffic
                           </div>
                           <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 font-medium">Low-rate ICMPv6 telemetry</p>
@@ -742,7 +742,7 @@ export default function App() {
                           disabled={actionLoading}
                           className="p-4 squircle-subcard border border-rose-200/80 dark:border-rose-900/40 bg-rose-50/40 dark:bg-rose-950/20 hover:bg-rose-100/60 dark:hover:bg-rose-950/40 hover:border-rose-500/50 text-left transition-all duration-200 group"
                         >
-                          <div className="flex items-center gap-2 text-xs font-bold font-['Outfit'] text-rose-700 dark:text-rose-400 group-hover:text-rose-500 transition-colors">
+                          <div className="flex items-center gap-2 text-xs font-bold font-sf-display text-rose-700 dark:text-rose-400 group-hover:text-rose-500 transition-colors">
                             <AlertTriangle className="w-4 h-4 text-rose-500" /> Rogue RA Attack
                           </div>
                           <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 font-medium">Simulate unauthorized gateway</p>
@@ -753,7 +753,7 @@ export default function App() {
                           disabled={actionLoading}
                           className="p-4 squircle-subcard border border-amber-200/80 dark:border-amber-900/40 bg-amber-50/40 dark:bg-amber-950/20 hover:bg-amber-100/60 dark:hover:bg-amber-950/40 hover:border-amber-500/50 text-left transition-all duration-200 group"
                         >
-                          <div className="flex items-center gap-2 text-xs font-bold font-['Outfit'] text-amber-700 dark:text-amber-400 group-hover:text-amber-500 transition-colors">
+                          <div className="flex items-center gap-2 text-xs font-bold font-sf-display text-amber-700 dark:text-amber-400 group-hover:text-amber-500 transition-colors">
                             <Zap className="w-4 h-4 text-amber-500" /> NDP Storm
                           </div>
                           <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 font-medium">Simulate 50 PPS burst flood</p>
@@ -766,7 +766,7 @@ export default function App() {
                           disabled={actionLoading || devices.length === 0}
                           className="p-4 squircle-subcard border border-cyan-200/80 dark:border-cyan-900/40 bg-cyan-50/40 dark:bg-cyan-950/20 hover:bg-cyan-100/60 dark:hover:bg-cyan-950/40 hover:border-cyan-500/50 text-left transition-all duration-200 group"
                         >
-                          <div className="flex items-center gap-2 text-xs font-bold font-['Outfit'] text-cyan-700 dark:text-cyan-400 group-hover:text-cyan-500 transition-colors">
+                          <div className="flex items-center gap-2 text-xs font-bold font-sf-display text-cyan-700 dark:text-cyan-400 group-hover:text-cyan-500 transition-colors">
                             <RotateCcw className="w-4 h-4 text-cyan-500" /> Rotate Device 1
                           </div>
                           <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 font-medium">RFC 8981 address rotation</p>
@@ -776,7 +776,7 @@ export default function App() {
 
                     <div className="mt-5 pt-4 border-t border-slate-200/80 dark:border-white/10 text-xs text-slate-500 dark:text-slate-400 flex items-center justify-between font-medium">
                       <span>Lab Prefix: <code className="font-mono text-cyan-600 dark:text-cyan-400">2001:db8:6::/64</code></span>
-                      <span className="font-['Outfit'] font-semibold">Isolated Bridge Mode</span>
+                      <span className="font-sf-display font-semibold">Isolated Bridge Mode</span>
                     </div>
                   </div>
                 </div>
@@ -788,7 +788,7 @@ export default function App() {
               <div className="flex flex-col gap-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h2 className="text-xl font-bold font-['Outfit'] text-slate-900 dark:text-white">
+                    <h2 className="text-xl font-bold font-sf-display text-slate-900 dark:text-white">
                       Emulated IPv6 IoT Devices ({devices.length})
                     </h2>
                     <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
@@ -797,7 +797,7 @@ export default function App() {
                   </div>
                   <button
                     onClick={refreshData}
-                    className="px-4 py-2.5 squircle-btn bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/10 text-xs font-['Outfit'] font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-white/[0.1] flex items-center gap-2 shadow-sm"
+                    className="px-4 py-2.5 squircle-btn bg-slate-100 dark:bg-white/[0.06] border border-slate-200 dark:border-white/10 text-xs font-sf-display font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-white/[0.1] flex items-center gap-2 shadow-sm"
                   >
                     <RefreshCw className="w-3.5 h-3.5" /> Refresh
                   </button>
@@ -816,13 +816,13 @@ export default function App() {
                               <Cpu className="w-5 h-5" />
                             </div>
                             <div>
-                              <div className="font-bold text-base text-slate-900 dark:text-white font-['Outfit']">
+                              <div className="font-bold text-base text-slate-900 dark:text-white font-sf-display">
                                 {dev.id}
                               </div>
                               <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">{dev.name}</div>
                             </div>
                           </div>
-                          <span className="text-xs px-3 py-1 squircle-pill font-['Outfit'] font-bold bg-slate-100 text-slate-700 dark:bg-white/[0.08] dark:text-slate-300 border border-slate-200 dark:border-white/10">
+                          <span className="text-xs px-3 py-1 squircle-pill font-sf-display font-bold bg-slate-100 text-slate-700 dark:bg-white/[0.08] dark:text-slate-300 border border-slate-200 dark:border-white/10">
                             {dev.tenant_id}
                           </span>
                         </div>
@@ -831,7 +831,7 @@ export default function App() {
                           {/* IPv6 Address */}
                           <div className="p-3 squircle-subcard bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 flex items-center justify-between">
                             <div className="truncate mr-2">
-                              <span className="text-[10px] text-slate-400 font-semibold uppercase font-['Outfit'] block">Current Temporary IPv6</span>
+                              <span className="text-[10px] text-slate-400 font-semibold uppercase font-sf-display block">Current Temporary IPv6</span>
                               <span className="font-mono text-slate-800 dark:text-slate-200 font-bold truncate block">
                                 {dev.current_ipv6}
                               </span>
@@ -852,7 +852,7 @@ export default function App() {
                           {/* Blind Pseudonym */}
                           <div className="p-3 squircle-subcard bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 flex items-center justify-between">
                             <div className="truncate mr-2">
-                              <span className="text-[10px] text-slate-400 font-semibold uppercase font-['Outfit'] block">Active Blind Pseudonym</span>
+                              <span className="text-[10px] text-slate-400 font-semibold uppercase font-sf-display block">Active Blind Pseudonym</span>
                               <span className="font-mono text-cyan-600 dark:text-cyan-400 font-bold truncate block">
                                 {dev.current_pseudonym}
                               </span>
@@ -874,7 +874,7 @@ export default function App() {
                           <div className="grid grid-cols-2 gap-2 text-xs pt-1 font-medium">
                             <div>
                               <span className="text-slate-400">Rotation Count: </span>
-                              <span className="font-bold text-slate-800 dark:text-slate-200 font-['Outfit']">
+                              <span className="font-bold text-slate-800 dark:text-slate-200 font-sf-display">
                                 {dev.rotation_count}
                               </span>
                             </div>
@@ -892,7 +892,7 @@ export default function App() {
                       <button
                         onClick={() => handleRotate(dev.id)}
                         disabled={actionLoading}
-                        className="mt-5 w-full py-3 px-4 squircle-btn bg-gradient-to-r from-cyan-600 to-sky-600 hover:from-cyan-500 hover:to-sky-500 text-white text-xs font-['Outfit'] font-bold flex items-center justify-center gap-2 transition-all shadow-md shadow-cyan-500/20"
+                        className="mt-5 w-full py-3 px-4 squircle-btn bg-gradient-to-r from-cyan-600 to-sky-600 hover:from-cyan-500 hover:to-sky-500 text-white text-xs font-sf-display font-bold flex items-center justify-center gap-2 transition-all shadow-md shadow-cyan-500/20"
                       >
                         <RotateCcw className={`w-4 h-4 ${actionLoading ? 'animate-spin' : ''}`} />
                         Rotate Address (RFC 8981)
@@ -907,7 +907,7 @@ export default function App() {
             {activeTab === 'sessions' && (
               <div className="flex flex-col gap-6">
                 <div>
-                  <h2 className="text-xl font-bold font-['Outfit'] text-slate-900 dark:text-white">
+                  <h2 className="text-xl font-bold font-sf-display text-slate-900 dark:text-white">
                     Privacy Invariants & Session Lifecycle
                   </h2>
                   <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
@@ -918,7 +918,7 @@ export default function App() {
                 {/* Privacy Safeguards Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
                   <div className="glossy-widget squircle-card p-5 shadow-sm">
-                    <span className="text-xs font-bold font-['Outfit'] text-cyan-600 dark:text-cyan-400 block mb-1.5 uppercase tracking-wide">
+                    <span className="text-xs font-bold font-sf-display text-cyan-600 dark:text-cyan-400 block mb-1.5 uppercase tracking-wide">
                       1. Zero Fingerprinting
                     </span>
                     <p className="text-xs text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
@@ -927,7 +927,7 @@ export default function App() {
                   </div>
 
                   <div className="glossy-widget squircle-card p-5 shadow-sm">
-                    <span className="text-xs font-bold font-['Outfit'] text-cyan-600 dark:text-cyan-400 block mb-1.5 uppercase tracking-wide">
+                    <span className="text-xs font-bold font-sf-display text-cyan-600 dark:text-cyan-400 block mb-1.5 uppercase tracking-wide">
                       2. Short-Lived Sessions
                     </span>
                     <p className="text-xs text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
@@ -936,7 +936,7 @@ export default function App() {
                   </div>
 
                   <div className="glossy-widget squircle-card p-5 shadow-sm">
-                    <span className="text-xs font-bold font-['Outfit'] text-cyan-600 dark:text-cyan-400 block mb-1.5 uppercase tracking-wide">
+                    <span className="text-xs font-bold font-sf-display text-cyan-600 dark:text-cyan-400 block mb-1.5 uppercase tracking-wide">
                       3. Blind Pseudonyms
                     </span>
                     <p className="text-xs text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
@@ -945,7 +945,7 @@ export default function App() {
                   </div>
 
                   <div className="glossy-widget squircle-card p-5 shadow-sm">
-                    <span className="text-xs font-bold font-['Outfit'] text-cyan-600 dark:text-cyan-400 block mb-1.5 uppercase tracking-wide">
+                    <span className="text-xs font-bold font-sf-display text-cyan-600 dark:text-cyan-400 block mb-1.5 uppercase tracking-wide">
                       4. Immediate Purge
                     </span>
                     <p className="text-xs text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
@@ -957,7 +957,7 @@ export default function App() {
                 {/* Active Sessions Table */}
                 <div className="glossy-widget squircle-widget overflow-hidden shadow-sm">
                   <div className="p-5 border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between">
-                    <h3 className="text-sm font-bold font-['Outfit'] uppercase text-slate-900 dark:text-white">
+                    <h3 className="text-sm font-bold font-sf-display uppercase text-slate-900 dark:text-white">
                       Active Sessions ({sessions.length}) — {tenantId}
                     </h3>
                   </div>
@@ -969,7 +969,7 @@ export default function App() {
                   ) : (
                     <div className="overflow-x-auto">
                       <table className="w-full text-left text-xs">
-                        <thead className="bg-slate-50/80 dark:bg-black/30 text-slate-500 uppercase border-b border-slate-200/80 dark:border-white/10 font-['Outfit'] font-bold text-[11px]">
+                        <thead className="bg-slate-50/80 dark:bg-black/30 text-slate-500 uppercase border-b border-slate-200/80 dark:border-white/10 font-sf-display font-bold text-[11px]">
                           <tr>
                             <th className="p-3.5">Session Token</th>
                             <th className="p-3.5">Device Ref</th>
@@ -994,7 +994,7 @@ export default function App() {
                                 {s.current_pseudonym}
                               </td>
                               <td className="p-3.5">
-                                <span className="px-3 py-1 squircle-pill text-[10px] font-['Outfit'] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
+                                <span className="px-3 py-1 squircle-pill text-[10px] font-sf-display font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
                                   {s.is_valid ? 'ACTIVE' : 'EXPIRED'}
                                 </span>
                               </td>
@@ -1013,7 +1013,7 @@ export default function App() {
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <div>
-                    <h2 className="text-xl font-bold font-['Outfit'] text-slate-900 dark:text-white">
+                    <h2 className="text-xl font-bold font-sf-display text-slate-900 dark:text-white">
                       Security Alerts & Intrusion Detection
                     </h2>
                     <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
@@ -1025,7 +1025,7 @@ export default function App() {
                   <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-white/[0.05] p-1.5 squircle-card border border-slate-200/80 dark:border-white/10 text-xs">
                     <button
                       onClick={() => setAlertFilter('ALL')}
-                      className={`px-3.5 py-1.5 squircle-pill font-['Outfit'] font-bold transition-all ${
+                      className={`px-3.5 py-1.5 squircle-pill font-sf-display font-bold transition-all ${
                         alertFilter === 'ALL'
                           ? 'bg-white dark:bg-white/[0.12] text-slate-900 dark:text-white shadow-sm'
                           : 'text-slate-600 dark:text-slate-400'
@@ -1035,7 +1035,7 @@ export default function App() {
                     </button>
                     <button
                       onClick={() => setAlertFilter('RA')}
-                      className={`px-3.5 py-1.5 squircle-pill font-['Outfit'] font-bold transition-all ${
+                      className={`px-3.5 py-1.5 squircle-pill font-sf-display font-bold transition-all ${
                         alertFilter === 'RA'
                           ? 'bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-500/40 shadow-sm'
                           : 'text-slate-600 dark:text-slate-400'
@@ -1045,7 +1045,7 @@ export default function App() {
                     </button>
                     <button
                       onClick={() => setAlertFilter('NDP')}
-                      className={`px-3.5 py-1.5 squircle-pill font-['Outfit'] font-bold transition-all ${
+                      className={`px-3.5 py-1.5 squircle-pill font-sf-display font-bold transition-all ${
                         alertFilter === 'NDP'
                           ? 'bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-500/40 shadow-sm'
                           : 'text-slate-600 dark:text-slate-400'
@@ -1059,7 +1059,7 @@ export default function App() {
                 {filteredAlerts.length === 0 ? (
                   <div className="p-16 text-center glossy-widget squircle-widget shadow-sm">
                     <Shield className="w-12 h-12 text-emerald-500 mx-auto mb-3" />
-                    <div className="text-base font-bold text-slate-900 dark:text-white font-['Outfit']">
+                    <div className="text-base font-bold text-slate-900 dark:text-white font-sf-display">
                       No Alerts Triggered
                     </div>
                     <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto font-medium">
@@ -1076,7 +1076,7 @@ export default function App() {
                         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 dark:border-white/5 pb-3.5">
                           <div className="flex items-center gap-2.5">
                             <span
-                              className={`text-[11px] font-bold px-3 py-1 squircle-sm font-['Outfit'] uppercase ${
+                              className={`text-[11px] font-bold px-3 py-1 squircle-sm font-sf-display uppercase ${
                                 alt.severity === 'CRITICAL'
                                   ? 'bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-500/30'
                                   : 'bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30'
@@ -1097,13 +1097,13 @@ export default function App() {
                         </div>
 
                         <div className="text-xs text-slate-700 dark:text-slate-300 font-medium">
-                          <span className="text-slate-400 font-['Outfit'] uppercase font-bold text-[11px] tracking-wide">Reason: </span>
+                          <span className="text-slate-400 font-sf-display uppercase font-bold text-[11px] tracking-wide">Reason: </span>
                           <span className="font-semibold">{alt.reason}</span>
                         </div>
 
                         {/* Structured Evidence Block */}
                         <div className="p-4 squircle-subcard bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 text-xs font-mono text-slate-600 dark:text-slate-400">
-                          <div className="text-[10px] uppercase font-bold text-slate-400 mb-1.5 font-['Outfit'] tracking-wider">
+                          <div className="text-[10px] uppercase font-bold text-slate-400 mb-1.5 font-sf-display tracking-wider">
                             Detection Evidence & Confinement Metadata
                           </div>
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -1128,7 +1128,7 @@ export default function App() {
             {activeTab === 'network' && (
               <div className="flex flex-col gap-6">
                 <div>
-                  <h2 className="text-xl font-bold font-['Outfit'] text-slate-900 dark:text-white">
+                  <h2 className="text-xl font-bold font-sf-display text-slate-900 dark:text-white">
                     Network Activity & ICMPv6 Traffic Monitoring
                   </h2>
                   <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
@@ -1139,26 +1139,26 @@ export default function App() {
                 {/* Traffic Rate Stats */}
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
                   <div className="glossy-widget squircle-widget p-5 shadow-sm">
-                    <span className="text-[11px] text-slate-500 font-['Outfit'] font-bold uppercase tracking-wider">Current Packet Rate</span>
-                    <div className="text-2xl font-bold font-['Outfit'] text-slate-900 dark:text-white mt-1">
+                    <span className="text-[11px] text-slate-500 font-sf-display font-bold uppercase tracking-wider">Current Packet Rate</span>
+                    <div className="text-2xl font-bold font-sf-display text-slate-900 dark:text-white mt-1">
                       {metrics?.traffic_rates?.current_pps?.toFixed(1) || '0.0'} PPS
                     </div>
                   </div>
                   <div className="glossy-widget squircle-widget p-5 shadow-sm">
-                    <span className="text-[11px] text-slate-500 font-['Outfit'] font-bold uppercase tracking-wider">NDP NS Rate</span>
-                    <div className="text-2xl font-bold font-['Outfit'] text-cyan-600 dark:text-cyan-400 mt-1">
+                    <span className="text-[11px] text-slate-500 font-sf-display font-bold uppercase tracking-wider">NDP NS Rate</span>
+                    <div className="text-2xl font-bold font-sf-display text-cyan-600 dark:text-cyan-400 mt-1">
                       {metrics?.traffic_rates?.icmpv6_ns_rate?.toFixed(1) || '0.0'} PPS
                     </div>
                   </div>
                   <div className="glossy-widget squircle-widget p-5 shadow-sm">
-                    <span className="text-[11px] text-slate-500 font-['Outfit'] font-bold uppercase tracking-wider">NDP NA Rate</span>
-                    <div className="text-2xl font-bold font-['Outfit'] text-indigo-600 dark:text-indigo-400 mt-1">
+                    <span className="text-[11px] text-slate-500 font-sf-display font-bold uppercase tracking-wider">NDP NA Rate</span>
+                    <div className="text-2xl font-bold font-sf-display text-indigo-600 dark:text-indigo-400 mt-1">
                       {metrics?.traffic_rates?.icmpv6_na_rate?.toFixed(1) || '0.0'} PPS
                     </div>
                   </div>
                   <div className="glossy-widget squircle-widget p-5 shadow-sm">
-                    <span className="text-[11px] text-slate-500 font-['Outfit'] font-bold uppercase tracking-wider">Rate Threshold</span>
-                    <div className="text-2xl font-bold font-['Outfit'] text-amber-600 dark:text-amber-400 mt-1">
+                    <span className="text-[11px] text-slate-500 font-sf-display font-bold uppercase tracking-wider">Rate Threshold</span>
+                    <div className="text-2xl font-bold font-sf-display text-amber-600 dark:text-amber-400 mt-1">
                       {metrics?.traffic_rates?.ndp_threshold || '15.0'} PPS
                     </div>
                   </div>
@@ -1167,7 +1167,7 @@ export default function App() {
                 {/* Normalized Events Feed */}
                 <div className="glossy-widget squircle-widget overflow-hidden shadow-sm">
                   <div className="p-5 border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between">
-                    <h3 className="text-sm font-bold font-['Outfit'] uppercase text-slate-900 dark:text-white">
+                    <h3 className="text-sm font-bold font-sf-display uppercase text-slate-900 dark:text-white">
                       Normalized Security Events ({events.length})
                     </h3>
                   </div>
@@ -1179,7 +1179,7 @@ export default function App() {
                   ) : (
                     <div className="overflow-x-auto">
                       <table className="w-full text-left text-xs">
-                        <thead className="bg-slate-50/80 dark:bg-black/30 text-slate-500 uppercase border-b border-slate-200/80 dark:border-white/10 font-['Outfit'] font-bold text-[11px]">
+                        <thead className="bg-slate-50/80 dark:bg-black/30 text-slate-500 uppercase border-b border-slate-200/80 dark:border-white/10 font-sf-display font-bold text-[11px]">
                           <tr>
                             <th className="p-3.5">Event ID</th>
                             <th className="p-3.5">Timestamp</th>
@@ -1196,7 +1196,7 @@ export default function App() {
                               <td className="p-3.5 text-slate-500">{new Date(ev.timestamp).toLocaleTimeString()}</td>
                               <td className="p-3.5">
                                 <span
-                                  className={`px-2.5 py-1 squircle-pill text-[10px] font-['Outfit'] font-bold ${
+                                  className={`px-2.5 py-1 squircle-pill text-[10px] font-sf-display font-bold ${
                                     ev.event_type.includes('ROGUE') || ev.event_type.includes('ANOMALY')
                                       ? 'bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-500/30'
                                       : 'bg-slate-100 text-slate-700 dark:bg-white/[0.08] dark:text-slate-300'
@@ -1224,7 +1224,7 @@ export default function App() {
             {activeTab === 'experiments' && (
               <div className="flex flex-col gap-6">
                 <div>
-                  <h2 className="text-xl font-bold font-['Outfit'] text-slate-900 dark:text-white">
+                  <h2 className="text-xl font-bold font-sf-display text-slate-900 dark:text-white">
                     Controlled Lab Attack Scenarios
                   </h2>
                   <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
@@ -1238,14 +1238,14 @@ export default function App() {
                   <div className="glossy-widget squircle-widget p-6 shadow-sm flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between mb-2.5">
-                        <span className="text-xs font-bold font-['Outfit'] text-rose-600 dark:text-rose-400 uppercase tracking-wide">
+                        <span className="text-xs font-bold font-sf-display text-rose-600 dark:text-rose-400 uppercase tracking-wide">
                           Scenario 1: Rogue Router Advertisement
                         </span>
-                        <span className="text-[10px] px-2.5 py-1 squircle-pill font-['Outfit'] font-bold bg-rose-500/15 border border-rose-500/30 text-rose-600 dark:text-rose-400">
+                        <span className="text-[10px] px-2.5 py-1 squircle-pill font-sf-display font-bold bg-rose-500/15 border border-rose-500/30 text-rose-600 dark:text-rose-400">
                           RFC 6105 Violation
                         </span>
                       </div>
-                      <h3 className="text-base font-bold text-slate-900 dark:text-white font-['Outfit'] mb-2">
+                      <h3 className="text-base font-bold text-slate-900 dark:text-white font-sf-display mb-2">
                         Unauthorized Gateway & Prefix Injection
                       </h3>
                       <p className="text-xs text-slate-600 dark:text-slate-400 mb-4 font-medium leading-relaxed">
@@ -1264,7 +1264,7 @@ export default function App() {
                     <button
                       onClick={() => promptExperiment('ROGUE_RA')}
                       disabled={actionLoading}
-                      className="w-full py-3 px-4 squircle-btn bg-rose-600 hover:bg-rose-500 dark:bg-rose-500/20 dark:hover:bg-rose-500/30 text-white dark:text-rose-300 border border-rose-600 dark:border-rose-500/40 text-xs font-['Outfit'] font-bold flex items-center justify-center gap-2 transition-all shadow-md shadow-rose-600/20"
+                      className="w-full py-3 px-4 squircle-btn bg-rose-600 hover:bg-rose-500 dark:bg-rose-500/20 dark:hover:bg-rose-500/30 text-white dark:text-rose-300 border border-rose-600 dark:border-rose-500/40 text-xs font-sf-display font-bold flex items-center justify-center gap-2 transition-all shadow-md shadow-rose-600/20"
                     >
                       <Play className="w-4 h-4" />
                       Launch Rogue RA Scenario
@@ -1275,14 +1275,14 @@ export default function App() {
                   <div className="glossy-widget squircle-widget p-6 shadow-sm flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between mb-2.5">
-                        <span className="text-xs font-bold font-['Outfit'] text-amber-600 dark:text-amber-400 uppercase tracking-wide">
+                        <span className="text-xs font-bold font-sf-display text-amber-600 dark:text-amber-400 uppercase tracking-wide">
                           Scenario 2: Abnormal NDP Rate Burst
                         </span>
-                        <span className="text-[10px] px-2.5 py-1 squircle-pill font-['Outfit'] font-bold bg-amber-500/15 border border-amber-500/30 text-amber-600 dark:text-amber-400">
+                        <span className="text-[10px] px-2.5 py-1 squircle-pill font-sf-display font-bold bg-amber-500/15 border border-amber-500/30 text-amber-600 dark:text-amber-400">
                           Rate Anomaly
                         </span>
                       </div>
-                      <h3 className="text-base font-bold text-slate-900 dark:text-white font-['Outfit'] mb-2">
+                      <h3 className="text-base font-bold text-slate-900 dark:text-white font-sf-display mb-2">
                         High-Frequency Neighbor Solicitations (50 PPS)
                       </h3>
                       <p className="text-xs text-slate-600 dark:text-slate-400 mb-4 font-medium leading-relaxed">
@@ -1299,7 +1299,7 @@ export default function App() {
                     <button
                       onClick={() => promptExperiment('NDP_BURST')}
                       disabled={actionLoading}
-                      className="w-full py-3 px-4 squircle-btn bg-amber-600 hover:bg-amber-500 dark:bg-amber-500/20 dark:hover:bg-amber-500/30 text-white dark:text-amber-300 border border-amber-600 dark:border-amber-500/40 text-xs font-['Outfit'] font-bold flex items-center justify-center gap-2 transition-all shadow-md shadow-amber-600/20"
+                      className="w-full py-3 px-4 squircle-btn bg-amber-600 hover:bg-amber-500 dark:bg-amber-500/20 dark:hover:bg-amber-500/30 text-white dark:text-amber-300 border border-amber-600 dark:border-amber-500/40 text-xs font-sf-display font-bold flex items-center justify-center gap-2 transition-all shadow-md shadow-amber-600/20"
                     >
                       <Zap className="w-4 h-4" />
                       Launch NDP Storm Scenario
@@ -1310,13 +1310,13 @@ export default function App() {
                 {/* Experiment Run History Table */}
                 <div className="glossy-widget squircle-widget overflow-hidden shadow-sm">
                   <div className="p-5 border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between">
-                    <h3 className="text-sm font-bold font-['Outfit'] uppercase text-slate-900 dark:text-white">
+                    <h3 className="text-sm font-bold font-sf-display uppercase text-slate-900 dark:text-white">
                       Recorded Experiments History ({experiments.length})
                     </h3>
                     <button
                       onClick={handleStopExperiment}
                       disabled={actionLoading}
-                      className="px-4 py-2 squircle-btn bg-slate-100 dark:bg-white/[0.08] text-xs text-rose-600 dark:text-rose-400 hover:bg-slate-200 dark:hover:bg-white/[0.12] font-['Outfit'] font-bold flex items-center gap-1.5"
+                      className="px-4 py-2 squircle-btn bg-slate-100 dark:bg-white/[0.08] text-xs text-rose-600 dark:text-rose-400 hover:bg-slate-200 dark:hover:bg-white/[0.12] font-sf-display font-bold flex items-center gap-1.5"
                     >
                       <StopCircle className="w-3.5 h-3.5" /> Stop Running
                     </button>
@@ -1329,7 +1329,7 @@ export default function App() {
                   ) : (
                     <div className="overflow-x-auto">
                       <table className="w-full text-left text-xs">
-                        <thead className="bg-slate-50/80 dark:bg-black/30 text-slate-500 uppercase border-b border-slate-200/80 dark:border-white/10 font-['Outfit'] font-bold text-[11px]">
+                        <thead className="bg-slate-50/80 dark:bg-black/30 text-slate-500 uppercase border-b border-slate-200/80 dark:border-white/10 font-sf-display font-bold text-[11px]">
                           <tr>
                             <th className="p-3.5">Experiment ID</th>
                             <th className="p-3.5">Scenario Type</th>
@@ -1350,7 +1350,7 @@ export default function App() {
                                 {exp.alerts_triggered}
                               </td>
                               <td className="p-3.5">
-                                <span className="px-2.5 py-1 squircle-sm text-[10px] font-['Outfit'] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
+                                <span className="px-2.5 py-1 squircle-sm text-[10px] font-sf-display font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
                                   {exp.status}
                                 </span>
                               </td>
@@ -1368,7 +1368,7 @@ export default function App() {
             {activeTab === 'evaluation' && (
               <div className="flex flex-col gap-6">
                 <div>
-                  <h2 className="text-xl font-bold font-['Outfit'] text-slate-900 dark:text-white">
+                  <h2 className="text-xl font-bold font-sf-display text-slate-900 dark:text-white">
                     Empirical Evaluation & Performance Metrics
                   </h2>
                   <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
@@ -1379,7 +1379,7 @@ export default function App() {
                 {!metrics?.detection_metrics?.has_data ? (
                   <div className="p-16 text-center glossy-widget squircle-widget shadow-sm">
                     <Layers className="w-12 h-12 text-slate-400 mx-auto mb-3" />
-                    <div className="text-base font-bold text-slate-900 dark:text-white font-['Outfit']">
+                    <div className="text-base font-bold text-slate-900 dark:text-white font-sf-display">
                       Insufficient evaluation data
                     </div>
                     <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto font-medium">
@@ -1391,10 +1391,10 @@ export default function App() {
                     {/* Primary Benchmark KPI Cards */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                       <div className="glossy-widget squircle-widget p-6 shadow-sm">
-                        <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 font-['Outfit'] uppercase tracking-wider">
+                        <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 font-sf-display uppercase tracking-wider">
                           TRUE POSITIVE RATE
                         </span>
-                        <div className="text-3xl font-extrabold font-['Outfit'] text-emerald-600 dark:text-emerald-400 mt-1">
+                        <div className="text-3xl font-extrabold font-sf-display text-emerald-600 dark:text-emerald-400 mt-1">
                           {metrics.detection_metrics.detection_rate_pct !== undefined
                             ? `${metrics.detection_metrics.detection_rate_pct.toFixed(0)}%`
                             : '100%'}
@@ -1406,10 +1406,10 @@ export default function App() {
                       </div>
 
                       <div className="glossy-widget squircle-widget p-6 shadow-sm">
-                        <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 font-['Outfit'] uppercase tracking-wider">
+                        <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 font-sf-display uppercase tracking-wider">
                           FALSE ALARM RATE
                         </span>
-                        <div className="text-3xl font-extrabold font-['Outfit'] text-slate-900 dark:text-white mt-1">
+                        <div className="text-3xl font-extrabold font-sf-display text-slate-900 dark:text-white mt-1">
                           {metrics.detection_metrics.false_alarm_rate_pct !== undefined
                             ? `${metrics.detection_metrics.false_alarm_rate_pct.toFixed(1)}%`
                             : '0.0%'}
@@ -1421,10 +1421,10 @@ export default function App() {
                       </div>
 
                       <div className="glossy-widget squircle-widget p-6 shadow-sm">
-                        <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 font-['Outfit'] uppercase tracking-wider">
+                        <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 font-sf-display uppercase tracking-wider">
                           AVG DETECTION LATENCY
                         </span>
-                        <div className="text-3xl font-extrabold font-['Outfit'] text-cyan-600 dark:text-cyan-400 mt-1">
+                        <div className="text-3xl font-extrabold font-sf-display text-cyan-600 dark:text-cyan-400 mt-1">
                           {metrics.detection_metrics.avg_detection_latency_ms !== undefined
                             ? `${metrics.detection_metrics.avg_detection_latency_ms.toFixed(1)} ms`
                             : '35.2 ms'}
@@ -1433,10 +1433,10 @@ export default function App() {
                       </div>
 
                       <div className="glossy-widget squircle-widget p-6 shadow-sm">
-                        <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 font-['Outfit'] uppercase tracking-wider">
+                        <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 font-sf-display uppercase tracking-wider">
                           TRACKING RESISTANCE
                         </span>
-                        <div className="text-3xl font-extrabold font-['Outfit'] text-emerald-600 dark:text-emerald-400 mt-1">
+                        <div className="text-3xl font-extrabold font-sf-display text-emerald-600 dark:text-emerald-400 mt-1">
                           {metrics.privacy_metrics.tracking_resistance_score !== undefined
                             ? `${metrics.privacy_metrics.tracking_resistance_score.toFixed(2)} / 1.0`
                             : '1.00 / 1.0'}
@@ -1448,7 +1448,7 @@ export default function App() {
                     {/* Visual Charts */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                       <div className="glossy-widget squircle-widget p-6 shadow-sm">
-                        <h3 className="text-sm font-bold font-['Outfit'] uppercase text-slate-700 dark:text-slate-300 mb-5">
+                        <h3 className="text-sm font-bold font-sf-display uppercase text-slate-700 dark:text-slate-300 mb-5">
                           Detection Accuracy Distribution
                         </h3>
                         <div className="h-52 w-full" style={{ minWidth: 200, minHeight: 200 }}>
@@ -1480,13 +1480,13 @@ export default function App() {
                       </div>
 
                       <div className="glossy-widget squircle-widget p-6 shadow-sm">
-                        <h3 className="text-sm font-bold font-['Outfit'] uppercase text-slate-700 dark:text-slate-300 mb-5">
+                        <h3 className="text-sm font-bold font-sf-display uppercase text-slate-700 dark:text-slate-300 mb-5">
                           Security vs Privacy Tradeoff Matrix
                         </h3>
                         <div className="p-5 squircle-subcard bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 flex flex-col gap-3.5 text-xs font-medium">
                           <div className="flex items-center justify-between">
                             <span className="text-slate-500">Evaluation Unit:</span>
-                            <span className="font-bold text-slate-800 dark:text-slate-200 font-['Outfit']">Per Experiment Trial</span>
+                            <span className="font-bold text-slate-800 dark:text-slate-200 font-sf-display">Per Experiment Trial</span>
                           </div>
                           <div className="flex items-center justify-between">
                             <span className="text-slate-500">Trials Sample Size:</span>
@@ -1496,13 +1496,13 @@ export default function App() {
                           </div>
                           <div className="flex items-center justify-between">
                             <span className="text-slate-500">Authorized Continuity:</span>
-                            <span className="font-bold text-emerald-600 dark:text-emerald-400 font-['Outfit']">
+                            <span className="font-bold text-emerald-600 dark:text-emerald-400 font-sf-display">
                               {metrics.privacy_metrics.authorized_session_continuity_pct}%
                             </span>
                           </div>
                           <div className="flex items-center justify-between">
                             <span className="text-slate-500">Unauthorized Correlation Blocked:</span>
-                            <span className="font-bold text-cyan-600 dark:text-cyan-400 font-['Outfit']">
+                            <span className="font-bold text-cyan-600 dark:text-cyan-400 font-sf-display">
                               {metrics.privacy_metrics.unauthorized_correlations_blocked}
                             </span>
                           </div>
@@ -1518,7 +1518,7 @@ export default function App() {
             {activeTab === 'settings' && (
               <div className="flex flex-col gap-6">
                 <div>
-                  <h2 className="text-xl font-bold font-['Outfit'] text-slate-900 dark:text-white">
+                  <h2 className="text-xl font-bold font-sf-display text-slate-900 dark:text-white">
                     System Configuration & Lab Settings
                   </h2>
                   <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
@@ -1529,7 +1529,7 @@ export default function App() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="glossy-widget squircle-widget p-6 shadow-sm">
-                    <h3 className="text-xs font-bold font-['Outfit'] uppercase text-cyan-600 dark:text-cyan-400 mb-3 tracking-wider">
+                    <h3 className="text-xs font-bold font-sf-display uppercase text-cyan-600 dark:text-cyan-400 mb-3 tracking-wider">
                       Router Advertisement (RFC 6105) Policy
                     </h3>
                     <div className="p-4 squircle-subcard bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 text-xs flex flex-col gap-2 font-medium">
@@ -1541,7 +1541,7 @@ export default function App() {
                   </div>
 
                   <div className="glossy-widget squircle-widget p-6 shadow-sm">
-                    <h3 className="text-xs font-bold font-['Outfit'] uppercase text-cyan-600 dark:text-cyan-400 mb-3 tracking-wider">
+                    <h3 className="text-xs font-bold font-sf-display uppercase text-cyan-600 dark:text-cyan-400 mb-3 tracking-wider">
                       NDP Rolling-Window Rate Detector
                     </h3>
                     <div className="p-4 squircle-subcard bg-slate-50 dark:bg-black/30 border border-slate-200/80 dark:border-white/5 text-xs flex flex-col gap-2 font-medium">
@@ -1555,7 +1555,7 @@ export default function App() {
 
                 {/* Quickstart Reference Box */}
                 <div className="glossy-widget squircle-widget p-6 shadow-sm">
-                  <h3 className="text-sm font-bold font-['Outfit'] uppercase text-slate-800 dark:text-slate-200 mb-3 tracking-wider">
+                  <h3 className="text-sm font-bold font-sf-display uppercase text-slate-800 dark:text-slate-200 mb-3 tracking-wider">
                     CLI Reproducibility Commands
                   </h3>
                   <div className="bg-slate-900 text-slate-200 p-5 squircle-card font-mono text-xs flex flex-col gap-2 overflow-x-auto shadow-inner">
@@ -1581,7 +1581,7 @@ export default function App() {
               <div className="p-3 squircle-subcard bg-amber-500/15 border border-amber-500/30 text-amber-600 dark:text-amber-400">
                 <AlertTriangle className="w-5 h-5" />
               </div>
-              <h3 className="text-base font-bold font-['Outfit'] text-slate-900 dark:text-white">
+              <h3 className="text-base font-bold font-sf-display text-slate-900 dark:text-white">
                 {confirmModal.title}
               </h3>
             </div>
@@ -1593,13 +1593,13 @@ export default function App() {
             <div className="flex items-center justify-end gap-3">
               <button
                 onClick={() => setConfirmModal({ isOpen: false, scenario: null, title: '', description: '' })}
-                className="px-4 py-2.5 squircle-btn bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.08] dark:hover:bg-white/[0.14] text-slate-700 dark:text-slate-300 text-xs font-['Outfit'] font-bold transition-colors"
+                className="px-4 py-2.5 squircle-btn bg-slate-100 hover:bg-slate-200 dark:bg-white/[0.08] dark:hover:bg-white/[0.14] text-slate-700 dark:text-slate-300 text-xs font-sf-display font-bold transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={executeConfirmedExperiment}
-                className="px-5 py-2.5 squircle-btn bg-rose-600 hover:bg-rose-500 text-white text-xs font-['Outfit'] font-bold transition-all shadow-md shadow-rose-600/30"
+                className="px-5 py-2.5 squircle-btn bg-rose-600 hover:bg-rose-500 text-white text-xs font-sf-display font-bold transition-all shadow-md shadow-rose-600/30"
               >
                 Confirm & Launch
               </button>
