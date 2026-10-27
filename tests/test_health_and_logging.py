@@ -41,3 +41,19 @@ def test_sensitive_log_filter():
     filt.filter(record)
     assert "token=[REDACTED]" in record.msg
     assert "secret12345" not in record.msg
+
+@pytest.mark.asyncio
+async def test_backend_app_entrypoint_regression():
+    """
+    Regression Test: Ensures 'backend.app:app' is cleanly importable as an ASGI entrypoint,
+    preventing ModuleNotFoundError during 'uvicorn backend.app:app' startup.
+    """
+    from backend.app import app as app_entrypoint
+    assert app_entrypoint is not None
+    assert app_entrypoint is app
+    transport = ASGITransport(app=app_entrypoint)
+    async with AsyncClient(transport=transport, base_url="http://test") as client:
+        res = await client.get("/api/health")
+        assert res.status_code == 200
+        assert res.json()["status"] == "healthy"
+
