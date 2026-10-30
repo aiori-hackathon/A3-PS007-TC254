@@ -2,7 +2,7 @@
 **Privacy-Aware IPv6 IoT Security Monitoring Across Address Rotation**
 
 > **AIORI Hackathon 3 | Problem Statement: PS-007 | Team Code: A3-PS007-TC254**  
-> **Official Demo & Presentation**: [Watch YouTube Video](https://youtu.be/BkqlxewUyNs) | [Solution Slide Deck (PDF)](./A3-PS007-TC254-PPT.pdf) | [Architecture Guide](./docs/ARCHITECTURE.md) | [Evaluation Report](./docs/EVALUATION_REPORT.md) | [Lab Runbook](./docs/LAB_RUNBOOK.md)
+> **Official Demo & Presentation**: [Watch YouTube Video](https://youtu.be/BkqlxewUyNs) | [Solution Slide Deck (PDF)](./A3-PS007-TC254-PPT.pdf) *(conforming to [Proposed-structure-hackathon.pdf](./Proposed-structure-hackathon.pdf))* | [Architecture Guide](./docs/ARCHITECTURE.md) | [Evaluation Report](./docs/EVALUATION_REPORT.md) | [Lab Runbook](./docs/LAB_RUNBOOK.md)
 
 ---
 
@@ -29,6 +29,7 @@
 20. [Team Roles](#20-team-roles)
 21. [Screenshots & UI Showcase](#21-screenshots--ui-showcase)
 22. [Reproducible Demo Sequence](#22-reproducible-demo-sequence)
+23. [Mentor Demonstration & Pseudocode Snippets (Deliverable 3)](#23-mentor-demonstration--pseudocode-snippets-deliverable-3)
 
 ---
 
@@ -370,3 +371,97 @@ Run the complete 14-step automated demonstration sequence required by Phase 9 Se
 12. **Step 12**: Demonstrate multi-tenant boundary isolation.
 13. **Step 13**: Calculate live empirical evaluation metrics.
 14. **Step 14**: Gracefully stop lab and sniffer workers.
+
+---
+
+## 23. Mentor Demonstration & Pseudocode Snippets (Deliverable 3)
+
+Priv6Guard fulfills **Deliverable 3** (*"Prototype Demonstration with a Pseudocode Snippet to the mentor"*) with two components:
+1. **Automated Live/Fixture Demonstration**: Executable directly via `python3 scripts/run_demo.py --mode fixture` (or `--mode live`).
+2. **Core Algorithmic Pseudocode**: The mathematical logic executing during the demonstration is formalized below.
+
+### Algorithm 1: Privacy-Preserving Address Rotation & Ephemeral Pseudonym Correlation
+Decouples persistent hardware identity by issuing short-lived HMAC pseudonyms tied to authenticated session epochs.
+
+```python
+# ALGORITHM 1: Privacy-Preserving Address Rotation (RFC 8981)
+Function RotateAddressUnderSession(session_token, old_ipv6, tenant_id):
+    session = ActiveSessions.get(session_token)
+    if session is null or session.expires_at <= Now() or session.tenant_id != tenant_id:
+        AuditLog("ROTATION_DENIED", old_ipv6, tenant_id)
+        return (403_FORBIDDEN, null, "Correlation denied: invalid/expired session")
+
+    # 1. RFC 8981: Generate randomized 64-bit temporary interface identifier (IID)
+    new_iid  = SecureRandomBytes(8)
+    new_ipv6 = ConstructIPv6(prefix="2001:db8:6::/64", iid=new_iid)
+
+    # 2. Derive ephemeral blind pseudonym (HMAC-SHA256, TTL = 120s)
+    pseudonym = "p6g-ps-" + Base64UrlSafe(HMAC_SHA256(key=EphemeralSecret, data=new_iid))
+
+    # 3. Bind new address to pseudonym under active session epoch
+    ActiveMappings[pseudonym] = {
+        "ipv6": new_ipv6, "session_id": session_token,
+        "tenant_id": tenant_id, "epoch_expires": Now() + 120
+    }
+    
+    # 4. Immediate purge of expired mappings (Unlinkability invariant)
+    PurgeExpiredMappings()
+    return (200_OK, new_ipv6, pseudonym)
+```
+
+### Algorithm 2: Frequency-Invariant Rogue RA Trust Policy Detection (RFC 4861 / RFC 6105)
+Validates router legitimacy by link-local authority and prefix pool. Authorized routers retransmitting at high rates are **never** flagged as rogue.
+
+```python
+# ALGORITHM 2: Frequency-Invariant Rogue RA Trust Policy Detection
+Function InspectRouterAdvertisement(packet):
+    src_ll = packet.ipv6.source_address
+
+    # Rule 1: Link-Local Identity Check
+    if src_ll ∉ AuthorizedGateways:  # e.g., {"fe80::1"}
+        return TriggerAlert("RULE-RA-UNAUTHORIZED-SOURCE", Severity=CRITICAL, src=src_ll)
+
+    # Rule 2: Prefix Information Check (RFC 4861 Option 3)
+    for pio in packet.options.prefix_info:
+        if (pio.prefix + "/" + pio.len) ∉ AuthorizedPrefixes:  # e.g., {"2001:db8:6::/64"}
+            return TriggerAlert("RULE-RA-UNAUTHORIZED-PREFIX", Severity=HIGH, src=src_ll)
+
+    # Rule 3: Lifetime Bounds Check (RFC 6105)
+    if packet.router_lifetime > 1800:
+        return TriggerAlert("RULE-RA-ABNORMAL-LIFETIME", Severity=MEDIUM, src=src_ll)
+
+    # Frequency Invariance: Legitimate gateways are ALWAYS trusted regardless of rate
+    return PassBenign("TRUSTED_GATEWAY_RA")
+```
+
+### Algorithm 3: Rolling-Window NDP Rate Anomaly Detector with Cooldown
+Detects high-rate Neighbor Solicitation (NS) and Neighbor Advertisement (NA) floods without penalizing normal network reconvergence.
+
+```python
+# ALGORITHM 3: Rolling-Window NDP Rate Anomaly Detector
+Function InspectNDPPacket(packet, window=5.0s, threshold=15.0pps, cooldown=10.0s):
+    if packet.icmpv6.type not in {133, 135, 136}: return PassToNormalPipeline(packet)
+    
+    key = (packet.ipv6.src, packet.icmpv6.type)
+    now = CurrentTimestamp()
+    TimestampQueues[key].append(now)
+
+    # Slide window: discard timestamps older than window
+    PruneQueue(TimestampQueues[key], cutoff=now - window)
+
+    # Calculate rolling packet rate (PPS)
+    current_rate = len(TimestampQueues[key]) / window
+    if current_rate >= threshold:
+        if (now - LastAlertTime.get(key, 0)) >= cooldown:
+            LastAlertTime[key] = now
+            return TriggerAlert(
+                rule_id="RULE-NDP-RATE-ANOMALY",
+                classification="ANOMALY_INDICATOR_NOT_DEFINITIVE_PROOF",
+                severity="MEDIUM", rate=current_rate, threshold=threshold
+            )
+        else:
+            return SuppressAlert("COOLDOWN_ACTIVE")
+            
+    return NormalNDPTraffic(current_rate)
+```
+

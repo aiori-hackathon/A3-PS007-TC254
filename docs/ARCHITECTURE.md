@@ -334,3 +334,198 @@ graph TB
 2. **Ephemeral Identity Scope**: Pseudonyms are unique to an active, authorized session ($TTL=300\text{s}$). Once expired, continuity is severed; however, during the active epoch, all events from that device share the same pseudonym.
 3. **Upper-Layer Fingerprinting**: Application-layer protocols (e.g., HTTP User-Agent, TLS ClientHello cipher suite order, CoAP options) are intentionally not scrubbed by PRIV6GUARD, as deep packet inspection violates data minimization principles.
 4. **Local Subnet Confinement**: PRIV6GUARD's privacy guarantees apply to the local L2/L3 IPv6 segment. When packets traverse wide-area networks (WAN), ISP-level routing prefixes (`/48` or `/56`) remain visible to upstream providers.
+
+---
+
+## 10. Core Algorithms & Mentor Demonstration Pseudocode (Deliverable 3)
+
+The following formal pseudocode snippets specify the three mathematical algorithms driving Priv6Guard, fulfilling **Deliverable 3** (*"Prototype Demonstration with a Pseudocode Snippet to the mentor"*).
+
+### Algorithm 1: Privacy-Preserving Address Rotation & Ephemeral Pseudonym Correlation
+Governs how devices rotate IPv6 addresses without permitting persistent hardware tracking or cross-session graph linkage.
+
+```python
+"""
+ALGORITHM 1: Privacy-Preserving Address Rotation & Ephemeral Pseudonym Binding
+Implements RFC 8981 address transition under short-lived cryptographic authorization.
+"""
+
+# Global State:
+ActiveSessions = {}     # token -> {device_id, tenant_id, expires_at}
+ActiveMappings = {}     # pseudonym -> {ipv6, session_id, tenant_id, epoch_expires}
+
+function AuthenticateDeviceSession(device_id, preshared_secret, tenant_id):
+    """Issues a short-lived session token (TTL = 300s). Rejects invalid credentials."""
+    if not VerifySecret(device_id, preshared_secret) or TenantOf(device_id) != tenant_id:
+        AuditLog("AUTH_REJECTED", device_id, tenant_id)
+        return (401_UNAUTHORIZED, null)
+    
+    session_token = GenerateCryptographicRandomToken(entropy_bits=256)
+    ActiveSessions[session_token] = {
+        "device_id": device_id,
+        "tenant_id": tenant_id,
+        "expires_at": CurrentTimeUTC() + 300  # seconds
+    }
+    AuditLog("AUTH_SUCCESS", device_id, tenant_id)
+    return (200_OK, session_token)
+
+function RotateAddressUnderSession(session_token, old_ipv6, tenant_id):
+    """
+    Authorizes RFC 8981 address rotation.
+    Decouples persistent hardware ID by issuing a fresh blind HMAC pseudonym.
+    """
+    session = ActiveSessions.get(session_token)
+    if session is null or session.expires_at <= CurrentTimeUTC() or session.tenant_id != tenant_id:
+        AuditLog("ROTATION_DENIED", old_ipv6, tenant_id, reason="EXPIRED_OR_INVALID_SESSION")
+        return (403_FORBIDDEN, null, "Correlation denied: invalid or expired session.")
+
+    # RFC 8981: Generate randomized temporary 64-bit interface identifier (IID)
+    new_iid = SecureRandomBytes(8)
+    new_ipv6 = ConstructIPv6(prefix="2001:db8:6::/64", iid=new_iid)
+
+    # Cryptographic blind pseudonym: HMAC-SHA256 with ephemeral epoch secret
+    pseudonym = "p6g-ps-" + Base64UrlSafe(HMAC_SHA256(key=EphemeralSecret, data=new_iid))
+
+    # Bind pseudonym strictly to this session epoch (TTL = 120s)
+    ActiveMappings[pseudonym] = {
+        "ipv6": new_ipv6,
+        "session_id": session_token,
+        "tenant_id": tenant_id,
+        "epoch_expires": CurrentTimeUTC() + 120  # seconds
+    }
+
+    # Automatically purge expired records to prevent memory retention
+    PurgeExpiredMappings()
+
+    AuditLog("ROTATION_AUTHORIZED", tenant_id, pseudonym=pseudonym)
+    return (200_OK, new_ipv6, pseudonym)
+
+function PurgeExpiredMappings():
+    """Permanent memory and DB purge: expired records cannot be correlated."""
+    now = CurrentTimeUTC()
+    for pseudonym, rec in list(ActiveMappings.items()):
+        if rec.epoch_expires <= now:
+            del ActiveMappings[pseudonym]
+            AuditLog("MAPPING_PURGED", pseudonym, reason="EPOCH_EXPIRED")
+```
+
+---
+
+### Algorithm 2: Frequency-Invariant Rogue Router Advertisement Policy Enforcement
+Validates gateway legitimacy using RFC 4861 / RFC 6105 policy constraints. Crucially, legitimate routers retransmitting RAs frequently are **never** flagged as rogue (Frequency Invariance Invariant).
+
+```python
+"""
+ALGORITHM 2: Frequency-Invariant Rogue RA Trust Policy Detection (RFC 4861/6105)
+Ensures gateways are validated by topological authority, not transmission rate.
+"""
+
+# Configured Local Policy:
+AuthorizedGateways = {"fe80::1"}
+AuthorizedPrefixes = {"2001:db8:6::/64"}
+MaxAllowedLifetime = 1800  # seconds
+
+function InspectRouterAdvertisement(packet, interface="p6g-br0"):
+    if not packet.has_layer(ICMPv6_ROUTER_ADVERTISEMENT):
+        return BenignNoAction("NON_RA_MESSAGE")
+
+    src_ll = packet.ipv6.source_address
+
+    # Invariant 1: Source MUST be an authorized link-local router address
+    if not IsLinkLocal(src_ll) or src_ll not in AuthorizedGateways:
+        return TriggerAlert(
+            rule_id="RULE-RA-UNAUTHORIZED-SOURCE",
+            severity="CRITICAL",
+            source=src_ll,
+            reason="Unapproved gateway link-local identity injecting default routes."
+        )
+
+    # Invariant 2: Prefix Information Options (PIO) must match approved local subnets
+    for pio in packet.icmpv6_options.prefix_info_options:
+        prefix_str = pio.prefix + "/" + str(pio.prefix_length)
+        if prefix_str not in AuthorizedPrefixes:
+            return TriggerAlert(
+                rule_id="RULE-RA-UNAUTHORIZED-PREFIX",
+                severity="HIGH",
+                source=src_ll,
+                reason="Foreign/unauthorized prefix announcement detected."
+            )
+
+    # Invariant 3: Lifetime bounds checking
+    if packet.router_lifetime > MaxAllowedLifetime:
+        return TriggerAlert(
+            rule_id="RULE-RA-ABNORMAL-LIFETIME",
+            severity="MEDIUM",
+            source=src_ll,
+            reason="Router lifetime exceeds maximum operational threshold."
+        )
+
+    # FREQUENCY INVARIANCE: Even at 100 RAs/sec, an authorized gateway is TRUSTED.
+    RecordBenignTelemetry(source=src_ll, interface=interface)
+    return BenignNoAction("TRUSTED_GATEWAY_RA")
+```
+
+---
+
+### Algorithm 3: Rolling-Window NDP Rate Anomaly Detector with Cooldown Suppression
+Measures Neighbor Solicitation (NS) and Neighbor Advertisement (NA) message rates. Classifies bursts strictly as non-punitive anomaly indicators.
+
+```python
+"""
+ALGORITHM 3: Rolling-Window NDP Rate Anomaly Detector
+Detects scanning/exhaustion floods while tolerating legitimate network re-convergence.
+"""
+
+# Configuration:
+WindowSizeSeconds = 5.0
+ThresholdPPS      = 15.0  # Packets per second
+CooldownSeconds   = 10.0
+
+# State:
+TimestampQueues = {}    # (source_ip, msg_type) -> Deque of float timestamps
+LastAlertTime   = {}    # (source_ip, msg_type) -> timestamp
+
+function InspectNDPPacket(packet, interface="p6g-br0"):
+    msg_type = packet.icmpv6.type   # 135 = NS, 136 = NA, 133 = RS
+    if msg_type not in {133, 135, 136}:
+        return PassToEventPipeline(packet)
+
+    src_ip = packet.ipv6.source_address
+    key = (src_ip, msg_type)
+    now = CurrentTimestamp()
+
+    if key not in TimestampQueues:
+        TimestampQueues[key] = Deque()
+
+    queue = TimestampQueues[key]
+    queue.push_back(now)
+
+    # 1. Slide window: prune timestamps older than WindowSizeSeconds
+    cutoff = now - WindowSizeSeconds
+    while queue is not empty and queue.front() < cutoff:
+        queue.pop_front()
+
+    # 2. Compute current sliding-window packet rate
+    observed_count = queue.size()
+    current_rate_pps = observed_count / WindowSizeSeconds
+
+    # 3. Check threshold violation
+    if current_rate_pps >= ThresholdPPS:
+        # Cooldown check to prevent log flooding
+        last_alert = LastAlertTime.get(key, 0)
+        if (now - last_alert) >= CooldownSeconds:
+            LastAlertTime[key] = now
+            return TriggerAlert(
+                rule_id="RULE-NDP-RATE-ANOMALY",
+                classification="ANOMALY_INDICATOR_NOT_DEFINITIVE_PROOF",
+                severity="MEDIUM",
+                source=src_ip,
+                current_rate=current_rate_pps,
+                threshold=ThresholdPPS
+            )
+        else:
+            return SuppressAlert("COOLDOWN_ACTIVE")
+
+    return NormalNDPTraffic(current_rate_pps)
+```
+

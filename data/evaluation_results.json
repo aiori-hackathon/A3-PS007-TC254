@@ -5,12 +5,12 @@
     "hackathon": "AIORI Hackathon 3",
     "problem_statement": "PS-007",
     "team_code": "A3-PS007-TC254",
-    "generated_at": "2026-10-27T17:40:50.999410+00:00"
+    "generated_at": "2026-10-30T19:28:35.894048+00:00"
   },
   "metrics": {
     "evaluation_unit": "individual_trial_execution",
     "software_version": "1.0.0",
-    "evaluation_timestamp": "2026-10-27T17:40:50.999387+00:00",
+    "evaluation_timestamp": "2026-10-30T19:28:35.894019+00:00",
     "summary": {
       "total_trials": 18,
       "correct_trials": 18,
@@ -36,7 +36,7 @@
   },
   "trials": [
     {
-      "trial_id": "eval-e23eed1d",
+      "trial_id": "eval-0c888e78",
       "experiment_num": 1,
       "scenario_name": "Benign Baseline Telemetry Trial 1",
       "software_version": "1.0.0",
@@ -46,9 +46,9 @@
         "interval_sec": 0.2,
         "threshold_pps": 15.0
       },
-      "start_time": "2026-10-27T17:40:50.989852+00:00",
-      "end_time": "2026-10-27T17:40:50.989898+00:00",
-      "duration_ms": 0.046,
+      "start_time": "2026-10-30T19:28:35.884690+00:00",
+      "end_time": "2026-10-30T19:28:35.884750+00:00",
+      "duration_ms": 0.06,
       "expected_result": "BENIGN",
       "observed_result": "BENIGN",
       "is_correct": true,
@@ -57,7 +57,7 @@
       "notes": "Normal device query rate within threshold guide (15.0 pps)."
     },
     {
-      "trial_id": "eval-0119b2b2",
+      "trial_id": "eval-de366f75",
       "experiment_num": 1,
       "scenario_name": "Benign Baseline Telemetry Trial 2",
       "software_version": "1.0.0",
@@ -67,9 +67,9 @@
         "interval_sec": 0.2,
         "threshold_pps": 15.0
       },
-      "start_time": "2026-10-27T17:40:50.989927+00:00",
-      "end_time": "2026-10-27T17:40:50.989943+00:00",
-      "duration_ms": 0.016,
+      "start_time": "2026-10-30T19:28:35.884786+00:00",
+      "end_time": "2026-10-30T19:28:35.884809+00:00",
+      "duration_ms": 0.023,
       "expected_result": "BENIGN",
       "observed_result": "BENIGN",
       "is_correct": true,
@@ -78,7 +78,7 @@
       "notes": "Normal device query rate within threshold guide (15.0 pps)."
     },
     {
-      "trial_id": "eval-4baeebb7",
+      "trial_id": "eval-090cb5fc",
       "experiment_num": 1,
       "scenario_name": "Benign Baseline Telemetry Trial 3",
       "software_version": "1.0.0",
@@ -88,9 +88,9 @@
         "interval_sec": 0.2,
         "threshold_pps": 15.0
       },
-      "start_time": "2026-10-27T17:40:50.989956+00:00",
-      "end_time": "2026-10-27T17:40:50.989968+00:00",
-      "duration_ms": 0.012,
+      "start_time": "2026-10-30T19:28:35.884827+00:00",
+      "end_time": "2026-10-30T19:28:35.884840+00:00",
+      "duration_ms": 0.013,
       "expected_result": "BENIGN",
       "observed_result": "BENIGN",
       "is_correct": true,
@@ -99,7 +99,7 @@
       "notes": "Normal device query rate within threshold guide (15.0 pps)."
     },
     {
-      "trial_id": "eval-9b5665aa",
+      "trial_id": "eval-ade5545e",
       "experiment_num": 1,
       "scenario_name": "Benign Baseline Telemetry Trial 4",
       "software_version": "1.0.0",
@@ -109,9 +109,9 @@
         "interval_sec": 0.2,
         "threshold_pps": 15.0
       },
-      "start_time": "2026-10-27T17:40:50.989975+00:00",
-      "end_time": "2026-10-27T17:40:50.989986+00:00",
-      "duration_ms": 0.011,
+      "start_time": "2026-10-30T19:28:35.884847+00:00",
+      "end_time": "2026-10-30T19:28:35.884860+00:00",
+      "duration_ms": 0.013,
       "expected_result": "BENIGN",
       "observed_result": "BENIGN",
       "is_correct": true,
@@ -120,7 +120,7 @@
       "notes": "Normal device query rate within threshold guide (15.0 pps)."
     },
     {
-      "trial_id": "eval-4d55ce3b",
+      "trial_id": "eval-dee873d0",
       "experiment_num": 1,
       "scenario_name": "Benign Baseline Telemetry Trial 5",
       "software_version": "1.0.0",
@@ -130,9 +130,9 @@
         "interval_sec": 0.2,
         "threshold_pps": 15.0
       },
-      "start_time": "2026-10-27T17:40:50.989991+00:00",
-      "end_time": "2026-10-27T17:40:50.990001+00:00",
-      "duration_ms": 0.01,
+      "start_time": "2026-10-30T19:28:35.884867+00:00",
+      "end_time": "2026-10-30T19:28:35.884887+00:00",
+      "duration_ms": 0.02,
       "expected_result": "BENIGN",
       "observed_result": "BENIGN",
       "is_correct": true,
@@ -141,7 +141,7 @@
       "notes": "Normal device query rate within threshold guide (15.0 pps)."
     },
     {
-      "trial_id": "eval-659d0d69",
+      "trial_id": "eval-c7b07183",
       "experiment_num": 2,
       "scenario_name": "RA Policy: Authorized Gateway RA",
       "software_version": "1.0.0",
@@ -153,18 +153,18 @@
         "lifetime": 1800,
         "expected": "AUTHORIZED"
       },
-      "start_time": "2026-10-27T17:40:50.990265+00:00",
-      "end_time": "2026-10-27T17:40:50.990310+00:00",
-      "duration_ms": 0.045,
+      "start_time": "2026-10-30T19:28:35.885182+00:00",
+      "end_time": "2026-10-30T19:28:35.885234+00:00",
+      "duration_ms": 0.052,
       "expected_result": "AUTHORIZED",
       "observed_result": "AUTHORIZED",
       "is_correct": true,
       "alert_id": null,
-      "latency_ms": 0.043,
+      "latency_ms": 0.05,
       "notes": "Compliant with policy."
     },
     {
-      "trial_id": "eval-4a056e8c",
+      "trial_id": "eval-f24dbce4",
       "experiment_num": 2,
       "scenario_name": "RA Policy: Rogue Gateway Source fe80::dead:beef",
       "software_version": "1.0.0",
@@ -176,18 +176,18 @@
         "lifetime": 1800,
         "expected": "ROGUE"
       },
-      "start_time": "2026-10-27T17:40:50.990438+00:00",
-      "end_time": "2026-10-27T17:40:50.990546+00:00",
-      "duration_ms": 0.108,
+      "start_time": "2026-10-30T19:28:35.885370+00:00",
+      "end_time": "2026-10-30T19:28:35.885500+00:00",
+      "duration_ms": 0.13,
       "expected_result": "ROGUE",
       "observed_result": "ROGUE",
       "is_correct": true,
-      "alert_id": "alt-ra-3e0009",
-      "latency_ms": 0.106,
+      "alert_id": "alt-ra-39e04c",
+      "latency_ms": 0.127,
       "notes": "Violation rule: RULE-RA-UNAUTHORIZED-SOURCE, reason: Source fe80::dead:beef is not in authorized router whitelist (default-deny policy)."
     },
     {
-      "trial_id": "eval-64da8001",
+      "trial_id": "eval-6c41a23e",
       "experiment_num": 2,
       "scenario_name": "RA Policy: Foreign Prefix Hijack 2001:db8:baad::/64",
       "software_version": "1.0.0",
@@ -199,18 +199,18 @@
         "lifetime": 1800,
         "expected": "ROGUE"
       },
-      "start_time": "2026-10-27T17:40:50.990680+00:00",
-      "end_time": "2026-10-27T17:40:50.990744+00:00",
-      "duration_ms": 0.064,
+      "start_time": "2026-10-30T19:28:35.885657+00:00",
+      "end_time": "2026-10-30T19:28:35.885730+00:00",
+      "duration_ms": 0.073,
       "expected_result": "ROGUE",
       "observed_result": "ROGUE",
       "is_correct": true,
-      "alert_id": "alt-ra-bc9acd",
-      "latency_ms": 0.063,
+      "alert_id": "alt-ra-67fe18",
+      "latency_ms": 0.072,
       "notes": "Violation rule: RULE-RA-UNAUTHORIZED-PREFIX, reason: Prefix 2001:db8:baad::/64 is foreign to this network policy."
     },
     {
-      "trial_id": "eval-affb09a4",
+      "trial_id": "eval-8ee04c0f",
       "experiment_num": 2,
       "scenario_name": "RA Policy: Abnormal Excessive Lifetime (9500s > 9000s max)",
       "software_version": "1.0.0",
@@ -222,18 +222,18 @@
         "lifetime": 9500,
         "expected": "ROGUE"
       },
-      "start_time": "2026-10-27T17:40:50.990862+00:00",
-      "end_time": "2026-10-27T17:40:50.990910+00:00",
-      "duration_ms": 0.048,
+      "start_time": "2026-10-30T19:28:35.885855+00:00",
+      "end_time": "2026-10-30T19:28:35.885910+00:00",
+      "duration_ms": 0.055,
       "expected_result": "ROGUE",
       "observed_result": "ROGUE",
       "is_correct": true,
-      "alert_id": "alt-ra-ed9590",
-      "latency_ms": 0.047,
+      "alert_id": "alt-ra-f18992",
+      "latency_ms": 0.054,
       "notes": "Violation rule: RULE-RA-ABNORMAL-LIFETIME, reason: Lifetime 9500s exceeds maximum allowed 1800s."
     },
     {
-      "trial_id": "eval-d7ce2c4f",
+      "trial_id": "eval-d5cc2e2c",
       "experiment_num": 2,
       "scenario_name": "RA Policy: Authorized Graceful Deprecation (lifetime=0)",
       "software_version": "1.0.0",
@@ -245,18 +245,18 @@
         "lifetime": 0,
         "expected": "AUTHORIZED"
       },
-      "start_time": "2026-10-27T17:40:50.991024+00:00",
-      "end_time": "2026-10-27T17:40:50.991046+00:00",
-      "duration_ms": 0.022,
+      "start_time": "2026-10-30T19:28:35.886029+00:00",
+      "end_time": "2026-10-30T19:28:35.886053+00:00",
+      "duration_ms": 0.024,
       "expected_result": "AUTHORIZED",
       "observed_result": "AUTHORIZED",
       "is_correct": true,
       "alert_id": null,
-      "latency_ms": 0.022,
+      "latency_ms": 0.023,
       "notes": "Compliant with policy."
     },
     {
-      "trial_id": "eval-cc448209",
+      "trial_id": "eval-e94ce1db",
       "experiment_num": 3,
       "scenario_name": "NDP Rate: Benign NDP Rate",
       "software_version": "1.0.0",
@@ -267,18 +267,18 @@
         "duration": 2.0,
         "expected": "BENIGN"
       },
-      "start_time": "2026-10-27T17:40:50.991068+00:00",
-      "end_time": "2026-10-27T17:40:50.991124+00:00",
-      "duration_ms": 0.056,
+      "start_time": "2026-10-30T19:28:35.886079+00:00",
+      "end_time": "2026-10-30T19:28:35.886120+00:00",
+      "duration_ms": 0.041,
       "expected_result": "BENIGN",
       "observed_result": "BENIGN",
       "is_correct": true,
       "alert_id": null,
-      "latency_ms": 0.055,
+      "latency_ms": 0.04,
       "notes": "Calculated rate vs 15.0 pps threshold on 2.0s rolling window."
     },
     {
-      "trial_id": "eval-ae94ae91",
+      "trial_id": "eval-509e2fbf",
       "experiment_num": 3,
       "scenario_name": "NDP Rate: Borderline Sub-Threshold (14 pps)",
       "software_version": "1.0.0",
@@ -289,18 +289,18 @@
         "duration": 2.0,
         "expected": "BENIGN"
       },
-      "start_time": "2026-10-27T17:40:50.991133+00:00",
-      "end_time": "2026-10-27T17:40:50.991199+00:00",
-      "duration_ms": 0.066,
+      "start_time": "2026-10-30T19:28:35.886129+00:00",
+      "end_time": "2026-10-30T19:28:35.886197+00:00",
+      "duration_ms": 0.068,
       "expected_result": "BENIGN",
       "observed_result": "BENIGN",
       "is_correct": true,
       "alert_id": null,
-      "latency_ms": 0.064,
+      "latency_ms": 0.067,
       "notes": "Calculated rate vs 15.0 pps threshold on 2.0s rolling window."
     },
     {
-      "trial_id": "eval-2e1d1150",
+      "trial_id": "eval-1d3b4dc4",
       "experiment_num": 3,
       "scenario_name": "NDP Rate: Borderline Super-Threshold (16 pps)",
       "software_version": "1.0.0",
@@ -311,18 +311,18 @@
         "duration": 2.0,
         "expected": "ANOMALY"
       },
-      "start_time": "2026-10-27T17:40:50.991205+00:00",
-      "end_time": "2026-10-27T17:40:50.991306+00:00",
+      "start_time": "2026-10-30T19:28:35.886204+00:00",
+      "end_time": "2026-10-30T19:28:35.886305+00:00",
       "duration_ms": 0.101,
       "expected_result": "ANOMALY",
       "observed_result": "ANOMALY",
       "is_correct": true,
-      "alert_id": "alt-ndp-363d1d",
-      "latency_ms": 0.1,
+      "alert_id": "alt-ndp-358c7a",
+      "latency_ms": 0.101,
       "notes": "Calculated rate vs 15.0 pps threshold on 2.0s rolling window."
     },
     {
-      "trial_id": "eval-fd173030",
+      "trial_id": "eval-f5f0b73e",
       "experiment_num": 3,
       "scenario_name": "NDP Rate: Severe Flood Attack (80 pps)",
       "software_version": "1.0.0",
@@ -333,18 +333,18 @@
         "duration": 1.0,
         "expected": "ANOMALY"
       },
-      "start_time": "2026-10-27T17:40:50.991314+00:00",
-      "end_time": "2026-10-27T17:40:50.991403+00:00",
-      "duration_ms": 0.089,
+      "start_time": "2026-10-30T19:28:35.886315+00:00",
+      "end_time": "2026-10-30T19:28:35.886403+00:00",
+      "duration_ms": 0.088,
       "expected_result": "ANOMALY",
       "observed_result": "ANOMALY",
       "is_correct": true,
-      "alert_id": "alt-ndp-5c527e",
+      "alert_id": "alt-ndp-480471",
       "latency_ms": 0.088,
       "notes": "Calculated rate vs 15.0 pps threshold on 2.0s rolling window."
     },
     {
-      "trial_id": "eval-6049ec1f",
+      "trial_id": "eval-cb023fcb",
       "experiment_num": 4,
       "scenario_name": "RFC 8981 Address Rotation & Privacy Boundary",
       "software_version": "1.0.0",
@@ -354,9 +354,9 @@
         "device_id": "p6g-iot1",
         "tenant_id": "tenant-alpha"
       },
-      "start_time": "2026-10-27T17:40:50.991427+00:00",
-      "end_time": "2026-10-27T17:40:50.991541+00:00",
-      "duration_ms": 0.114,
+      "start_time": "2026-10-30T19:28:35.886434+00:00",
+      "end_time": "2026-10-30T19:28:35.886558+00:00",
+      "duration_ms": 0.124,
       "expected_result": "AUTHORIZED_ROTATION_WITHOUT_FINGERPRINTING",
       "observed_result": "AUTHORIZED_ROTATION_WITHOUT_FINGERPRINTING",
       "is_correct": true,
@@ -365,7 +365,7 @@
       "notes": "3 successful rotations. Unauthorized correlation rejected: Prohibits behavioral fingerprinting."
     },
     {
-      "trial_id": "eval-680cfe2d",
+      "trial_id": "eval-2756a478",
       "experiment_num": 5,
       "scenario_name": "Pseudonym Epoch Expiry and Active Purge",
       "software_version": "1.0.0",
@@ -374,8 +374,8 @@
         "epoch_seconds": 60,
         "time_advanced_to": 65
       },
-      "start_time": "2026-10-27T17:40:50.991557+00:00",
-      "end_time": "2026-10-27T17:41:55.991557+00:00",
+      "start_time": "2026-10-30T19:28:35.886575+00:00",
+      "end_time": "2026-10-30T19:29:40.886575+00:00",
       "duration_ms": 65000.0,
       "expected_result": "EXPIRED_AND_PURGED",
       "observed_result": "EXPIRED_AND_PURGED",
@@ -385,7 +385,7 @@
       "notes": "Expired mapping refused by lookup and removed from active memory by purge_expired_mappings()."
     },
     {
-      "trial_id": "eval-180140ab",
+      "trial_id": "eval-8c03547f",
       "experiment_num": 6,
       "scenario_name": "Cross-Tenant Boundary & Token Validation",
       "software_version": "1.0.0",
@@ -396,9 +396,9 @@
           "tenant-beta"
         ]
       },
-      "start_time": "2026-10-27T17:40:50.991588+00:00",
-      "end_time": "2026-10-27T17:40:50.991634+00:00",
-      "duration_ms": 0.046,
+      "start_time": "2026-10-30T19:28:35.886629+00:00",
+      "end_time": "2026-10-30T19:28:35.886735+00:00",
+      "duration_ms": 0.106,
       "expected_result": "ACCESS_DENIED",
       "observed_result": "ACCESS_DENIED",
       "is_correct": true,
@@ -407,17 +407,17 @@
       "notes": "Cross-tenant lookup and session reuse attempts categorically denied with zero metadata returned."
     },
     {
-      "trial_id": "eval-483b9a05",
+      "trial_id": "eval-4d213723",
       "experiment_num": 7,
       "scenario_name": "Application Restart & Invalidation Recovery",
       "software_version": "1.0.0",
       "app_name": "PRIV6GUARD",
       "configuration": {
-        "db_file": "/tmp/tmp2x54w211/eval_restart.db"
+        "db_file": "/tmp/tmp0_o3nhf1/eval_restart.db"
       },
-      "start_time": "2026-10-27T17:40:50.993966+00:00",
-      "end_time": "2026-10-27T17:40:50.999185+00:00",
-      "duration_ms": 5.219,
+      "start_time": "2026-10-30T19:28:35.888688+00:00",
+      "end_time": "2026-10-30T19:28:35.893809+00:00",
+      "duration_ms": 5.121,
       "expected_result": "EXPIRED_INVALID_AFTER_RESTART",
       "observed_result": "EXPIRED_INVALID_AFTER_RESTART",
       "is_correct": true,
